@@ -109,7 +109,6 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 				test.Result = test_finished.Json["result"].(string)
 				ts := test_finished.Json["timestamp"].(float64)
 				test.FinishDate = time.Unix(int64(ts), 0).Format("2006-01-02 15:04")
-				fmt.Println(test)
 			}
 		}
 	}
