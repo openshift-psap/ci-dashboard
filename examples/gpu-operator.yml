@@ -4,7 +4,7 @@ matrices:
     description: Red Hat OpenShift Nightlies
     viewer_url: https://prow.ci.openshift.org/view/gs/origin-ci-test/logs
     artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs
-    artifacts_cache: /home/kevin/openshift/ci-dashboard/cache
+    artifacts_cache: cache
     artifacts_test_name: gpu-operator-e2e/nightly
     operator_name: GPU Operator
     tests:
