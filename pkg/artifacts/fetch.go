@@ -30,6 +30,11 @@ type ArtifactResult struct {
 
 type JsonResult map[string]interface{}
 
+func fetchRemoveFromCache(test_matrix v1.MatrixSpec, path string) error {
+	cache_path := fmt.Sprintf("%s/%s", test_matrix.ArtifactsCache, path)
+	return os.Remove(cache_path)
+}
+
 func fetchArtifact(test_matrix v1.MatrixSpec, path string) ([]byte, error) {
 	cache_path := fmt.Sprintf("%s/%s", test_matrix.ArtifactsCache, path)
 	content, err := ioutil.ReadFile(cache_path)
@@ -125,6 +130,10 @@ func FetchLastTestResult(test_matrix v1.MatrixSpec, matrix_name string, test v1.
 	last_test_build_id, err := fetchArtifact(test_matrix, last_test_path)
 	if err != nil {
 		return "", ArtifactResult{}, fmt.Errorf("error fetching the last test build_id from %s: %v", last_test_path, err)
+	}
+
+	if err = fetchRemoveFromCache(test_matrix, last_test_path); err != nil {
+		log.Warningf("Failed to remove %s from cache : %v", last_test_path, err)
 	}
 
 	last_test_file, err := fetchTestResult(test_matrix, matrix_name, test_name,
