@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/openshift-psap/ci-dashboard/cmd/gen_matrix"
+	"github.com/openshift-psap/ci-dashboard/cmd/daily_matrix"
 	"github.com/openshift-psap/ci-dashboard/pkg/artifacts"
 	"github.com/openshift-psap/ci-dashboard/pkg/config"
 	log "github.com/sirupsen/logrus"
@@ -37,7 +37,7 @@ func main() {
 	}
 
 	app.Commands = []*cli.Command{
-		gen_matrix.BuildCommand(),
+		daily_matrix.BuildCommand(),
 	}
 
 	// Set log-level for all subcommands
@@ -46,8 +46,8 @@ func main() {
 		if flags.Debug {
 			logLevel = log.DebugLevel
 		}
-		gen_matrixLog := gen_matrix.GetLogger()
-		gen_matrixLog.SetLevel(logLevel)
+		daily_matrixLog := daily_matrix.GetLogger()
+		daily_matrixLog.SetLevel(logLevel)
 
 		configLog := config.GetLogger()
 		configLog.SetLevel(logLevel)
