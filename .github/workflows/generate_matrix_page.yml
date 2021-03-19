@@ -17,7 +17,7 @@ jobs:
 
       - name: Generate the test matrix 🔧
         run: |
-          go run cmd/main.go --debug gen_matrix
+          make generate_daily_matrix
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0

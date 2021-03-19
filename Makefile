@@ -1,4 +1,4 @@
-run:
+generate_daily_matrix:
 	go run cmd/main.go --debug daily_matrix
 
 build:
