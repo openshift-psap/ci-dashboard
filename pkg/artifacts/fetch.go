@@ -103,8 +103,8 @@ func fetchJsonArtifact(test_matrix v1.MatrixSpec, path string) (JsonResult, erro
 	return result, nil
 }
 
-func fetchTestResult(test_matrix v1.MatrixSpec, matrix_name, test_name, build_id, filename string, filetype ArtifactType) (ArtifactResult, error) {
-	file_path := fmt.Sprintf("%s/%s/%s", test_name, build_id, filename)
+func fetchTestResult(test_matrix v1.MatrixSpec, matrix_name, prow_name, build_id, filename string, filetype ArtifactType) (ArtifactResult, error) {
+	file_path := fmt.Sprintf("%s/%s/%s", prow_name, build_id, filename)
 	var result ArtifactResult
 	var err error
 	if filetype == TypeJson {
@@ -125,22 +125,22 @@ func fetchTestResult(test_matrix v1.MatrixSpec, matrix_name, test_name, build_id
 
 func FetchLastTestResult(test_matrix v1.MatrixSpec, matrix_name string, test v1.TestSpec, filename string, filetype ArtifactType) (string, ArtifactResult, error) {
 
-	test_name := test.ProwName
-	last_test_path := fmt.Sprintf("%s/latest-build.txt", test_name)
+	prow_name := test.ProwName
+	last_test_path := fmt.Sprintf("%s/latest-build.txt", prow_name)
 	last_test_build_id, err := fetchArtifact(test_matrix, last_test_path)
 	if err != nil {
 		return "", ArtifactResult{}, fmt.Errorf("error fetching the last test build_id from %s: %v", last_test_path, err)
 	}
-
+	/*
 	if err = fetchRemoveFromCache(test_matrix, last_test_path); err != nil {
 		log.Warningf("Failed to remove %s from cache : %v", last_test_path, err)
 	}
-
-	last_test_file, err := fetchTestResult(test_matrix, matrix_name, test_name,
+*/
+	last_test_file, err := fetchTestResult(test_matrix, matrix_name, prow_name,
 		string(last_test_build_id), filename, filetype)
 	if (err != nil) {
 		return "", ArtifactResult{}, fmt.Errorf("error fetching the results of the last test of %s:%s (%s): %v",
-			matrix_name, test_name, last_test_build_id)
+			matrix_name, prow_name, last_test_build_id)
 
 	}
 
@@ -148,12 +148,15 @@ func FetchLastTestResult(test_matrix v1.MatrixSpec, matrix_name string, test v1.
 }
 
 
-func FetchAllTests(test_matrix v1.MatrixSpec, matrix_name, test_name string) error {
-	test_list_path := fmt.Sprintf("%s/?index", test_name)
+func FetchLastNTestResults(test_matrix v1.MatrixSpec, matrix_name, prow_name string, nb_test int, filename string, filetype ArtifactType) ([]string, map[string]ArtifactResult, error) {
+	test_list_path := fmt.Sprintf("%s/?index", prow_name)
 	test_list_html, err := fetchHtmlArtifact(test_matrix, test_list_path)
 	if err != nil {
-		return fmt.Errorf("error fetching the tests of %s / %s: %v", matrix_name, test_name, err)
+		return nil, nil, fmt.Errorf("error fetching the tests of %s / %s: %v", matrix_name, prow_name, err)
 	}
+
+	test_results := map[string]ArtifactResult{}
+	build_ids := make([]string, 0, nb_test)
 
 	test_list_html.Find("li.grid-row").EachWithBreak(func(i int, s *goquery.Selection) bool {
 		entry_type, found := s.Find("img").Attr("src")
@@ -165,17 +168,22 @@ func FetchAllTests(test_matrix v1.MatrixSpec, matrix_name, test_name string) err
 			return true
 		}
 
-		fmt.Println(test_build_id)
-		test_finished, err := fetchTestResult(test_matrix, matrix_name, test_name, test_build_id, "finished.json", TypeJson)
-		if (err != nil) {
-			log.Errorf("error fetching the results of %s:%s/%s: %v",
-				matrix_name, test_name, test_build_id)
-			return false
-		}
-		fmt.Printf("Test %s result: %s\n", test_build_id, test_finished.Json["result"])
+		build_ids = append([]string{test_build_id}, build_ids...)
 		return true
 	})
+	if len(build_ids) > nb_test {
+		build_ids = build_ids[:nb_test]
+	}
+	for _, test_build_id := range build_ids {
+		test_file, err := fetchTestResult(test_matrix, matrix_name, prow_name, test_build_id, filename, filetype)
+		if (err != nil) {
+			log.Warningf("error fetching the results of %s:%s/%s (%s): %v",
+				matrix_name, prow_name, test_build_id, filename, err)
 
+		}
 
-	return err
+		test_results[test_build_id] = test_file
+	}
+
+	return build_ids, test_results, err
 }

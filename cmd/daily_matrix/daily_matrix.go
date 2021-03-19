@@ -1,4 +1,4 @@
-package gen_matrix
+package daily_matrix
 
 import (
 	"fmt"
@@ -18,7 +18,8 @@ import (
 
 const (
 	DefaultConfigFile  = "examples/gpu-operator.yml"
-	DefaultOutputFile = "output/matrix.gen.html"
+	DefaultOutputFile = "output/gpu-operator_daily-matrix.html"
+	DefaultTemplateFile = "templates/daily_matrix.tmpl.html"
 )
 
 var log = logrus.New()
@@ -30,6 +31,7 @@ func GetLogger() *logrus.Logger {
 type Flags struct {
 	ConfigFile string
 	OutputFile string
+	TemplateFile string
 }
 
 type Context struct {
@@ -39,37 +41,45 @@ type Context struct {
 
 func BuildCommand() *cli.Command {
 	// Create a flags struct to hold our flags
-	gen_matrixFlags := Flags{}
+	daily_matrixFlags := Flags{}
 
-	// Create the 'gen_matrix' command
-	gen_matrix := cli.Command{}
-	gen_matrix.Name = "gen_matrix"
-	gen_matrix.Usage = "Generate the test matrix from Prow results"
-	gen_matrix.Action = func(c *cli.Context) error {
-		return gen_matrixWrapper(c, &gen_matrixFlags)
+	// Create the 'daily_matrix' command
+	daily_matrix := cli.Command{}
+	daily_matrix.Name = "daily_matrix"
+	daily_matrix.Usage = "Generate a daily test matrix from Prow results"
+	daily_matrix.Action = func(c *cli.Context) error {
+		return daily_matrixWrapper(c, &daily_matrixFlags)
 	}
 
 	// Setup the flags for this command
-	gen_matrix.Flags = []cli.Flag{
+	daily_matrix.Flags = []cli.Flag{
 		&cli.StringFlag{
 			Name:        "config-file",
 			Aliases:     []string{"c"},
 			Usage:       "Configuration file to use for fetching the Prow results",
-			Destination: &gen_matrixFlags.ConfigFile,
+			Destination: &daily_matrixFlags.ConfigFile,
 			Value:       DefaultConfigFile,
-			EnvVars:     []string{"CI_DASHBOARD_GENMATRIX_CONFIG_FILE"},
+			EnvVars:     []string{"CI_DASHBOARD_DAILYMATRIX_CONFIG_FILE"},
 		},
 		&cli.StringFlag{
 			Name:        "output-file",
 			Aliases:     []string{"o"},
 			Usage:       "Output file where the generated matrix will be stored",
-			Destination: &gen_matrixFlags.OutputFile,
+			Destination: &daily_matrixFlags.OutputFile,
 			Value:       DefaultOutputFile,
-			EnvVars:     []string{"CI_DASHBOARD_GENMATRIX_OUTPUT_FILE"},
+			EnvVars:     []string{"CI_DASHBOARD_DAILYMATRIX_OUTPUT_FILE"},
+		},
+		&cli.StringFlag{
+			Name:        "template",
+			Aliases:     []string{"t"},
+			Usage:       "Template file from which the matrix will be generated",
+			Destination: &daily_matrixFlags.TemplateFile,
+			Value:       DefaultTemplateFile,
+			EnvVars:     []string{"CI_DASHBOARD_DAILYMATRIX_TEMPLATE_FILE"},
 		},
 	}
 
-	return &gen_matrix
+	return &daily_matrix
 }
 
 func saveGeneratedHtml(generated_html []byte, f *Flags) error {
@@ -91,6 +101,15 @@ func saveGeneratedHtml(generated_html []byte, f *Flags) error {
 	return nil
 }
 
+func populateTestFromFinished(test *v1.TestResult, test_finished artifacts.ArtifactResult) error {
+	test.Passed = test_finished.Json["passed"].(bool)
+	test.Result = test_finished.Json["result"].(string)
+	ts := test_finished.Json["timestamp"].(float64)
+	test.FinishDate = time.Unix(int64(ts), 0).Format("2006-01-02 15:04")
+
+	return nil
+}
+
 func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 	for matrix_name, test_matrix := range matricesSpec.Matrices {
 		log.Printf("* %s: %s\n", matrix_name, test_matrix.Description)
@@ -104,11 +123,25 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 					return err
 				}
 				test.TestGroup = test_group
+
 				test.BuildId = test_build_id
-				test.Passed = test_finished.Json["passed"].(bool)
-				test.Result = test_finished.Json["result"].(string)
-				ts := test_finished.Json["timestamp"].(float64)
-				test.FinishDate = time.Unix(int64(ts), 0).Format("2006-01-02 15:04")
+				if err = populateTestFromFinished(&test.TestResult, test_finished); err != nil {
+					log.Warningf("Failed to get the last results of test %s/%s: %v", test.ProwName, test_build_id, err)
+				}
+				old_test_build_ids, old_tests, err := artifacts.FetchLastNTestResults(test_matrix, matrix_name, test.ProwName, matricesSpec.NbTestHistory,
+					"finished.json", artifacts.TypeJson)
+				if err != nil {
+					return err
+				}
+				for _, old_test_build_id := range old_test_build_ids {
+					old_test_finished := old_tests[old_test_build_id]
+					old_test := v1.TestResult{}
+					old_test.BuildId = old_test_build_id
+					if err = populateTestFromFinished(&old_test, old_test_finished); err != nil {
+						log.Warningf("Failed to get the last results of test %s/%s: %v", test.ProwName, old_test_build_id, err)
+					}
+					test.OldTests = append(test.OldTests, old_test)
+				}
 			}
 		}
 	}
@@ -116,7 +149,7 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 	return nil
 }
 
-func gen_matrixWrapper(c *cli.Context, f *Flags) error {
+func daily_matrixWrapper(c *cli.Context, f *Flags) error {
 	matricesSpec, err := config.ParseMatricesConfigFile(f.ConfigFile)
 	if err != nil {
 		return fmt.Errorf("error parsing config file: %v", err)
@@ -126,7 +159,10 @@ func gen_matrixWrapper(c *cli.Context, f *Flags) error {
 		return fmt.Errorf("error fetching the matrix results: %v", err)
 	}
 
-	generated_html, err := matrix_tpl.Generate(matricesSpec)
+	currentTime := time.Now()
+	generation_date := currentTime.Format("2006-01-02 15h04")
+
+	generated_html, err := matrix_tpl.Generate(f.TemplateFile, matricesSpec, generation_date)
 	if err != nil {
 		return fmt.Errorf("error generating the matrix page from the template: %v", err)
 	}
@@ -135,8 +171,7 @@ func gen_matrixWrapper(c *cli.Context, f *Flags) error {
 		return fmt.Errorf("error saving the generated matrix page: %v", err)
 	}
 
-	log.Infof("Test matrix saved into '%s'", f.OutputFile)
-
+	log.Infof("Daily test matrix saved into '%s'", f.OutputFile)
 
 	return nil
 }

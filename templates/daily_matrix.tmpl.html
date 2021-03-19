@@ -2,7 +2,7 @@
 <html class="mdl-js" lang="en"><head>
     <meta charset="UTF-8">
 
-    <title>Prow Status</title>
+    <title>{{ .Spec.Description }} - CI Dashboard</title>
     <link rel="stylesheet" type="text/css" href="https://prow.ci.openshift.org/static/style.css">
     <link rel="stylesheet" type="text/css" href="https://prow.ci.openshift.org/static/extensions/style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
@@ -19,6 +19,23 @@
           var rerunCreatesJob =  true ;
         </script>
         -->
+        <style>
+          table#builds td.old_tests,
+          table#builds th.old_tests,
+          table#builds th.test_group{
+              text-align: left;
+          }
+          table#builds td,table#builds th {
+              text-align: center;
+          }
+
+          .old_test_success {
+              background-color: green;
+          }
+          .old_test_failure {
+              background-color: red;
+          }
+        </style>
   </head>
   <body id="index">
 
@@ -27,28 +44,9 @@
         <header class="mdl-layout__header is-casting-shadow" style="background-color: black;"><div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button"><i class="material-icons"></i></div>
           <div class="mdl-layout__header-row">
             <a href="/" class="logo"><img src="https://prow.ci.openshift.org/static/extensions/logo.png" alt="kubernetes logo" class="logo"></a>
-            <span class="mdl-layout-title header-title">Prow Status</span>
+            <span class="mdl-layout-title header-title">{{ .Spec.Description }}</span>
           </div>
         </header>
-        <div class="mdl-layout__drawer" aria-hidden="true">
-          <span class="mdl-layout-title">Prow Dashboard</span>
-          <nav class="mdl-navigation">
-            <a class="mdl-navigation__link mdl-navigation__link--current" href="/">Prow Status</a>
-
-            <a class="mdl-navigation__link" href="/pr">PR Status</a>
-
-            <a class="mdl-navigation__link" href="/command-help">Command Help</a>
-
-            <a class="mdl-navigation__link" href="/tide">Tide Status</a>
-            <a class="mdl-navigation__link" href="/tide-history">Tide History</a>
-
-            <a class="mdl-navigation__link" href="/plugins">Plugins</a>
-            <a class="mdl-navigation__link" href="https://github.com/kubernetes/test-infra/blob/master/prow/README.md" target="_blank">Documentation <span class="material-icons">open_in_new</span></a>
-          </nav>
-          <footer>
-            fe8b28563d
-          </footer>
-        </div>
         <div id="loading-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate hidden is-upgraded" data-upgraded=",MaterialProgress"><div class="progressbar bar bar1" style="width: 0%;"></div><div class="bufferbar bar bar2" style="width: 100%;"></div><div class="auxbar bar bar3" style="width: 0%;"></div></div>
 
         <main class="mdl-layout__content">
@@ -81,28 +79,23 @@
               </div>
             </aside>
             -->
-            {{ range $matrix_name, $matrix := .Matrices }}
+
+            {{ range $matrix_name, $matrix := .Spec.Matrices }}
             {{ range $test_group, $tests := .Tests }}
 
+            <article>&nbsp;</article>
             <article>
               <div class="table-container">
                 <table id="builds">
                   <thead>
                     <tr>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th>{{ $test_group | group_name}}</th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
+                      <th class="test_group">{{ $test_group | group_name}}</th>
                     </tr>
                   </thead>
                 </table>
               </div>
             </article>
+
             <article>
               <div class="table-container">
                 <table id="builds">
@@ -111,10 +104,11 @@
                       <th><!-- success/error icon --></th>
                       <th><!-- build logs --></th>
                       <th><!-- artifacts dir --></th>
-                      <th>{{ $matrix.OperatorName }}</th>
+                      <th class='cell_operator'>{{ $matrix.OperatorName }}</th>
                       <th>Prow</th>
                       <th></th>
-                      <th>Finished at</th>
+                      <th>Last finished</th>
+                      <th class="old_tests">History of the last {{ nb_last_test }} tests:</th>
                     </tr>
                   </thead>
                   {{ range $test := $tests }}
@@ -132,12 +126,22 @@
                         <i class="material-icons state pending">watch_later</i>
                         -->
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ $matrix.ArtifactsURL }}/{{ $test.ProwName}}/{{ $test.BuildId }}/artifacts/{{ $matrix.ArtifactsTestName }}/build-log.txt"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} build logs">description</i></a></td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ $matrix.ArtifactsURL }}/{{ $test.ProwName}}/{{ $test.BuildId }}/artifacts/{{ $matrix.ArtifactsTestName }}/artifacts/"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} test artifacts">pageview</i></a></td>
-                      <td>{{ $test.OperatorVersion }}</td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ $matrix.ViewerURL }}/{{ $test.ProwName}}/{{ $test.BuildId }}"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test}}/build-log.txt"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} build logs">description</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test}}/artifacts/"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} test artifacts">pageview</i></a></td>
+                      <td class='cell_operator'>{{ $test.OperatorVersion }}</td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{  spyglass_url $matrix $test.ProwName $test.TestResult}}"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td></td>
                       <td><div tabindex="0">{{ $test.FinishDate }}</td>
+                      <td class="old_tests">
+                      {{ range $idx, $old_test := $test.OldTests }}
+                      <a title="{{ if eq $idx 0 }}Most recent test: {{ end }}{{ $old_test.FinishDate}}"
+                         href="{{  spyglass_url $matrix $test.ProwName $old_test}}"
+                         class="old_tests old_test_{{ if $old_test.Passed }}success{{ else }}failure{{ end }}">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                      {{ if eq $idx 0 }}
+                      |
+                      {{ end }}
+                      {{ end }}
+                      </td>
                     </tr>
                   </tbody>
                   {{ end }}
@@ -150,16 +154,10 @@
               <div id="rerun-content"></div>
             </div>
           </div>
-
-
         </main>
-        <div class="mdl-layout__obfuscator"></div></div></div>
 
-    <div id="toast" class="mdl-js-snackbar mdl-snackbar" data-upgraded=",MaterialSnackbar">
-      <div class="mdl-snackbar__text"></div>
-      <button class="mdl-snackbar__action" type="button" aria-hidden="true"></button>
-    </div>
-
-
-
-</body></html>
+        <div id="footer">
+          Document generated on {{ .Date }}.
+        </div>
+  </body>
+</html>
