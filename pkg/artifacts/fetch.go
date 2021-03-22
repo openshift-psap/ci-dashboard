@@ -38,23 +38,24 @@ func fetchRemoveFromCache(test_matrix v1.MatrixSpec, path string) error {
 
 func fetchArtifact(test_matrix v1.MatrixSpec, path string) ([]byte, error) {
 	cache_path := fmt.Sprintf("%s/%s", test_matrix.ArtifactsCache, path)
+	artifact_url := fmt.Sprintf("%s/%s", test_matrix.ArtifactsURL, path)
+
 	content, err := ioutil.ReadFile(cache_path)
 	if err == nil {
-		log.Debugf("File %s found in the cache", path)
+		log.Debugf("File %s found in the cache", artifact_url)
 		return content, nil
 	}
 
-	artifact_path := fmt.Sprintf("%s/%s", test_matrix.ArtifactsURL, path)
-	log.Debugf("Fetching %s ...", path)
-	resp, err := http.Get(artifact_path)
+	log.Debugf("Fetching %s ...", artifact_url)
+	resp, err := http.Get(artifact_url)
 	if err != nil {
-		return []byte{}, fmt.Errorf("error fetching %s: %v", artifact_path, err)
+		return []byte{}, fmt.Errorf("error fetching %s: %v", artifact_url, err)
 	}
 
 	defer resp.Body.Close()
 	content, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return []byte{}, fmt.Errorf("error reading %s: %v", artifact_path, err)
+		return []byte{}, fmt.Errorf("error reading %s: %v", artifact_url, err)
 	}
 
 	cache_dir, err := filepath.Abs(filepath.Dir(cache_path))
@@ -98,13 +99,14 @@ func fetchJsonArtifact(test_matrix v1.MatrixSpec, path string) (JsonResult, erro
 	var result JsonResult
 	err = json.Unmarshal(content, &result)
 	if err != nil {
+		fetchRemoveFromCache(test_matrix, path)
 		return nil, fmt.Errorf("error parsing the JSON of %s: %v", path, err)
 	}
 
 	return result, nil
 }
 
-func fetchTestResult(test_matrix v1.MatrixSpec, matrix_name, prow_name, build_id, filename string, filetype ArtifactType) (ArtifactResult, error) {
+func fetchTestResult(test_matrix v1.MatrixSpec, prow_name, build_id, filename string, filetype ArtifactType) (ArtifactResult, error) {
 	file_path := fmt.Sprintf("%s/%s/%s", prow_name, build_id, filename)
 	var result ArtifactResult
 	var err error
@@ -143,7 +145,7 @@ func FetchLastTestResult(test_matrix v1.MatrixSpec, matrix_name string, test v1.
 		log.Warningf("Failed to remove %s from cache : %v", last_test_path, err)
 	}
 
-	last_test_file, err := fetchTestResult(test_matrix, matrix_name, test.ProwName,
+	last_test_file, err := fetchTestResult(test_matrix, test.ProwName,
 		string(last_test_build_id), filename, filetype)
 	if (err != nil) {
 		return "", ArtifactResult{}, fmt.Errorf("error fetching the results of the last test of %s:%s (%s): %v",
@@ -182,7 +184,7 @@ func FetchLastNTestResults(test_matrix v1.MatrixSpec, matrix_name, prow_name str
 		build_ids = build_ids[:nb_test]
 	}
 	for _, test_build_id := range build_ids {
-		test_file, err := fetchTestResult(test_matrix, matrix_name, prow_name, test_build_id, filename, filetype)
+		test_file, err := fetchTestResult(test_matrix, prow_name, test_build_id, filename, filetype)
 		if (err != nil) {
 			log.Warningf("error fetching the results of %s:%s/%s (%s): %v",
 				matrix_name, prow_name, test_build_id, filename, err)
@@ -193,4 +195,9 @@ func FetchLastNTestResults(test_matrix v1.MatrixSpec, matrix_name, prow_name str
 	}
 
 	return build_ids, test_results, err
+}
+
+func FetchTestStepResult(test_matrix v1.MatrixSpec, test_result v1.TestResult, filename string, filetype ArtifactType) (ArtifactResult, error) {
+	step_filenane := fmt.Sprintf("artifacts/%s/%s/%s", test_result.TestSpec.TestName, test_matrix.ProwStep, filename)
+	return fetchTestResult(test_matrix, test_result.TestSpec.ProwName, test_result.BuildId, step_filenane, filetype)
 }

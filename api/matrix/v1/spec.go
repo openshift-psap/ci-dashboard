@@ -31,6 +31,11 @@ type TestResult struct {
 	Passed bool
 	Result string
 	FinishDate string
+
+	StepPassed bool
+	StepResult string
+	/* *** */
+	TestSpec *TestSpec
 }
 
 type TestSpec struct {
@@ -43,7 +48,7 @@ type TestSpec struct {
 	ProwName string
 	TestGroup string
 
-	OldTests []TestResult
+	OldTests []*TestResult
 
 	TestResult
 }
