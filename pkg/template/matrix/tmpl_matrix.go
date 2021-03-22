@@ -39,12 +39,37 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 				return txt[pipe_pos+1:]
 			}
 		},
-		"artifacts_url": func(matrix v1.MatrixSpec, test v1.TestSpec) string {
+		"artifacts_url": func(matrix v1.MatrixSpec, test v1.TestResult) string {
 			return fmt.Sprintf("%s/%s/%s/artifacts/%s/%s",
-				matrix.ArtifactsURL, test.ProwName, test.BuildId, test.TestName, matrix.ProwStep)
+				matrix.ArtifactsURL, test.TestSpec.ProwName, test.BuildId, test.TestSpec.TestName, matrix.ProwStep)
 		},
 		"spyglass_url": func(matrix v1.MatrixSpec, prowName string, test v1.TestResult) string {
 			return fmt.Sprintf("%s/%s/%s", matrix.ViewerURL, prowName, test.BuildId)
+		},
+		"old_test_status_descr": func(test v1.TestResult, status string) string {
+			if status == "success" {
+				return "Test passed"
+			} else if status == "step_success" {
+				return "Test failed but the operator step passed"
+			} else if status == "step_failed" {
+				return "Test failed because the operator step failed"
+			} else if status == "step_missing" {
+				return "Test failed but operator step wasn't executed"
+			} else {
+				return fmt.Sprintf("Test: %t, Step: %t (status: %s)",
+					test.Passed, test.StepPassed, status)
+			}
+		},
+		"old_test_status": func(test v1.TestResult) string {
+			if test.Passed {
+				return "success"
+			} else if test.StepPassed {
+				return "step_success"
+			} else if !test.StepPassed {
+				return "step_failed"
+			} else {
+				return "parsin_error"
+			}
 		},
     }
 

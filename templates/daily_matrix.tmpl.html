@@ -32,8 +32,17 @@
           .old_test_success {
               background-color: green;
           }
-          .old_test_failure {
+          .old_test_step_success {
+              background-color: lightgreen;
+          }
+          .old_test_step_failed {
               background-color: red;
+          }
+          .old_test_step_missing {
+              background-color: gray;
+          }
+          .old_test_parsing_error {
+              background-color: black;
           }
         </style>
   </head>
@@ -126,17 +135,23 @@
                         <i class="material-icons state pending">watch_later</i>
                         -->
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test}}/build-log.txt"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} build logs">description</i></a></td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test}}/artifacts/"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} test artifacts">pageview</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test.TestResult }}/build-log.txt"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} build logs">description</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test.TestResult }}/artifacts/"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} test artifacts">pageview</i></a></td>
                       <td class='cell_operator'>{{ $test.OperatorVersion }}</td>
                       <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{  spyglass_url $matrix $test.ProwName $test.TestResult}}"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td></td>
                       <td><div tabindex="0">{{ $test.FinishDate }}</td>
                       <td class="old_tests">
-                      {{ range $idx, $old_test := $test.OldTests }}
-                      <a title="{{ if eq $idx 0 }}Most recent test: {{ end }}{{ $old_test.FinishDate}}"
-                         href="{{  spyglass_url $matrix $test.ProwName $old_test}}"
-                         class="old_tests old_test_{{ if $old_test.Passed }}success{{ else }}failure{{ end }}">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        {{ range $idx, $old_test := $test.OldTests }}
+                        {{$old_test_status := old_test_status $old_test}}
+                        <a title="{{ if eq $idx 0 }}Most recent test: {{ end }}{{ old_test_status_descr $old_test $old_test_status }}.
+{{ $old_test.FinishDate}}"
+                           {{ if ne $old_test_status "step_missing" }}
+                           href="{{ artifacts_url $matrix $old_test}}/artifacts"
+                           {{ else }}
+                           href="{{  spyglass_url $matrix $test.ProwName $old_test}}"
+                           {{ end }}
+                         class="old_tests old_test_{{ $old_test_status }}">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                       {{ if eq $idx 0 }}
                       |
                       {{ end }}

@@ -110,6 +110,12 @@ func populateTestFromFinished(test *v1.TestResult, test_finished artifacts.Artif
 	return nil
 }
 
+func populateTestFromStepFinished(test *v1.TestResult, step_test_finished artifacts.ArtifactResult) error {
+	test.StepPassed = step_test_finished.Json["passed"].(bool)
+	test.StepResult = step_test_finished.Json["result"].(string)
+	return nil
+}
+
 func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 	for matrix_name, test_matrix := range matricesSpec.Matrices {
 		log.Printf("* %s: %s\n", matrix_name, test_matrix.Description)
@@ -125,8 +131,9 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 				if err != nil {
 					return err
 				}
-				test.TestGroup = test_group
+				test.TestSpec = test
 
+				test.TestGroup = test_group
 				test.BuildId = test_build_id
 				if err = populateTestFromFinished(&test.TestResult, test_finished); err != nil {
 					log.Warningf("Failed to get the last results of test %s/%s: %v", test.ProwName, test_build_id, err)
@@ -138,12 +145,25 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 				}
 				for _, old_test_build_id := range old_test_build_ids {
 					old_test_finished := old_tests[old_test_build_id]
-					old_test := v1.TestResult{}
+					old_test := v1.TestResult{TestSpec: test}
 					old_test.BuildId = old_test_build_id
+					test.OldTests = append(test.OldTests, &old_test)
+
 					if err = populateTestFromFinished(&old_test, old_test_finished); err != nil {
-						log.Warningf("Failed to get the last results of test %s/%s: %v", test.ProwName, old_test_build_id, err)
+						log.Warningf("Failed to store the last results of test %s/%s: %v", test.ProwName, old_test_build_id, err)
+						continue
 					}
-					test.OldTests = append(test.OldTests, old_test)
+					if old_test.Passed {
+						continue
+					}
+					step_test_finished, err := artifacts.FetchTestStepResult(test_matrix, old_test, "finished.json", artifacts.TypeJson)
+					if (err != nil) {
+						log.Warningf("Failed to fetch the results of test step %s/%s: %v", test.ProwName, old_test_build_id, err)
+						continue
+					}
+					if err = populateTestFromStepFinished(&old_test, step_test_finished); err != nil {
+						log.Warningf("Failed to store the results of test step %s/%s: %v", test.ProwName, old_test_build_id, err)
+					}
 				}
 			}
 		}
