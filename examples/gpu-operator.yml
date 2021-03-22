@@ -3,38 +3,50 @@ description: GPU Operator Test Matrix
 nb_test_history: 15
 matrices:
   nightlies:
-
     description: Red Hat OpenShift Nightlies
+    operator_name: GPU Operator
+
     viewer_url: https://prow.ci.openshift.org/view/gs/origin-ci-test/logs
+
     artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs
     artifacts_cache: cache
-    artifacts_test_name: gpu-operator-e2e/nightly
-    operator_name: GPU Operator
+
+    prow_config: periodic-ci-openshift-psap-ci-artifacts
+    prow_step: nightly
+
     tests:
       1|OpenShift 4.7:
-      - prow_name: periodic-ci-openshift-psap-ci-artifacts-release-next-gpu-operator-e2e
+      - branch: release-next
+        test_name: gpu-operator-e2e
         operator_version: master
 
-      - prow_name: periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e
+      - branch: release-4.7
+        test_name: gpu-operator-e2e
         operator_version: latest
 
       2|OpenShift 4.6:
-      - prow_name: periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e
+      - branch: release-4.6
+        test_name: gpu-operator-e2e
         operator_version: latest
 
-      - prow_name: periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-152
+      - branch: release-4.6
+        test_name: gpu-operator-e2e-152
         operator_version: 1.5.2
 
-      - prow_name: periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-140
+      - branch: release-4.6
+        test_name: gpu-operator-e2e-140
         operator_version: 1.4.0
 
       3|OpenShift 4.5:
-      - prow_name: periodic-ci-openshift-psap-ci-artifacts-release-4.5-gpu-operator-e2e
+      - branch: release-4.5
+        test_name: gpu-operator-e2e
         operator_version: latest
         ocp_version: 4.5
 
-      - prow_name: periodic-ci-openshift-psap-ci-artifacts-release-4.5-gpu-operator-e2e-152
+      - branch: release-4.5
+        test_name: gpu-operator-e2e-152
         operator_version: 1.5.2
 
-      - prow_name: periodic-ci-openshift-psap-ci-artifacts-release-4.5-gpu-operator-e2e-140
+      - branch: release-4.5
+        test_name: gpu-operator-e2e-140
         operator_version: 1.4.0
