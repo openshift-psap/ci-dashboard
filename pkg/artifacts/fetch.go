@@ -139,11 +139,10 @@ func FetchLastTestResult(test_matrix v1.MatrixSpec, matrix_name string, test v1.
 			last_test_path, err)
 	}
 
-	/*
 	if err = fetchRemoveFromCache(test_matrix, last_test_path); err != nil {
 		log.Warningf("Failed to remove %s from cache : %v", last_test_path, err)
 	}
-*/
+
 	last_test_file, err := fetchTestResult(test_matrix, matrix_name, test.ProwName,
 		string(last_test_build_id), filename, filetype)
 	if (err != nil) {
