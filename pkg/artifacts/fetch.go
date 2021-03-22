@@ -8,6 +8,7 @@ import (
     "net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	v1 "github.com/openshift-psap/ci-dashboard/api/matrix/v1"
@@ -124,23 +125,30 @@ func fetchTestResult(test_matrix v1.MatrixSpec, matrix_name, prow_name, build_id
 }
 
 func FetchLastTestResult(test_matrix v1.MatrixSpec, matrix_name string, test v1.TestSpec, filename string, filetype ArtifactType) (string, ArtifactResult, error) {
-
-	prow_name := test.ProwName
-	last_test_path := fmt.Sprintf("%s/latest-build.txt", prow_name)
+	last_test_path := fmt.Sprintf("%s/latest-build.txt", test.ProwName)
 	last_test_build_id, err := fetchArtifact(test_matrix, last_test_path)
 	if err != nil {
-		return "", ArtifactResult{}, fmt.Errorf("error fetching the last test build_id from %s: %v", last_test_path, err)
+		fetchRemoveFromCache(test_matrix, last_test_path)
+		return "", ArtifactResult{}, fmt.Errorf("error fetching the last test build_id from %s: %v",
+			last_test_path, err)
 	}
+
+	if _, err := strconv.Atoi(string(last_test_build_id)); err != nil {
+		fetchRemoveFromCache(test_matrix, last_test_path)
+		return "", ArtifactResult{}, fmt.Errorf("error validating the last test build_id from %s: %v",
+			last_test_path, err)
+	}
+
 	/*
 	if err = fetchRemoveFromCache(test_matrix, last_test_path); err != nil {
 		log.Warningf("Failed to remove %s from cache : %v", last_test_path, err)
 	}
 */
-	last_test_file, err := fetchTestResult(test_matrix, matrix_name, prow_name,
+	last_test_file, err := fetchTestResult(test_matrix, matrix_name, test.ProwName,
 		string(last_test_build_id), filename, filetype)
 	if (err != nil) {
 		return "", ArtifactResult{}, fmt.Errorf("error fetching the results of the last test of %s:%s (%s): %v",
-			matrix_name, prow_name, last_test_build_id)
+			matrix_name, test.ProwName, last_test_build_id, err)
 
 	}
 

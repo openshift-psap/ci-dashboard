@@ -40,8 +40,8 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 			}
 		},
 		"artifacts_url": func(matrix v1.MatrixSpec, test v1.TestSpec) string {
-			return fmt.Sprintf("%s/%s/%s/artifacts/%s",
-				matrix.ArtifactsURL, test.ProwName, test.BuildId, matrix.ArtifactsTestName)
+			return fmt.Sprintf("%s/%s/%s/artifacts/%s/%s",
+				matrix.ArtifactsURL, test.ProwName, test.BuildId, test.TestName, matrix.ProwStep)
 		},
 		"spyglass_url": func(matrix v1.MatrixSpec, prowName string, test v1.TestResult) string {
 			return fmt.Sprintf("%s/%s/%s", matrix.ViewerURL, prowName, test.BuildId)

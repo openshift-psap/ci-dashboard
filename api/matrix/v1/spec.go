@@ -34,9 +34,13 @@ type TestResult struct {
 }
 
 type TestSpec struct {
-	ProwName string        `json:"prow_name,omitempty"`
+	TestName string        `json:"test_name,omitempty"`
+	Branch string          `json:"branch,omitempty"`
 	OperatorVersion string `json:"operator_version,omitempty"`
+
 	/* *** */
+
+	ProwName string
 	TestGroup string
 
 	OldTests []TestResult
@@ -49,7 +53,8 @@ type MatrixSpec struct {
 	ViewerURL string          `json:"viewer_url,omitempty"`
 	ArtifactsURL string       `json:"artifacts_url,omitempty"`
 	ArtifactsCache string     `json:"artifacts_cache,omitempty"`
-	ArtifactsTestName string  `json:"artifacts_test_name,omitempty"`
+	ProwConfig string         `json:"prow_config,omitempty"`
+	ProwStep string           `json:"prow_step,omitempty"`
 	OperatorName string       `json:"operator_name,omitempty"`
 	Tests map[string][]TestSpec `json:"tests,omitempty"`
 }
