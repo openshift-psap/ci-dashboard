@@ -46,7 +46,7 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 		"spyglass_url": func(matrix v1.MatrixSpec, prowName string, test v1.TestResult) string {
 			return fmt.Sprintf("%s/%s/%s", matrix.ViewerURL, prowName, test.BuildId)
 		},
-		"old_test_status_descr": func(test v1.TestResult, status string) string {
+		"test_status_descr": func(test v1.TestResult, status string) string {
 			if status == "success" {
 				return "Test passed"
 			} else if status == "step_success" {
@@ -60,9 +60,11 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 					test.Passed, test.StepPassed, status)
 			}
 		},
-		"old_test_status": func(test v1.TestResult) string {
+		"test_status": func(test v1.TestResult) string {
 			if test.Passed {
 				return "success"
+			} else if !test.StepExecuted {
+				return "step_missing"
 			} else if test.StepPassed {
 				return "step_success"
 			} else if !test.StepPassed {

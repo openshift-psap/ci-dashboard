@@ -111,6 +111,7 @@ func populateTestFromFinished(test *v1.TestResult, test_finished artifacts.Artif
 }
 
 func populateTestFromStepFinished(test *v1.TestResult, step_test_finished artifacts.ArtifactResult) error {
+	test.StepExecuted = true
 	test.StepPassed = step_test_finished.Json["passed"].(bool)
 	test.StepResult = step_test_finished.Json["result"].(string)
 	return nil
