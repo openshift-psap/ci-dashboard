@@ -79,7 +79,7 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 			} else if !test.StepPassed {
 				return "step_failed"
 			} else {
-				return "parsin_error"
+				return "parsing_error"
 			}
 		},
     }
