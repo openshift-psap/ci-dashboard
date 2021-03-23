@@ -123,7 +123,8 @@
                   {{ range $test := $tests }}
                   <tbody>
                     <tr class="changed">
-                      <td class="icon-cell" title="{{ $test.Result}}">
+                      {{$test_status := test_status $test.TestResult}}
+                      <td class="icon-cell" title="{{ test_status_descr $test.TestResult $test_status }}">
                         {{ if $test.Passed }}
                         <i class="material-icons state success">check_circle</i>
                         {{ else }}
@@ -143,8 +144,8 @@
                       <td><div tabindex="0">{{ $test.FinishDate }}</td>
                       <td class="old_tests">
                         {{ range $idx, $old_test := $test.OldTests }}
-                        {{$old_test_status := old_test_status $old_test}}
-                        <a title="{{ if eq $idx 0 }}Most recent test: {{ end }}{{ old_test_status_descr $old_test $old_test_status }}.
+                        {{$old_test_status := test_status $old_test}}
+                        <a title="{{ if eq $idx 0 }}Most recent test: {{ end }}{{ test_status_descr $old_test $old_test_status }}.
 {{ $old_test.FinishDate}}"
                            {{ if ne $old_test_status "step_missing" }}
                            href="{{ artifacts_url $matrix $old_test}}/artifacts"

@@ -32,6 +32,7 @@ type TestResult struct {
 	Result string
 	FinishDate string
 
+	StepExecuted bool
 	StepPassed bool
 	StepResult string
 	/* *** */

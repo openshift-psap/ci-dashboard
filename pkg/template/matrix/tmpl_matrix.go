@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"html/template"
 	"strings"
-
+	"unicode/utf8"
 	v1 "github.com/openshift-psap/ci-dashboard/api/matrix/v1"
 )
 
@@ -28,6 +28,15 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 	}
 
 	fmap := template.FuncMap{
+		"md_section" : func(s string) string {
+			return strings.Repeat("=", utf8.RuneCountInString(s))
+		},
+		"md_subsection" : func(s string) string {
+			return strings.Repeat("-", utf8.RuneCountInString(s))
+		},
+		"unescape_html" : func(s string) template.HTML {
+			return template.HTML(s)
+		},
         "nb_last_test": func() string {
 			return fmt.Sprintf("%d", matrices.NbTestHistory)
 		},
@@ -46,7 +55,7 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 		"spyglass_url": func(matrix v1.MatrixSpec, prowName string, test v1.TestResult) string {
 			return fmt.Sprintf("%s/%s/%s", matrix.ViewerURL, prowName, test.BuildId)
 		},
-		"old_test_status_descr": func(test v1.TestResult, status string) string {
+		"test_status_descr": func(test v1.TestResult, status string) string {
 			if status == "success" {
 				return "Test passed"
 			} else if status == "step_success" {
@@ -60,9 +69,11 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 					test.Passed, test.StepPassed, status)
 			}
 		},
-		"old_test_status": func(test v1.TestResult) string {
+		"test_status": func(test v1.TestResult) string {
 			if test.Passed {
 				return "success"
+			} else if !test.StepExecuted {
+				return "step_missing"
 			} else if test.StepPassed {
 				return "step_success"
 			} else if !test.StepPassed {
