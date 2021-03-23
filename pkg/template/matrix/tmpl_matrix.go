@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"html/template"
 	"strings"
-
+	"unicode/utf8"
 	v1 "github.com/openshift-psap/ci-dashboard/api/matrix/v1"
 )
 
@@ -28,6 +28,15 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 	}
 
 	fmap := template.FuncMap{
+		"md_section" : func(s string) string {
+			return strings.Repeat("=", utf8.RuneCountInString(s))
+		},
+		"md_subsection" : func(s string) string {
+			return strings.Repeat("-", utf8.RuneCountInString(s))
+		},
+		"unescape_html" : func(s string) template.HTML {
+			return template.HTML(s)
+		},
         "nb_last_test": func() string {
 			return fmt.Sprintf("%d", matrices.NbTestHistory)
 		},
