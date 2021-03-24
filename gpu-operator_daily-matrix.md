@@ -2,11 +2,18 @@
 GPU Operator Test Matrix
 ========================
 
+OpenShift 4.8
+-------------
+
+* GPU Operator master: FAILURE
+  - Test failed because the operator step failed
+  - Test finished at 2021-03-24 00:20
+
 OpenShift 4.7
 -------------
 
 * GPU Operator master: FAILURE
-  - Test failed but operator step wasn't executed
+  - Test failed because the operator step failed
   - Test finished at 2021-03-24 00:27
 
 * GPU Operator latest: SUCCESS
@@ -45,4 +52,4 @@ OpenShift 4.5
 
 
 ---
-Document generated on 2021-03-24 06h06.
+Document generated on 2021-03-24 09h08.
