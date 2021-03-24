@@ -123,10 +123,16 @@
                   {{ range $test := $tests }}
                   <tbody>
                     <tr class="changed">
-                      {{$test_status := test_status $test.TestResult}}
+                      {{ $test_status := test_status $test.TestResult }}
                       <td class="icon-cell" title="{{ test_status_descr $test.TestResult $test_status }}">
-                        {{ if $test.Passed }}
+                        {{ if eq $test_status "success" }}
                         <i class="material-icons state success">check_circle</i>
+                        {{ else if eq $test_status "step_success" }}
+                        <i class="material-icons state success">check_circle</i>
+                        {{ else if eq $test_status "step_failed" }}
+                        <i class="material-icons state failure">error</i>
+                        {{ else if eq $test_status "step_missing" }}
+                        <i class="material-icons state aborted">remove_circle</i>
                         {{ else }}
                         <i class="material-icons state error">warning</i>
                         {{ end }}
