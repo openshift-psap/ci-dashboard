@@ -152,7 +152,7 @@
                         {{ range $idx, $old_test := $test.OldTests }}
                         {{$old_test_status := test_status $old_test}}
                         <a title="{{ if eq $idx 0 }}Most recent test: {{ end }}{{ test_status_descr $old_test $old_test_status }}.
-                                  {{ $old_test.FinishDate}}"
+{{ $old_test.FinishDate}}"
                            {{ if ne $old_test_status "step_missing" }}
                            href="{{ artifacts_url $matrix $old_test}}/artifacts"
                            {{ else }}
