@@ -15,6 +15,11 @@ matrices:
     prow_step: nightly
 
     tests:
+      0|OpenShift 4.8:
+      - branch: release-4.8
+        test_name: gpu-operator-e2e-master
+        operator_version: master
+
       1|OpenShift 4.7:
       - branch: release-next
         test_name: gpu-operator-e2e
