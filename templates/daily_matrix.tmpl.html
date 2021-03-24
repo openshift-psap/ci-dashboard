@@ -152,17 +152,20 @@
                         {{ range $idx, $old_test := $test.OldTests }}
                         {{$old_test_status := test_status $old_test}}
                         <a title="{{ if eq $idx 0 }}Most recent test: {{ end }}{{ test_status_descr $old_test $old_test_status }}.
-{{ $old_test.FinishDate}}"
+                                  {{ $old_test.FinishDate}}"
                            {{ if ne $old_test_status "step_missing" }}
                            href="{{ artifacts_url $matrix $old_test}}/artifacts"
                            {{ else }}
                            href="{{  spyglass_url $matrix $test.ProwName $old_test}}"
                            {{ end }}
-                         class="old_tests old_test_{{ $old_test_status }}">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                      {{ if eq $idx 0 }}
-                      |
-                      {{ end }}
-                      {{ end }}
+                           class="old_tests old_test_{{ $old_test_status }}">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        {{ if eq $idx 0 }}
+                        |
+                        {{ end }}
+                        {{ end }}
+                        {{ range $idx := no_test_history $test }}
+                        <span class="no_old_test no_old_test_{{ $idx}}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        {{ end }}
                       </td>
                     </tr>
                   </tbody>

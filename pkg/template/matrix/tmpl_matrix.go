@@ -40,6 +40,13 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
         "nb_last_test": func() string {
 			return fmt.Sprintf("%d", matrices.NbTestHistory)
 		},
+        "no_test_history": func(test v1.TestSpec) []int {
+			arr := []int{}
+			for i := len(test.OldTests); i < matrices.NbTestHistory; i++ {
+				arr = append(arr, i)
+			}
+			return arr
+		},
         "group_name": func(txt string) string {
 			pipe_pos := strings.Index(txt, "|")
 			if pipe_pos == -1 {
