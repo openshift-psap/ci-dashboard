@@ -12,9 +12,9 @@ OpenShift 4.8
 OpenShift 4.7
 -------------
 
-* GPU Operator master: FAILURE
-  - Test failed because the operator step failed
-  - Test finished at 2021-03-26 00:36
+* GPU Operator master: SUCCESS
+  - Test passed
+  - Test finished at 2021-03-27 00:19
 
 * GPU Operator latest: SUCCESS
   - Test passed
@@ -52,4 +52,4 @@ OpenShift 4.5
 
 
 ---
-Document generated on 2021-03-27 06h06.
+Document generated on 2021-03-27 10h45.
