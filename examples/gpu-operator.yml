@@ -21,8 +21,8 @@ matrices:
         operator_version: master
 
       1|OpenShift 4.7:
-      - branch: release-next
-        test_name: gpu-operator-e2e
+      - branch: release-4.7
+        test_name: gpu-operator-e2e-master
         operator_version: master
 
       - branch: release-4.7
