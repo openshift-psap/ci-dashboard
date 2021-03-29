@@ -142,15 +142,16 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 				step_test_finished, err := artifacts.FetchTestStepResult(test_matrix, test.TestResult, "finished.json", artifacts.TypeJson)
 				if (err != nil) {
 					log.Warningf("Failed to fetch the results of test step %s/%s: %v", test.ProwName, test_build_id, err)
-					continue
+				} else {
+					if err = populateTestFromStepFinished(&test.TestResult, step_test_finished); err != nil {
+						log.Warningf("Failed to store the results of test step %s/%s: %v", test.ProwName, test_build_id, err)
+					}
 				}
-				if err = populateTestFromStepFinished(&test.TestResult, step_test_finished); err != nil {
-					log.Warningf("Failed to store the results of test step %s/%s: %v", test.ProwName, test_build_id, err)
-				}
+
 				old_test_build_ids, old_tests, err := artifacts.FetchLastNTestResults(test_matrix, matrix_name, test.ProwName, matricesSpec.NbTestHistory,
 					"finished.json", artifacts.TypeJson)
 				if err != nil {
-					return err
+					return fmt.Errorf("Failed to fetch the last %d test results for %s: %v", matricesSpec.NbTestHistory, test.ProwName, err)
 				}
 				for _, old_test_build_id := range old_test_build_ids {
 					old_test_finished := old_tests[old_test_build_id]
