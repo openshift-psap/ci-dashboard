@@ -151,7 +151,7 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 				old_test_build_ids, old_tests, err := artifacts.FetchLastNTestResults(test_matrix, matrix_name, test.ProwName, matricesSpec.NbTestHistory,
 					"finished.json", artifacts.TypeJson)
 				if err != nil {
-					return err
+					return fmt.Errorf("Failed to fetch the last %d test results for %s: %v", matricesSpec.NbTestHistory, test.ProwName, err)
 				}
 				for _, old_test_build_id := range old_test_build_ids {
 					old_test_finished := old_tests[old_test_build_id]
