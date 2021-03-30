@@ -5,51 +5,51 @@ GPU Operator Test Matrix
 OpenShift 4.8
 -------------
 
-* GPU Operator master: FAILURE
-  - Test failed but operator step wasn't executed
-  - Test finished at 2021-03-29 00:11
+* GPU Operator master: SUCCESS
+  - Test passed
+  - Test finished at 2021-03-30 00:32
 
 OpenShift 4.7
 -------------
 
 * GPU Operator master: SUCCESS
   - Test passed
-  - Test finished at 2021-03-29 00:23
+  - Test finished at 2021-03-30 00:27
 
 * GPU Operator latest: SUCCESS
   - Test passed
-  - Test finished at 2021-03-29 00:08
+  - Test finished at 2021-03-30 00:08
 
 OpenShift 4.6
 -------------
 
 * GPU Operator latest: SUCCESS
   - Test passed
-  - Test finished at 2021-03-29 00:18
+  - Test finished at 2021-03-30 00:18
 
 * GPU Operator 1.5.2: SUCCESS
   - Test passed
-  - Test finished at 2021-03-29 00:13
+  - Test finished at 2021-03-30 00:20
 
 * GPU Operator 1.4.0: SUCCESS
   - Test passed
-  - Test finished at 2021-03-29 00:12
+  - Test finished at 2021-03-30 00:24
 
 OpenShift 4.5
 -------------
 
 * GPU Operator latest: SUCCESS
   - Test passed
-  - Test finished at 2021-03-29 00:11
+  - Test finished at 2021-03-30 00:19
 
 * GPU Operator 1.5.2: SUCCESS
   - Test passed
-  - Test finished at 2021-03-29 00:14
+  - Test finished at 2021-03-30 00:11
 
 * GPU Operator 1.4.0: SUCCESS
   - Test passed
-  - Test finished at 2021-03-29 00:10
+  - Test finished at 2021-03-30 00:17
 
 
 ---
-Document generated on 2021-03-29 09h36.
+Document generated on 2021-03-30 06h06.
