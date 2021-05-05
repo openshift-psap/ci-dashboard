@@ -7,49 +7,49 @@ OpenShift 4.8
 
 * GPU Operator master: FAILURE
   - Test failed because the operator step failed
-  - Test finished at 2021-05-04 00:09
+  - Test finished at 2021-05-05 00:27
 
 OpenShift 4.7
 -------------
 
 * GPU Operator master: SUCCESS
   - Test passed
-  - Test finished at 2021-05-04 00:19
+  - Test finished at 2021-05-05 00:31
 
 * GPU Operator latest: SUCCESS
   - Test passed
-  - Test finished at 2021-05-04 00:20
+  - Test finished at 2021-05-05 00:21
 
 OpenShift 4.6
 -------------
 
 * GPU Operator latest: FAILURE
   - Test failed because the operator step failed
-  - Test finished at 2021-05-04 00:22
+  - Test finished at 2021-05-05 00:23
 
-* GPU Operator 1.5.2: SUCCESS
-  - Test passed
-  - Test finished at 2021-05-04 00:21
+* GPU Operator 1.5.2: FAILURE
+  - Test failed because the operator step failed
+  - Test finished at 2021-05-05 00:22
 
-* GPU Operator 1.4.0: SUCCESS
-  - Test passed
-  - Test finished at 2021-05-04 00:17
+* GPU Operator 1.4.0: FAILURE
+  - Test failed because the operator step failed
+  - Test finished at 2021-05-05 00:08
 
 OpenShift 4.5
 -------------
 
 * GPU Operator latest: FAILURE
   - Test failed because the operator step failed
-  - Test finished at 2021-05-04 00:25
+  - Test finished at 2021-05-05 00:09
 
 * GPU Operator 1.5.2: FAILURE
   - Test failed because the operator step failed
-  - Test finished at 2021-05-04 00:24
+  - Test finished at 2021-05-05 00:11
 
 * GPU Operator 1.4.0: FAILURE
   - Test failed because the operator step failed
-  - Test finished at 2021-05-04 00:18
+  - Test finished at 2021-05-05 00:11
 
 
 ---
-Document generated on 2021-05-04 06h21.
+Document generated on 2021-05-05 06h21.
