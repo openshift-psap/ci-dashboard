@@ -26,6 +26,14 @@ type MatricesSpec struct {
 	Matrices map[string]MatrixSpec `json:"matrices,omitempty"`
 }
 
+type ToolboxStepResult struct {
+	Name string
+
+	Ok int
+	Failures int
+	Ignored int
+}
+
 type TestResult struct {
 	BuildId string
 	Passed bool
@@ -37,6 +45,14 @@ type TestResult struct {
 	StepResult string
 	/* *** */
 	TestSpec *TestSpec
+
+	ToolboxStepsResults []ToolboxStepResult
+
+	/* *** */
+
+	Ok int
+	Failures int
+	Ignored int
 }
 
 type TestSpec struct {

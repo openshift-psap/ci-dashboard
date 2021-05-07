@@ -18,18 +18,21 @@ import (
 type ArtifactType string
 
 const (
-	TypeJson ArtifactType = "type:json"
-	TypeHtml              = "type:html"
-	TypeBytes             = "type:bytes"
+	TypeJson ArtifactType      = "type:json"
+	TypeJsonArray ArtifactType = "type:json-array"
+	TypeHtml                   = "type:html"
+	TypeBytes                  = "type:bytes"
 )
 
 type ArtifactResult struct {
 	Json JsonResult
+	JsonArray JsonArray
 	Html *goquery.Document
 	Bytes []byte
 }
 
 type JsonResult map[string]interface{}
+type JsonArray []interface{}
 
 func fetchRemoveFromCache(test_matrix v1.MatrixSpec, path string) error {
 	cache_path := fmt.Sprintf("%s/%s", test_matrix.ArtifactsCache, path)
@@ -106,12 +109,29 @@ func fetchJsonArtifact(test_matrix v1.MatrixSpec, path string) (JsonResult, erro
 	return result, nil
 }
 
+func fetchJsonArrayArtifact(test_matrix v1.MatrixSpec, path string) (JsonArray, error){
+	content, err := fetchArtifact(test_matrix, path)
+	if err != nil {
+		return nil, err
+	}
+	var result JsonArray
+	err = json.Unmarshal(content, &result)
+	if err != nil {
+		//fetchRemoveFromCache(test_matrix, path)
+		return nil, fmt.Errorf("error parsing the JSON of %s: %v", path, err)
+	}
+
+	return result, nil
+}
+
 func fetchTestResult(test_matrix v1.MatrixSpec, prow_name, build_id, filename string, filetype ArtifactType) (ArtifactResult, error) {
 	file_path := fmt.Sprintf("%s/%s/%s", prow_name, build_id, filename)
 	var result ArtifactResult
 	var err error
 	if filetype == TypeJson {
 		result.Json, err = fetchJsonArtifact(test_matrix, file_path)
+	} else if filetype == TypeJsonArray {
+		result.JsonArray, err = fetchJsonArrayArtifact(test_matrix, file_path)
 	} else if filetype == TypeHtml {
 		result.Html, err = fetchHtmlArtifact(test_matrix, file_path)
 	} else if filetype == TypeBytes {
@@ -200,4 +220,52 @@ func FetchLastNTestResults(test_matrix v1.MatrixSpec, matrix_name, prow_name str
 func FetchTestStepResult(test_matrix v1.MatrixSpec, test_result v1.TestResult, filename string, filetype ArtifactType) (ArtifactResult, error) {
 	step_filenane := fmt.Sprintf("artifacts/%s/%s/%s", test_result.TestSpec.TestName, test_matrix.ProwStep, filename)
 	return fetchTestResult(test_matrix, test_result.TestSpec.ProwName, test_result.BuildId, step_filenane, filetype)
+}
+
+func FetchTestToolboxSteps(test_matrix v1.MatrixSpec, test_result v1.TestResult) ([]string, error) {
+	html_toolbox_steps, err := FetchTestStepResult(test_matrix, test_result, "artifacts/", TypeHtml)
+	if err != nil {
+		return []string{}, err
+	}
+
+	toolbox_steps := []string{}
+	html_toolbox_steps.Html.Find("li.grid-row").EachWithBreak(func(i int, s *goquery.Selection) bool {
+		entry_type, found := s.Find("img").Attr("src")
+
+		if !found || entry_type != "/icons/dir.png" {
+			return true
+		}
+		toolbox_step_name := strings.TrimSuffix(strings.TrimSpace(s.Find("a").Text()), "/")
+		if (!found) {
+			return true
+		}
+
+		toolbox_steps = append([]string{toolbox_step_name}, toolbox_steps...)
+
+		return true
+	})
+
+	return toolbox_steps, nil
+}
+
+func FetchTestToolboxLogs(test_matrix v1.MatrixSpec, test_result v1.TestResult) (map[string]JsonArray, error) {
+	toolbox_steps, err := FetchTestToolboxSteps(test_matrix, test_result)
+	if err != nil {
+		fmt.Println(err)
+		return map[string]JsonArray{}, err
+	}
+	logs := map[string]JsonArray{}
+
+	for _, toolbox_step := range toolbox_steps {
+		ansible_log_path := "artifacts/"+ toolbox_step + "/_ansible.log.json"
+		json_toolbox_step_logs, err := FetchTestStepResult(test_matrix, test_result, ansible_log_path, TypeJsonArray)
+		if err != nil {
+			log.Debugf("No logs for step %s: %v", toolbox_step, err)
+			continue // ignore
+		}
+		logs[toolbox_step] = json_toolbox_step_logs.JsonArray
+		fmt.Println(toolbox_step)
+	}
+
+	return logs, nil
 }
