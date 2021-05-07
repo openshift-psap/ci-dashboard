@@ -43,6 +43,10 @@ func fetchArtifact(test_matrix v1.MatrixSpec, path string) ([]byte, error) {
 	cache_path := fmt.Sprintf("%s/%s", test_matrix.ArtifactsCache, path)
 	artifact_url := fmt.Sprintf("%s/%s", test_matrix.ArtifactsURL, path)
 
+	if strings.HasSuffix(cache_path, "/") {
+		cache_path += "/?index"
+	}
+
 	content, err := ioutil.ReadFile(cache_path)
 	if err == nil {
 		log.Debugf("File %s found in the cache", artifact_url)
@@ -176,9 +180,8 @@ func FetchLastTestResult(test_matrix v1.MatrixSpec, matrix_name string, test v1.
 	return string(last_test_build_id), last_test_file, nil
 }
 
-
 func FetchLastNTestResults(test_matrix v1.MatrixSpec, matrix_name, prow_name string, nb_test int, filename string, filetype ArtifactType) ([]string, map[string]ArtifactResult, error) {
-	test_list_path := fmt.Sprintf("%s/?index", prow_name)
+	test_list_path := fmt.Sprintf("%s/", prow_name)
 	test_list_html, err := fetchHtmlArtifact(test_matrix, test_list_path)
 	if err != nil {
 		return nil, nil, fmt.Errorf("error fetching the tests of %s / %s: %v", matrix_name, prow_name, err)
