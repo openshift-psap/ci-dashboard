@@ -172,7 +172,7 @@ func FetchLastTestResult(test_matrix v1.MatrixSpec, matrix_name string, test v1.
 	last_test_file, err := fetchTestResult(test_matrix, test.ProwName,
 		string(last_test_build_id), filename, filetype)
 	if (err != nil) {
-		return "", ArtifactResult{}, fmt.Errorf("error fetching the results of the last test of %s:%s (%s): %v",
+		return "", ArtifactResult{}, fmt.Errorf("error fetching the results of the last test of %s: %s (%s): %v",
 			matrix_name, test.ProwName, last_test_build_id, err)
 
 	}

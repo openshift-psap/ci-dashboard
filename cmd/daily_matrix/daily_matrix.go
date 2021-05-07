@@ -102,18 +102,38 @@ func saveGeneratedHtml(generated_html []byte, f *Flags) error {
 }
 
 func populateTestFromFinished(test *v1.TestResult, test_finished artifacts.ArtifactResult) error {
-	test.Passed = test_finished.Json["passed"].(bool)
-	test.Result = test_finished.Json["result"].(string)
-	ts := test_finished.Json["timestamp"].(float64)
-	test.FinishDate = time.Unix(int64(ts), 0).Format("2006-01-02 15:04")
-
+	if test_finished.Json["passed"] != nil {
+		test.Passed = test_finished.Json["passed"].(bool)
+	} else {
+		test.Passed = false
+	}
+	if test_finished.Json["result"] != nil {
+		test.Result = test_finished.Json["result"].(string)
+	} else {
+		test.Result = "N/A"
+	}
+	if test_finished.Json["timestamp"] != nil {
+		ts := test_finished.Json["timestamp"].(float64)
+		test.FinishDate = time.Unix(int64(ts), 0).Format("2006-01-02 15:04")
+	} else {
+		test.FinishDate = "N/A"
+	}
 	return nil
 }
 
 func populateTestFromStepFinished(test *v1.TestResult, step_test_finished artifacts.ArtifactResult) error {
 	test.StepExecuted = true
-	test.StepPassed = step_test_finished.Json["passed"].(bool)
-	test.StepResult = step_test_finished.Json["result"].(string)
+	if step_test_finished.Json["passed"] != nil {
+		test.StepPassed = step_test_finished.Json["passed"].(bool)
+	} else {
+		test.StepPassed = false
+	}
+	if step_test_finished.Json["result"] != nil {
+		test.StepResult = step_test_finished.Json["result"].(string)
+	} else {
+		test.StepResult = "N/A"
+	}
+
 	return nil
 }
 
@@ -156,7 +176,6 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 
 				test.ProwName = fmt.Sprintf("%s-%s-%s", test_matrix.ProwConfig, branch, test.TestName)
 
-				fmt.Printf(" - %s\n", test.ProwName)
 				test_build_id, test_finished, err := artifacts.FetchLastTestResult(test_matrix, matrix_name, *test,
 					"finished.json", artifacts.TypeJson)
 				if err != nil {
@@ -167,6 +186,7 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 
 				test.TestGroup = test_group
 				test.BuildId = test_build_id
+
 				if err = populateTestFromFinished(&test.TestResult, test_finished); err != nil {
 					log.Warningf("Failed to get the last results of test %s/%s: %v", test.ProwName, test_build_id, err)
 				}
