@@ -20,6 +20,13 @@ OpenShift 4.7
   - Test passed
   - Test finished at 2021-05-21 00:35
 
+OpenShift 4.6 upgraded to 4.7
+-----------------------------
+
+* GPU Operator master: SUCCESS
+  - Test passed
+  - Test finished at 2021-05-19 14:52
+
 OpenShift 4.6
 -------------
 
@@ -52,4 +59,4 @@ OpenShift 4.5
 
 
 ---
-Document generated on 2021-05-21 06h35.
+Document generated on 2021-05-21 07h34.
