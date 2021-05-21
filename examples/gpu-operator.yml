@@ -15,12 +15,12 @@ matrices:
     prow_step: nightly
 
     tests:
-      0|OpenShift 4.8:
+      0_480|OpenShift 4.8:
       - branch: release-4.8
         test_name: gpu-operator-e2e-master
         operator_version: master
 
-      1|OpenShift 4.7:
+      1_470|OpenShift 4.7:
       - branch: release-4.7
         test_name: gpu-operator-e2e-master
         operator_version: master
@@ -29,7 +29,7 @@ matrices:
         test_name: gpu-operator-e2e-162
         operator_version: 1.6.2
 
-      2|OpenShift 4.6:
+      2_460|OpenShift 4.6:
       - branch: release-4.6
         test_name: gpu-operator-e2e-162
         operator_version: 1.6.2
@@ -42,7 +42,7 @@ matrices:
         test_name: gpu-operator-e2e-140
         operator_version: 1.4.0
 
-      3|OpenShift 4.5:
+      3_450|OpenShift 4.5:
       - branch: release-4.5
         test_name: gpu-operator-e2e-160
         operator_version: 1.6.0
