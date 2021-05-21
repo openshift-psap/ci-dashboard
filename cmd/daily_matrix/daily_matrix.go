@@ -136,7 +136,8 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 				test_build_id, test_finished, err := artifacts.FetchLastTestResult(test_matrix, matrix_name, *test,
 					"finished.json", artifacts.TypeJson)
 				if err != nil {
-					return err
+					log.Errorf("Failed to fetch the last results of the test %s: %v", test.ProwName, err)
+					continue
 				}
 				test.TestSpec = test
 
