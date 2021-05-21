@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="mdl-js" lang="en"><head>
+    <meta charset="UTF-8">
+
+    <title>Special Resource Operator Test Matrix - CI Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="https://prow.ci.openshift.org/static/style.css">
+    <link rel="stylesheet" type="text/css" href="https://prow.ci.openshift.org/static/extensions/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    
+        <style>
+          table#builds td.old_tests,
+          table#builds th.old_tests,
+          table#builds th.test_group{
+              text-align: left;
+          }
+          table#builds td,table#builds th {
+              text-align: center;
+          }
+
+          .old_test_success {
+              background-color: green;
+          }
+          .old_test_step_success {
+              background-color: lightgreen;
+          }
+          .old_test_step_failed {
+              background-color: red;
+          }
+          .old_test_step_missing {
+              background-color: gray;
+          }
+          .old_test_parsing_error {
+              background-color: black;
+          }
+        </style>
+  </head>
+  <body id="index">
+
+    <div id="alert-container"></div>
+    <div class="mdl-layout__container"><div class="mdl-layout mdl-js-layout mdl-layout--fixed-header has-drawer is-upgraded" data-upgraded=",MaterialLayout">
+        <header class="mdl-layout__header is-casting-shadow" style="background-color: black;"><div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button"><i class="material-icons"></i></div>
+          <div class="mdl-layout__header-row">
+            <a href="/" class="logo"><img src="https://prow.ci.openshift.org/static/extensions/logo.png" alt="kubernetes logo" class="logo"></a>
+            <span class="mdl-layout-title header-title">Special Resource Operator Test Matrix</span>
+          </div>
+        </header>
+        <div id="loading-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate hidden is-upgraded" data-upgraded=",MaterialProgress"><div class="progressbar bar bar1" style="width: 0%;"></div><div class="bufferbar bar bar2" style="width: 100%;"></div><div class="auxbar bar bar3" style="width: 0%;"></div></div>
+
+        <main class="mdl-layout__content">
+
+          <button id="top-navigator" class="mdl-button mdl-js-button mdl-button--fab hidden" data-upgraded=",MaterialButton">
+            <i class="material-icons">arrow_upward</i>
+          </button>
+
+          <div class="page-content">
+            
+
+            
+            
+
+            <article>&nbsp;</article>
+            <article>
+              <div class="table-container">
+                <table id="builds">
+                  <thead>
+                    <tr>
+                      <th class="test_group">OpenShift 4.8</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </article>
+
+            <article>
+              <div class="table-container">
+                <table id="builds">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th class='cell_operator'>Special Resource Operator</th>
+                      <th>Prow</th>
+                      <th></th>
+                      <th>Last finished</th>
+                      <th class="old_tests">History of the last 15 tests:</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                    <tr class="changed">
+                      
+                      <td class="icon-cell" title="Test failed because the operator step failed">
+                        
+                        <i class="material-icons state failure">error</i>
+                        
+                        
+                      </td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1395514923550773248/artifacts/e2e-master/nightly/build-log.txt"><i class="icon-button material-icons" title="Special Resource Operator build logs">description</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1395514923550773248/artifacts/e2e-master/nightly/artifacts/"><i class="icon-button material-icons" title="Special Resource Operator test artifacts">pageview</i></a></td>
+                      <td class='cell_operator'>master</td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1395514923550773248"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td></td>
+                      <td><div tabindex="0">2021-05-21 00:32</td>
+                      <td class="old_tests">
+                        
+                        
+                        <a title="Most recent test: Test failed because the operator step failed.
+2021-05-21 00:32"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1395514923550773248/artifacts/e2e-master/nightly/artifacts"
+                           
+                           class="old_tests old_test_step_failed">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
+                        <span class="no_old_test no_old_test_1">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_2">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_3">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_4">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_5">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_6">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_7">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_8">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_9">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_10">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_11">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_12">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_13">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_14">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                      </td>
+                    </tr>
+                  </tbody>
+                  
+                </table>
+              </div>
+            </article>
+            
+
+            <article>&nbsp;</article>
+            <article>
+              <div class="table-container">
+                <table id="builds">
+                  <thead>
+                    <tr>
+                      <th class="test_group">OpenShift 4.7</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </article>
+
+            <article>
+              <div class="table-container">
+                <table id="builds">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th class='cell_operator'>Special Resource Operator</th>
+                      <th>Prow</th>
+                      <th></th>
+                      <th>Last finished</th>
+                      <th class="old_tests">History of the last 15 tests:</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                    <tr class="changed">
+                      
+                      <td class="icon-cell" title="Test passed">
+                        
+                        <i class="material-icons state success">check_circle</i>
+                        
+                        
+                      </td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1395514923043262464/artifacts/e2e-master/nightly/build-log.txt"><i class="icon-button material-icons" title="Special Resource Operator build logs">description</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1395514923043262464/artifacts/e2e-master/nightly/artifacts/"><i class="icon-button material-icons" title="Special Resource Operator test artifacts">pageview</i></a></td>
+                      <td class='cell_operator'>master</td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1395514923043262464"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td></td>
+                      <td><div tabindex="0">2021-05-21 00:18</td>
+                      <td class="old_tests">
+                        
+                        
+                        <a title="Most recent test: Test passed.
+2021-05-21 00:18"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1395514923043262464/artifacts/e2e-master/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
+                        <span class="no_old_test no_old_test_1">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_2">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_3">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_4">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_5">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_6">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_7">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_8">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_9">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_10">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_11">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_12">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_13">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                        <span class="no_old_test no_old_test_14">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        
+                      </td>
+                    </tr>
+                  </tbody>
+                  
+                </table>
+              </div>
+            </article>
+            
+            
+            <div id="rerun">
+              <div id="rerun-content"></div>
+            </div>
+          </div>
+        </main>
+
+        <div id="footer">
+          Document generated on 2021-05-21 13h31.
+        </div>
+  </body>
+</html>
