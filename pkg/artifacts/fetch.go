@@ -112,7 +112,7 @@ func fetchTestResult(test_matrix v1.MatrixSpec, prow_name, build_id, filename st
 	var err error
 	if filetype == TypeJson {
 		result.Json, err = fetchJsonArtifact(test_matrix, file_path)
-	} else if filetype == TypeJson {
+	} else if filetype == TypeHtml {
 		result.Html, err = fetchHtmlArtifact(test_matrix, file_path)
 	} else if filetype == TypeBytes {
 		result.Bytes, err = fetchArtifact(test_matrix, file_path)

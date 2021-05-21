@@ -148,7 +148,11 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 				}
 				step_test_finished, err := artifacts.FetchTestStepResult(test_matrix, test.TestResult, "finished.json", artifacts.TypeJson)
 				if (err != nil) {
-					log.Warningf("Failed to fetch the results of test step %s/%s: %v", test.ProwName, test_build_id, err)
+					// if finished.json can be parsed as an HTML file, the file certainly does'nt exist --> do not warn about it
+					_, err_json_as_html := artifacts.FetchTestStepResult(test_matrix, test.TestResult, "finished.json", artifacts.TypeHtml)
+					if err_json_as_html != nil {
+						log.Warningf("Failed to fetch the results of test step ??? %s/%s: %v", test.ProwName, test_build_id, err)
+					}
 				} else {
 					if err = populateTestFromStepFinished(&test.TestResult, step_test_finished); err != nil {
 						log.Warningf("Failed to store the results of test step %s/%s: %v", test.ProwName, test_build_id, err)
@@ -167,15 +171,21 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 					test.OldTests = append(test.OldTests, &old_test)
 
 					if err = populateTestFromFinished(&old_test, old_test_finished); err != nil {
-						log.Warningf("Failed to store the last results of test %s/%s: %v", test.ProwName, old_test_build_id, err)
+						log.Warningf("Failed to store the last results of test %s/%s: %v",
+							test.ProwName, old_test_build_id, err)
 						continue
 					}
 					if old_test.Passed {
 						continue
 					}
 					step_old_test_finished, err := artifacts.FetchTestStepResult(test_matrix, old_test, "finished.json", artifacts.TypeJson)
-					if (err != nil) {
-						log.Warningf("Failed to fetch the results of test step %s/%s: %v", test.ProwName, old_test_build_id, err)
+					if err != nil {
+						// if finished.json can be parsed as an HTML file, the file certainly does'nt exist --> do not warn about it
+						_, err_json_as_html := artifacts.FetchTestStepResult(test_matrix, old_test, "finished.json", artifacts.TypeHtml)
+						if err_json_as_html != nil {
+							log.Warningf("Failed to fetch the results of test step %s/%s: %v",
+								test.ProwName, old_test_build_id, err)
+						}
 						continue
 					}
 					if err = populateTestFromStepFinished(&old_test, step_old_test_finished); err != nil {
