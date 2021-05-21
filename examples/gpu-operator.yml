@@ -26,13 +26,13 @@ matrices:
         operator_version: master
 
       - branch: release-4.7
-        test_name: gpu-operator-e2e
-        operator_version: latest
+        test_name: gpu-operator-e2e-162
+        operator_version: 1.6.2
 
       2|OpenShift 4.6:
       - branch: release-4.6
-        test_name: gpu-operator-e2e
-        operator_version: latest
+        test_name: gpu-operator-e2e-162
+        operator_version: 1.6.2
 
       - branch: release-4.6
         test_name: gpu-operator-e2e-152
@@ -44,8 +44,8 @@ matrices:
 
       3|OpenShift 4.5:
       - branch: release-4.5
-        test_name: gpu-operator-e2e
-        operator_version: latest
+        test_name: gpu-operator-e2e-160
+        operator_version: 1.6.0
         ocp_version: 4.5
 
       - branch: release-4.5
