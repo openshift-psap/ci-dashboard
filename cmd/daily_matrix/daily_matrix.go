@@ -123,8 +123,14 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 		for test_group, tests := range test_matrix.Tests {
 			for test_idx := range tests {
 				test := &tests[test_idx]
+				var branch string
+				if test.Variant != "" {
+					branch = fmt.Sprintf("%s-%s", test.Branch, test.Variant)
+				} else {
+					branch = test.Branch
+				}
 
-				test.ProwName = fmt.Sprintf("%s-%s-%s", test_matrix.ProwConfig, test.Branch, test.TestName)
+				test.ProwName = fmt.Sprintf("%s-%s-%s", test_matrix.ProwConfig, branch, test.TestName)
 
 				fmt.Printf(" - %s\n", test.ProwName)
 				test_build_id, test_finished, err := artifacts.FetchLastTestResult(test_matrix, matrix_name, *test,
