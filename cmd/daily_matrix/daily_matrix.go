@@ -123,14 +123,21 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 		for test_group, tests := range test_matrix.Tests {
 			for test_idx := range tests {
 				test := &tests[test_idx]
+				var branch string
+				if test.Variant != "" {
+					branch = fmt.Sprintf("%s-%s", test.Branch, test.Variant)
+				} else {
+					branch = test.Branch
+				}
 
-				test.ProwName = fmt.Sprintf("%s-%s-%s", test_matrix.ProwConfig, test.Branch, test.TestName)
+				test.ProwName = fmt.Sprintf("%s-%s-%s", test_matrix.ProwConfig, branch, test.TestName)
 
 				fmt.Printf(" - %s\n", test.ProwName)
 				test_build_id, test_finished, err := artifacts.FetchLastTestResult(test_matrix, matrix_name, *test,
 					"finished.json", artifacts.TypeJson)
 				if err != nil {
-					return err
+					log.Errorf("Failed to fetch the last results of the test %s: %v", test.ProwName, err)
+					continue
 				}
 				test.TestSpec = test
 
@@ -141,7 +148,11 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 				}
 				step_test_finished, err := artifacts.FetchTestStepResult(test_matrix, test.TestResult, "finished.json", artifacts.TypeJson)
 				if (err != nil) {
-					log.Warningf("Failed to fetch the results of test step %s/%s: %v", test.ProwName, test_build_id, err)
+					// if finished.json can be parsed as an HTML file, the file certainly does'nt exist --> do not warn about it
+					_, err_json_as_html := artifacts.FetchTestStepResult(test_matrix, test.TestResult, "finished.json", artifacts.TypeHtml)
+					if err_json_as_html != nil {
+						log.Warningf("Failed to fetch the results of test step ??? %s/%s: %v", test.ProwName, test_build_id, err)
+					}
 				} else {
 					if err = populateTestFromStepFinished(&test.TestResult, step_test_finished); err != nil {
 						log.Warningf("Failed to store the results of test step %s/%s: %v", test.ProwName, test_build_id, err)
@@ -160,15 +171,21 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 					test.OldTests = append(test.OldTests, &old_test)
 
 					if err = populateTestFromFinished(&old_test, old_test_finished); err != nil {
-						log.Warningf("Failed to store the last results of test %s/%s: %v", test.ProwName, old_test_build_id, err)
+						log.Warningf("Failed to store the last results of test %s/%s: %v",
+							test.ProwName, old_test_build_id, err)
 						continue
 					}
 					if old_test.Passed {
 						continue
 					}
 					step_old_test_finished, err := artifacts.FetchTestStepResult(test_matrix, old_test, "finished.json", artifacts.TypeJson)
-					if (err != nil) {
-						log.Warningf("Failed to fetch the results of test step %s/%s: %v", test.ProwName, old_test_build_id, err)
+					if err != nil {
+						// if finished.json can be parsed as an HTML file, the file certainly does'nt exist --> do not warn about it
+						_, err_json_as_html := artifacts.FetchTestStepResult(test_matrix, old_test, "finished.json", artifacts.TypeHtml)
+						if err_json_as_html != nil {
+							log.Warningf("Failed to fetch the results of test step %s/%s: %v",
+								test.ProwName, old_test_build_id, err)
+						}
 						continue
 					}
 					if err = populateTestFromStepFinished(&old_test, step_old_test_finished); err != nil {

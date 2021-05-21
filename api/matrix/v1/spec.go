@@ -43,6 +43,7 @@ type TestSpec struct {
 	TestName string        `json:"test_name,omitempty"`
 	Branch string          `json:"branch,omitempty"`
 	OperatorVersion string `json:"operator_version,omitempty"`
+	Variant string         `json:"variant"`
 
 	/* *** */
 
