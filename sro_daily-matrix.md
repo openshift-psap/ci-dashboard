@@ -5,17 +5,17 @@ Special Resource Operator Test Matrix
 OpenShift 4.8
 -------------
 
-* Special Resource Operator master: SUCCESS
-  - Test passed
-  - Test finished at 2021-05-24 00:25
+* Special Resource Operator master: FAILURE
+  - Test failed because the operator step failed
+  - Test finished at 2021-05-25 00:31
 
 OpenShift 4.7
 -------------
 
 * Special Resource Operator master: SUCCESS
   - Test passed
-  - Test finished at 2021-05-24 00:15
+  - Test finished at 2021-05-25 00:14
 
 
 ---
-Document generated on 2021-05-24 05h02.
+Document generated on 2021-05-25 05h13.
