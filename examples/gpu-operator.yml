@@ -26,6 +26,10 @@ matrices:
         operator_version: master
 
       - branch: release-4.7
+        test_name: gpu-operator-e2e-170
+        operator_version: 1.7.0
+
+      - branch: release-4.7
         test_name: gpu-operator-e2e-162
         operator_version: 1.6.2
 
@@ -35,7 +39,16 @@ matrices:
         operator_version: master
         variant: upgrade
 
+      #- branch: release-4.7
+      #  test_name: gpu-operator-e2e-upgrade-170
+      #  operator_version: 1.7.0
+      #  variant: upgrade
+
       2_460|OpenShift 4.6:
+      - branch: release-4.6
+        test_name: gpu-operator-e2e-170
+        operator_version: 1.7.0
+
       - branch: release-4.6
         test_name: gpu-operator-e2e-162
         operator_version: 1.6.2
