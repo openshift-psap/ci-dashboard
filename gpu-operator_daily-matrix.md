@@ -31,6 +31,10 @@ OpenShift 4.6 upgraded to 4.7
   - Test passed
   - Test finished at 2021-06-02 14:53
 
+* GPU Operator 1.7.0: SUCCESS
+  - Test passed
+  - Test finished at 2021-06-02 14:51
+
 OpenShift 4.6
 -------------
 
@@ -67,4 +71,4 @@ OpenShift 4.5
 
 
 ---
-Document generated on 2021-06-09 05h12.
+Document generated on 2021-06-09 09h35.
