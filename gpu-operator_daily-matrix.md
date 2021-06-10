@@ -5,70 +5,70 @@ GPU Operator Test Matrix
 OpenShift 4.8
 -------------
 
-* GPU Operator master: SUCCESS
-  - Test passed
-  - Test finished at 2021-06-09 00:43
+* GPU Operator master: FAILURE
+  - Test failed but operator step wasn't executed
+  - Test finished at 2021-06-10 00:42
 
 OpenShift 4.7
 -------------
 
-* GPU Operator master: SUCCESS
-  - Test passed
-  - Test finished at 2021-06-09 00:31
+* GPU Operator master: FAILURE
+  - Test failed but operator step wasn't executed
+  - Test finished at 2021-06-10 01:12
 
 * GPU Operator 1.7.0: SUCCESS
   - Test passed
-  - Test finished at 2021-06-09 00:28
+  - Test finished at 2021-06-10 01:11
 
-* GPU Operator 1.6.2: FAILURE
-  - Test failed but the operator step passed
-  - Test finished at 2021-06-09 00:56
+* GPU Operator 1.6.2: SUCCESS
+  - Test passed
+  - Test finished at 2021-06-10 01:19
 
 OpenShift 4.6 upgraded to 4.7
 -----------------------------
 
-* GPU Operator master: SUCCESS
-  - Test passed
-  - Test finished at 2021-06-02 14:53
+* GPU Operator master: FAILURE
+  - Test failed but operator step wasn't executed
+  - Test finished at 2021-06-09 16:11
 
-* GPU Operator 1.7.0: SUCCESS
-  - Test passed
-  - Test finished at 2021-06-02 14:51
+* GPU Operator 1.7.0: FAILURE
+  - Test failed but operator step wasn't executed
+  - Test finished at 2021-06-09 14:04
 
 OpenShift 4.6
 -------------
 
 * GPU Operator 1.7.0: SUCCESS
   - Test passed
-  - Test finished at 2021-06-09 00:43
+  - Test finished at 2021-06-10 00:44
 
 * GPU Operator 1.6.2: SUCCESS
   - Test passed
-  - Test finished at 2021-06-09 00:44
+  - Test finished at 2021-06-10 01:03
 
 * GPU Operator 1.5.2: SUCCESS
   - Test passed
-  - Test finished at 2021-06-09 00:33
+  - Test finished at 2021-06-10 01:49
 
 * GPU Operator 1.4.0: SUCCESS
   - Test passed
-  - Test finished at 2021-06-09 00:24
+  - Test finished at 2021-06-10 01:10
 
 OpenShift 4.5
 -------------
 
-* GPU Operator 1.6.0: SUCCESS
-  - Test passed
-  - Test finished at 2021-06-09 00:37
+* GPU Operator 1.6.0: FAILURE
+  - Test failed because the operator step failed
+  - Test finished at 2021-06-10 02:00
 
 * GPU Operator 1.5.2: FAILURE
-  - Test failed but the operator step passed
-  - Test finished at 2021-06-09 00:59
+  - Test failed but operator step wasn't executed
+  - Test finished at 2021-06-10 00:28
 
 * GPU Operator 1.4.0: SUCCESS
   - Test passed
-  - Test finished at 2021-06-09 01:52
+  - Test finished at 2021-06-10 00:51
 
 
 ---
-Document generated on 2021-06-09 09h35.
+Document generated on 2021-06-10 05h09.
