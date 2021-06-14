@@ -56,6 +56,9 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 			}
 		},
 		"artifacts_url": func(matrix v1.MatrixSpec, test v1.TestResult) string {
+			if test.TestSpec == nil {
+				return "INVALID"
+			}
 			return fmt.Sprintf("%s/%s/%s/artifacts/%s/%s",
 				matrix.ArtifactsURL, test.TestSpec.ProwName, test.BuildId, test.TestSpec.TestName, matrix.ProwStep)
 		},
