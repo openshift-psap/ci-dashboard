@@ -142,12 +142,27 @@
                         <i class="material-icons state pending">watch_later</i>
                         -->
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test.TestResult }}/build-log.txt"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} build logs">description</i></a></td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test.TestResult }}/artifacts/"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} test artifacts">pageview</i></a></td>
+
+                      <td class="icon-cell">
+                        {{ if $test.TestResult.TestSpec }}
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test.TestResult }}/build-log.txt"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} build logs">description</i></a>
+                        {{ end }}
+                      </td>
+                      <td class="icon-cell">
+                        {{ if $test.TestResult.TestSpec }}
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test.TestResult }}/artifacts/"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} test artifacts">pageview</i></a>
+                        {{ end }}
+                      </td>
                       <td class='cell_operator'>{{ $test.OperatorVersion }}</td>
                       <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{  spyglass_url $matrix $test.ProwName $test.TestResult}}"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td></td>
-                      <td><div tabindex="0">{{ $test.FinishDate }}</td>
+                      <td><div tabindex="0">
+                          {{ if $test.TestResult.TestSpec }}
+                             {{ $test.FinishDate }}
+                          {{ else }}
+                              Test-spec not found.
+                          {{ end }}
+                      </td>
                       <td class="old_tests">
                         {{ range $idx, $old_test := $test.OldTests }}
                         {{$old_test_status := test_status $old_test}}
