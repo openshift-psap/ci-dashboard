@@ -35,5 +35,23 @@ output/sro_daily-matrix.md: templates/daily_matrix.mail.tmpl.md
            --template $< \
            --output-file $@
 
+# NTO
+
+nto: output/nto_daily-matrix.html output/nto_daily-matrix.md
+
+output/nto_daily-matrix.html: templates/daily_matrix.tmpl.html
+	go run cmd/main.go --debug daily_matrix \
+           --config-file examples/nto.yml \
+           --template $< \
+           --output-file $@
+
+output/nto_daily-matrix.md: templates/daily_matrix.mail.tmpl.md
+	go run cmd/main.go --debug daily_matrix \
+           --config-file examples/nto.yml \
+           --template  $< \
+           --output-file $@
+
+#
+
 build:
 	go build -o ci-dashboard cmd/main.go
