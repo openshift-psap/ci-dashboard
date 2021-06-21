@@ -7,8 +7,8 @@ OpenShift 4.8
 
 * Node Tuning Operator 4.8: SUCCESS
   - Test passed
-  - Test finished at 2021-06-20 00:16
+  - Test finished at 2021-06-21 00:18
 
 
 ---
-Document generated on 2021-06-20 04h50.
+Document generated on 2021-06-21 04h50.
