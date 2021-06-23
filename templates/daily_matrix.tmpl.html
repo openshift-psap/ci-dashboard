@@ -140,8 +140,10 @@
                   {{ range $test := $tests }}
                   <tbody>
                     <tr class="changed">
-                      {{ $test_status := test_status $test.TestResult }}
-                      <td class="icon-cell" title="{{ test_status_descr $test.TestResult $test_status }}">
+                      {{ if $test.OldTests }}
+                      {{ $last_test := (index $test.OldTests 0) }}
+                      {{ $test_status := test_status $last_test }}
+                      <td class="icon-cell" title="{{ test_status_descr $last_test $test_status }}">
                         {{ if eq $test_status "success" }}
                         <i class="material-icons state success">check_circle</i>
                         {{ else if eq $test_status "step_success" }}
@@ -166,16 +168,16 @@
 
                       </td>
                       <td class="icon-cell">
-                        {{ if $test.TestResult.TestSpec }}
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test.TestResult }}/artifacts/"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} test artifacts">pageview</i></a>
+                        {{ if $last_test.TestSpec }}
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $last_test }}/artifacts/"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} test artifacts">pageview</i></a>
                         {{ end }}
                       </td>
                       <td class='cell_operator'>{{ $test.OperatorVersion }}</td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{  spyglass_url $matrix $test.ProwName $test.TestResult}}"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{  spyglass_url $matrix $test.ProwName $last_test}}"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td></td>
-                      <td><div tabindex="0">
-                          {{ if $test.TestResult.TestSpec }}
-                             {{ $test.FinishDate }}
+                      <td class="date-cell"><div tabindex="0">
+                          {{ if $last_test.TestSpec }}
+                             {{ $last_test.FinishDate }}
                           {{ else }}
                               Test-spec not found.
                           {{ end }}
@@ -201,6 +203,7 @@ OK: {{ $old_test.Ok }}, Failures: {{ $old_test.Failures }}, Ignored: {{ $old_tes
                         <span class="no_old_test no_old_test_{{ $idx}}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         {{ end }}
                       </td>
+                      {{ end }}
                     </tr>
                   </tbody>
                   {{ end }}

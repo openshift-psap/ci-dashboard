@@ -67,8 +67,6 @@ type TestSpec struct {
 	TestGroup string
 
 	OldTests []*TestResult
-
-	TestResult
 }
 
 type MatrixSpec struct {
