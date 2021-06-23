@@ -38,11 +38,11 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 			return template.HTML(s)
 		},
         "nb_last_test": func() string {
-			return fmt.Sprintf("%d", matrices.NbTestHistory)
+			return fmt.Sprintf("%d", matrices.TestHistory)
 		},
         "no_test_history": func(test v1.TestSpec) []int {
 			arr := []int{}
-			for i := len(test.OldTests); i < matrices.NbTestHistory; i++ {
+			for i := len(test.OldTests); i < matrices.TestHistory; i++ {
 				arr = append(arr, i)
 			}
 			return arr

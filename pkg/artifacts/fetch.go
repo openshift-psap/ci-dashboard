@@ -180,7 +180,8 @@ func FetchLastTestResult(test_matrix *v1.MatrixSpec, matrix_name string, test *v
 	return string(last_test_build_id), last_test_file, nil
 }
 
-func FetchLastNTestResults(test_matrix *v1.MatrixSpec, matrix_name, prow_name string, nb_test int, filename string, filetype ArtifactType) ([]string, map[string]ArtifactResult, error) {
+func FetchLastNTestResults(test_matrix *v1.MatrixSpec, matrix_name, prow_name string, test_history int, filename string, filetype ArtifactType) ([]string, map[string]ArtifactResult, error) {
+	test_list_path := fmt.Sprintf("%s/", prow_name)
 	test_list_html, err := fetchHtmlArtifact(test_matrix, test_list_path)
 	if err != nil {
 		return nil, nil, fmt.Errorf("error fetching the tests of %s / %s: %v", matrix_name, prow_name, err)
@@ -195,8 +196,8 @@ func FetchLastNTestResults(test_matrix *v1.MatrixSpec, matrix_name, prow_name st
 
 	// `build_ids` order is "oldest first" (alphanumeric order of timestamps)
 
-	if len(build_ids) > nb_test {
-		build_ids = build_ids[len(build_ids) - nb_test:]
+	if len(build_ids) > test_history {
+		build_ids = build_ids[len(build_ids) - test_history:]
 	}
 
 	build_ids = reverseStringArray(build_ids)

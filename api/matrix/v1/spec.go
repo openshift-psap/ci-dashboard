@@ -22,7 +22,7 @@ const Version = "v1"
 type MatricesSpec struct {
 	Version string                 `json:"version"`
 	Description string             `json:"description,omitempty"`
-	NbTestHistory int              `json:"nb_test_history"`
+	TestHistory int              `json:"test_history"`
 	Matrices map[string]MatrixSpec `json:"matrices,omitempty"`
 }
 

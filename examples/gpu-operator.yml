@@ -1,6 +1,6 @@
 version: v1
 description: GPU Operator Test Matrix
-nb_test_history: 15
+test_history: 15
 matrices:
   nightlies:
     description: Red Hat OpenShift Nightlies

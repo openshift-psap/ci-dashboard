@@ -20,6 +20,7 @@ const (
 	DefaultConfigFile  = "examples/gpu-operator.yml"
 	DefaultOutputFile = "output/gpu-operator_daily-matrix.html"
 	DefaultTemplateFile = "templates/daily_matrix.tmpl.html"
+	DefaultTestHistory = -1
 )
 
 var log = logrus.New()
@@ -32,6 +33,7 @@ type Flags struct {
 	ConfigFile string
 	OutputFile string
 	TemplateFile string
+	TestHistory int
 }
 
 type Context struct {
@@ -76,6 +78,14 @@ func BuildCommand() *cli.Command {
 			Destination: &daily_matrixFlags.TemplateFile,
 			Value:       DefaultTemplateFile,
 			EnvVars:     []string{"CI_DASHBOARD_DAILYMATRIX_TEMPLATE_FILE"},
+		},
+		&cli.IntFlag{
+			Name:        "test-history",
+			Aliases:     []string{"th"},
+			Usage:       "Number of tests to fetch",
+			Destination: &daily_matrixFlags.TestHistory,
+			Value:       DefaultTestHistory,
+			EnvVars:     []string{"CI_DASHBOARD_DAILYMATRIX_TEST_HISTORY"},
 		},
 	}
 
@@ -161,7 +171,7 @@ func populateTestFromToolboxLogs(test *v1.TestResult, toolbox_logs map[string]ar
 	return nil
 }
 
-func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
+func populateTestMatrices(matricesSpec *v1.MatricesSpec, test_history int) error {
 	for matrix_name, test_matrix := range matricesSpec.Matrices {
 		log.Printf("* %s: %s\n", matrix_name, test_matrix.Description)
 		for test_group, tests := range test_matrix.Tests {
@@ -182,10 +192,10 @@ func populateTestMatrices(matricesSpec *v1.MatricesSpec) error {
 					matricesSpec.TestHistory = test_history
 				}
 
-				test_build_ids, old_tests, err := artifacts.FetchLastNTestResults(&test_matrix, matrix_name, test.ProwName, matricesSpec.NbTestHistory,
+				test_build_ids, old_tests, err := artifacts.FetchLastNTestResults(&test_matrix, matrix_name, test.ProwName, matricesSpec.TestHistory,
 					"finished.json", artifacts.TypeJson)
 				if err != nil {
-					return fmt.Errorf("Failed to fetch the last %d test results for %s: %v", matricesSpec.NbTestHistory, test.ProwName, err)
+					return fmt.Errorf("Failed to fetch the last %d test results for %s: %v", matricesSpec.TestHistory, test.ProwName, err)
 				}
 				for _, old_test_build_id := range test_build_ids {
 					old_test_finished := old_tests[old_test_build_id]
@@ -234,7 +244,7 @@ func daily_matrixWrapper(c *cli.Context, f *Flags) error {
 		return fmt.Errorf("error parsing config file: %v", err)
 	}
 
-	if err = populateTestMatrices(matricesSpec); err != nil {
+	if err = populateTestMatrices(matricesSpec, f.TestHistory); err != nil {
 		return fmt.Errorf("error fetching the matrix results: %v", err)
 	}
 
