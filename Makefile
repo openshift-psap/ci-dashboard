@@ -64,7 +64,7 @@ output/nfd_daily-matrix.html: templates/daily_matrix.tmpl.html
 
 output/nfd_daily-matrix.md: templates/daily_matrix.mail.tmpl.md
 	go run cmd/main.go --debug daily_matrix \
-           --config-file examples/nto.yml \
+           --config-file examples/nfd.yml \
            --template  $< \
            --output-file $@
 
