@@ -1,7 +1,8 @@
 generate_daily_matrix: \
 	gpu \
 	sro \
-	nto
+	nto \
+	nfd
 
 # GPU Operator
 
@@ -46,6 +47,22 @@ output/nto_daily-matrix.html: templates/daily_matrix.tmpl.html
            --output-file $@
 
 output/nto_daily-matrix.md: templates/daily_matrix.mail.tmpl.md
+	go run cmd/main.go --debug daily_matrix \
+           --config-file examples/nto.yml \
+           --template  $< \
+           --output-file $@
+
+# NFD-Operator
+
+nfd: output/nfd_daily-matrix.html output/nfd_daily-matrix.md
+
+output/nfd_daily-matrix.html: templates/daily_matrix.tmpl.html
+	go run cmd/main.go --debug daily_matrix \
+           --config-file examples/nto.yml \
+           --template $< \
+           --output-file $@
+
+output/nfd_daily-matrix.md: templates/daily_matrix.mail.tmpl.md
 	go run cmd/main.go --debug daily_matrix \
            --config-file examples/nto.yml \
            --template  $< \
