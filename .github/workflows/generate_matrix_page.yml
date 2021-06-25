@@ -18,6 +18,7 @@ jobs:
       - name: Generate the test matrix 🔧
         run: |
           make generate_daily_matrix
+          make static
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0
