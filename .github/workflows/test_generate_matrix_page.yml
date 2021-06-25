@@ -18,3 +18,4 @@ jobs:
           sed -i 's/nb_test_history:.*/nb_test_history: 2/' examples/gpu-operator.yml
           sed -i 's/nb_test_history:.*/nb_test_history: 2/' examples/sro.yml
           make generate_daily_matrix
+          make static

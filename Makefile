@@ -68,6 +68,12 @@ output/nfd_daily-matrix.md: templates/daily_matrix.mail.tmpl.md
            --template  $< \
            --output-file $@
 
+# static
+
+static:
+	cp -rv static/* output/
+
+.PHONY: static
 #
 
 build:
