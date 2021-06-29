@@ -95,17 +95,17 @@ func BuildCommand() *cli.Command {
 func saveGeneratedHtml(generated_html []byte, f *Flags) error {
 	output_dir, err := filepath.Abs(filepath.Dir(f.OutputFile))
     if err != nil {
-		return fmt.Errorf("Failed to get cache directory for %s: %v", f.OutputFile, err)
+		return fmt.Errorf("Failed to get output directory for %s: %v", f.OutputFile, err)
     }
 
 	err = os.MkdirAll(output_dir, os.ModePerm)
 	if err != nil {
-		return fmt.Errorf("Failed to create cache directory %s: %v", output_dir, err)
+		return fmt.Errorf("Failed to create output directory %s: %v", output_dir, err)
     }
 
 	err = ioutil.WriteFile(f.OutputFile, generated_html, 0644)
 	if err != nil {
-		return fmt.Errorf("Failed to write into cache file at %s: %v", f.OutputFile, err)
+		return fmt.Errorf("Failed to write into output file at %s: %v", f.OutputFile, err)
 	}
 
 	return nil
