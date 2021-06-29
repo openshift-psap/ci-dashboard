@@ -7,6 +7,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 	cli "github.com/urfave/cli/v2"
+
+	v1 "github.com/openshift-psap/ci-dashboard/api/matrix/v1"
 	"github.com/openshift-psap/ci-dashboard/pkg/config"
 	"github.com/openshift-psap/ci-dashboard/pkg/populate"
 )
@@ -88,39 +90,36 @@ func matrix_benchWrapper(c *cli.Context, f *Flags) error {
 		return fmt.Errorf("error fetching the matrix results: %v", err)
 	}
 
-	//current_time := time.Now()
-	//generation_date := current_time.Format("2006-01-02 15h04")
+	var fetchGPUBurnLogs = func(test_matrix *v1.MatrixSpec, test_result *v1.TestResult) error {
+		gpu_burn_logs, err := FetchGPUBurnLogs(test_matrix, test_result, test_result.BuildId)
 
-	for _, test_matrix := range matrices_spec.Matrices {
-		for _, tests := range test_matrix.Tests {
-			for test_idx := range tests {
-				for _, test_result := range tests[test_idx].OldTests {
-					FetchGPUBurnLogs(&test_matrix, test_result, test_result.BuildId)
-
-					gpu_burn_logs, err := FetchGPUBurnLogs(&test_matrix, test_result, test_result.BuildId)
-
-					if err != nil {
-						log.Warningf("Failed to fetch the GPU burn logs of the test %s/%s: %v", test_result.TestSpec.ProwName, test_result.BuildId, err)
-					}
-
-					if gpu_burn_logs == ""{
-						log.Warningf("Could not find GPU burn logs for the test %s/%s", test_result.TestSpec.ProwName, test_result.BuildId)
-						continue
-					}
-					dest_dir := fmt.Sprintf("%s/%s/%s/gpu-burn/", f.OutputDir, test_result.TestSpec.ProwName, test_result.BuildId)
-					err = os.MkdirAll(dest_dir, os.ModePerm)
-					if err != nil {
-						return fmt.Errorf("Failed to create output directory %s: %v", f.OutputDir, err)
-					}
-
-					dest_fname := dest_dir + "/pod.log"
-					err = ioutil.WriteFile(dest_fname, []byte(gpu_burn_logs), 0644)
-					if err != nil {
-						return fmt.Errorf("Failed to write into output file at %s: %v", dest_fname, err)
-					}
-				}
-			}
+		if err != nil {
+			log.Warningf("Failed to fetch the GPU burn logs of the test %s/%s: %v", test_result.TestSpec.ProwName, test_result.BuildId, err)
+			return nil
 		}
+
+		if gpu_burn_logs == ""{
+			log.Warningf("Could not find GPU burn logs for the test %s/%s", test_result.TestSpec.ProwName, test_result.BuildId)
+			return nil
+		}
+
+		dest_dir := fmt.Sprintf("%s/%s/%s/gpu-burn/", f.OutputDir, test_result.TestSpec.ProwName, test_result.BuildId)
+		err = os.MkdirAll(dest_dir, os.ModePerm)
+		if err != nil {
+			return fmt.Errorf("Failed to create output directory %s: %v", f.OutputDir, err)
+		}
+
+		dest_fname := dest_dir + "/pod.log"
+		err = ioutil.WriteFile(dest_fname, []byte(gpu_burn_logs), 0644)
+		if err != nil {
+			return fmt.Errorf("Failed to write into output file at %s: %v", dest_fname, err)
+		}
+
+		return nil
+	}
+
+	if err = populate.TraverseAllTestResults(matrices_spec, fetchGPUBurnLogs); err != nil {
+		return err
 	}
 
 	return nil

@@ -73,6 +73,41 @@ func PopulateTestFromToolboxLogs(test *v1.TestResult, toolbox_logs map[string]ar
 	return nil
 }
 
+func PopulateTestStepLogs(matrices_spec *v1.MatricesSpec) {
+	var populateTestStepLogs = func(test_matrix *v1.MatrixSpec, test_result *v1.TestResult) error {
+		test_toolbox_logs, err := artifacts.FetchTestToolboxLogs(test_matrix, test_result.TestSpec, test_result.BuildId)
+		if err != nil {
+			log.Warningf("Failed to get the toolbox steps of the test %s/%s: %v",
+				test_result.TestSpec.ProwName, test_result.BuildId, err)
+			return nil
+		}
+		if err = PopulateTestFromToolboxLogs(test_result, test_toolbox_logs); err != nil {
+			log.Warningf("Failed to get the toolbox step logs of the test %s/%s: %v",
+				test_result.TestSpec.ProwName, test_result.BuildId, err)
+			return nil
+		}
+
+		return nil
+	}
+
+	TraverseAllTestResults(matrices_spec, populateTestStepLogs)
+}
+
+func TraverseAllTestResults(matrices_spec *v1.MatricesSpec, cb func(test_matrix *v1.MatrixSpec, test_result *v1.TestResult) error) error {
+	for _, test_matrix := range matrices_spec.Matrices {
+		for _, tests := range test_matrix.Tests {
+			for _, test := range tests {
+				for _, test_result := range test.OldTests {
+					if err := cb(&test_matrix, test_result); err != nil {
+						return err
+					}
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func PopulateTestMatrices(matricesSpec *v1.MatricesSpec, test_history int) error {
 	for matrix_name, test_matrix := range matricesSpec.Matrices {
 		log.Printf("* %s: %s\n", matrix_name, test_matrix.Description)
@@ -111,10 +146,10 @@ func PopulateTestMatrices(matricesSpec *v1.MatricesSpec, test_history int) error
 						continue
 					}
 
-					old_test_toolbox_logs, err := artifacts.FetchTestToolboxLogs(&test_matrix, test, old_test_build_id)
-
-					if err = PopulateTestFromToolboxLogs(&old_test, old_test_toolbox_logs); err != nil {
-						log.Warningf("Failed to get the toolbox step logs of the test %s/%s: %v", test.ProwName, old_test_build_id, err)
+					old_test.ToolboxSteps, err = artifacts.FetchTestToolboxSteps(&test_matrix, test, old_test_build_id)
+					if err != nil {
+						log.Warningf("Failed to parse the steps of test %s/%s: %v",
+							test.ProwName, old_test_build_id, err)
 					}
 
 					if old_test.Passed {

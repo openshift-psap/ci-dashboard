@@ -121,6 +121,8 @@ func daily_matrixWrapper(c *cli.Context, f *Flags) error {
 		return fmt.Errorf("error fetching the matrix results: %v", err)
 	}
 
+	populate.PopulateTestStepLogs(matricesSpec)
+
 	currentTime := time.Now()
 	generation_date := currentTime.Format("2006-01-02 15h04")
 
