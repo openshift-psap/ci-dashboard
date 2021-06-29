@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/openshift-psap/ci-dashboard/cmd/daily_matrix"
+	"github.com/openshift-psap/ci-dashboard/cmd/matrix_benchmarks"
 	"github.com/openshift-psap/ci-dashboard/pkg/artifacts"
 	"github.com/openshift-psap/ci-dashboard/pkg/config"
 	log "github.com/sirupsen/logrus"
@@ -38,6 +39,7 @@ func main() {
 
 	app.Commands = []*cli.Command{
 		daily_matrix.BuildCommand(),
+		matrix_benchmarks.BuildCommand(),
 	}
 
 	// Set log-level for all subcommands
