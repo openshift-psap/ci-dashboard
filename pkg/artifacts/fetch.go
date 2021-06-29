@@ -189,7 +189,7 @@ func FetchLastNTestResults(test_matrix *v1.MatrixSpec, matrix_name, prow_name st
 
 	test_results := map[string]ArtifactResult{}
 
-	build_ids, err := listFilesInDirectory(test_list_html, true, false)
+	build_ids, err := ListFilesInDirectory(test_list_html, true, false)
 	if err != nil {
 		return nil, nil, fmt.Errorf("error fetching last test results: %v", err)
 	}
@@ -234,7 +234,7 @@ func FetchTestToolboxSteps(test_matrix *v1.MatrixSpec, test_spec *v1.TestSpec, b
 		return []string{}, err
 	}
 
-	toolbox_steps, err := listFilesInDirectory(html_toolbox_steps.Html, true, false)
+	toolbox_steps, err := ListFilesInDirectory(html_toolbox_steps.Html, true, false)
 	if err != nil {
 		return []string{}, fmt.Errorf("error fetching toolbox steps: %v", err)
 	}
@@ -275,7 +275,7 @@ func reverseStringArray(arr []string) []string {
 	return arr
 }
 
-func listFilesInDirectory(html_dir *goquery.Document, dirs_only, files_only bool)([]string, error) {
+func ListFilesInDirectory(html_dir *goquery.Document, dirs_only, files_only bool)([]string, error) {
 	files := []string{}
 
 	html_dir.Find("li.grid-row").EachWithBreak(func(i int, li_tag *goquery.Selection) bool {
