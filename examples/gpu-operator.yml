@@ -38,11 +38,13 @@ matrices:
         test_name: gpu-operator-e2e-upgrade
         operator_version: master
         variant: upgrade
+        prow_step: 2-postupgrade-gpu-operator-validate-deployment
 
       - branch: release-4.7
         test_name: gpu-operator-e2e-upgrade-170
         operator_version: 1.7.0
         variant: upgrade
+        prow_step: 2-postupgrade-gpu-operator-validate-deployment
 
       2_460|OpenShift 4.6:
       - branch: release-4.6

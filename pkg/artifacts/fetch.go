@@ -219,7 +219,12 @@ func FetchLastNTestResults(test_matrix *v1.MatrixSpec, matrix_name, prow_name st
 }
 
 func FetchTestStepResult(test_matrix *v1.MatrixSpec, test_spec *v1.TestSpec, build_id string, filename string, filetype ArtifactType) (ArtifactResult, error) {
-	step_filenane := fmt.Sprintf("artifacts/%s/%s/%s", test_spec.TestName, test_matrix.ProwStep, filename)
+	var prow_step = test_matrix.ProwStep
+	if test_spec.ProwStep != "" {
+		// override test_matrix.ProwStep if ProwStep is test_spec.ProwStep is specified
+		prow_step = test_spec.ProwStep
+	}
+	step_filenane := fmt.Sprintf("artifacts/%s/%s/%s", test_spec.TestName, prow_step, filename)
 	return fetchTestResult(test_matrix, test_spec.ProwName, build_id, step_filenane, filetype)
 }
 
