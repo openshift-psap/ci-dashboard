@@ -22,8 +22,16 @@ const Version = "v1"
 type MatricesSpec struct {
 	Version string                 `json:"version"`
 	Description string             `json:"description,omitempty"`
-	NbTestHistory int              `json:"nb_test_history"`
+	TestHistory int              `json:"test_history"`
 	Matrices map[string]MatrixSpec `json:"matrices,omitempty"`
+}
+
+type ToolboxStepResult struct {
+	Name string
+
+	Ok int
+	Failures int
+	Ignored int
 }
 
 type TestResult struct {
@@ -37,6 +45,14 @@ type TestResult struct {
 	StepResult string
 	/* *** */
 	TestSpec *TestSpec
+
+	ToolboxStepsResults []ToolboxStepResult
+
+	/* *** */
+
+	Ok int
+	Failures int
+	Ignored int
 }
 
 type TestSpec struct {
@@ -44,6 +60,7 @@ type TestSpec struct {
 	Branch string          `json:"branch,omitempty"`
 	OperatorVersion string `json:"operator_version,omitempty"`
 	Variant string         `json:"variant"`
+	ProwStep string        `json:"prow_step,omitempty"`
 
 	/* *** */
 
@@ -51,8 +68,6 @@ type TestSpec struct {
 	TestGroup string
 
 	OldTests []*TestResult
-
-	TestResult
 }
 
 type MatrixSpec struct {

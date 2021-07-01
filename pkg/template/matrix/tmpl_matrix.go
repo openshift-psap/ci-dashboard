@@ -38,11 +38,11 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 			return template.HTML(s)
 		},
         "nb_last_test": func() string {
-			return fmt.Sprintf("%d", matrices.NbTestHistory)
+			return fmt.Sprintf("%d", matrices.TestHistory)
 		},
         "no_test_history": func(test v1.TestSpec) []int {
 			arr := []int{}
-			for i := len(test.OldTests); i < matrices.NbTestHistory; i++ {
+			for i := len(test.OldTests); i < matrices.TestHistory; i++ {
 				arr = append(arr, i)
 			}
 			return arr
@@ -59,8 +59,13 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 			if test.TestSpec == nil {
 				return "INVALID"
 			}
+			var prow_step = matrix.ProwStep
+			if test.TestSpec.ProwStep != "" {
+				// override test_matrix.ProwStep if ProwStep is test_spec.ProwStep is specified
+				prow_step = test.TestSpec.ProwStep
+			}
 			return fmt.Sprintf("%s/%s/%s/artifacts/%s/%s",
-				matrix.ArtifactsURL, test.TestSpec.ProwName, test.BuildId, test.TestSpec.TestName, matrix.ProwStep)
+				matrix.ArtifactsURL, test.TestSpec.ProwName, test.BuildId, test.TestSpec.TestName, prow_step)
 		},
 		"spyglass_url": func(matrix v1.MatrixSpec, prowName string, test v1.TestResult) string {
 			return fmt.Sprintf("%s/%s/%s", matrix.ViewerURL, prowName, test.BuildId)

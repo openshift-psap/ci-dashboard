@@ -44,6 +44,23 @@
           .old_test_parsing_error {
               background-color: black;
           }
+
+          .test_count_ok {
+              background-color: #DAF7A6;
+          }
+          .test_count_failures {
+              background-color: #ffb7a6;
+          }
+          .test_count_ignored {
+              background-color: #FFC300;
+          }
+
+          .results-cell {
+              width: 150px;
+          }
+          .date-cell {
+              width: 300px;
+          }
         </style>
   </head>
   <body id="index">
@@ -111,7 +128,7 @@
                   <thead>
                     <tr>
                       <th><!-- success/error icon --></th>
-                      <th><!-- build logs --></th>
+                      <th>Ansible tests<!-- test ok/failures/ignored --></th>
                       <th><!-- artifacts dir --></th>
                       <th class='cell_operator'>{{ $matrix.OperatorName }}</th>
                       <th>Prow</th>
@@ -123,8 +140,10 @@
                   {{ range $test := $tests }}
                   <tbody>
                     <tr class="changed">
-                      {{ $test_status := test_status $test.TestResult }}
-                      <td class="icon-cell" title="{{ test_status_descr $test.TestResult $test_status }}">
+                      {{ if $test.OldTests }}
+                      {{ $last_test := (index $test.OldTests 0) }}
+                      {{ $test_status := test_status $last_test }}
+                      <td class="icon-cell" title="{{ test_status_descr $last_test $test_status }}">
                         {{ if eq $test_status "success" }}
                         <i class="material-icons state success">check_circle</i>
                         {{ else if eq $test_status "step_success" }}
@@ -142,23 +161,23 @@
                         <i class="material-icons state pending">watch_later</i>
                         -->
                       </td>
-
-                      <td class="icon-cell">
-                        {{ if $test.TestResult.TestSpec }}
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test.TestResult }}/build-log.txt"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} build logs">description</i></a>
+                      <td class="results-cell">
+                        {{ if $test.OldTests }}
+                        <span title="{{ (index $test.OldTests 0).Ok }} Tests OK" class="test_count_ok">&nbsp;{{ (index $test.OldTests 0).Ok }}&nbsp;</span>|<span title="{{ (index $test.OldTests 0).Failures }} Tests Failures" class="test_count_failures">&nbsp;{{ (index $test.OldTests 0).Failures }}&nbsp;</span>{{ if (index $test.OldTests 0).Ignored }}|<span title="{{ (index $test.OldTests 0).Ignored }} Tests Ignored" class="test_count_ignored">&nbsp;{{ (index $test.OldTests 0).Ignored }}&nbsp;</span>{{ end }}
                         {{ end }}
+
                       </td>
                       <td class="icon-cell">
-                        {{ if $test.TestResult.TestSpec }}
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $test.TestResult }}/artifacts/"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} test artifacts">pageview</i></a>
+                        {{ if $last_test.TestSpec }}
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $last_test }}/artifacts/"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} test artifacts">pageview</i></a>
                         {{ end }}
                       </td>
                       <td class='cell_operator'>{{ $test.OperatorVersion }}</td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{  spyglass_url $matrix $test.ProwName $test.TestResult}}"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{  spyglass_url $matrix $test.ProwName $last_test}}"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td></td>
-                      <td><div tabindex="0">
-                          {{ if $test.TestResult.TestSpec }}
-                             {{ $test.FinishDate }}
+                      <td class="date-cell"><div tabindex="0">
+                          {{ if $last_test.TestSpec }}
+                             {{ $last_test.FinishDate }}
                           {{ else }}
                               Test-spec not found.
                           {{ end }}
@@ -166,8 +185,10 @@
                       <td class="old_tests">
                         {{ range $idx, $old_test := $test.OldTests }}
                         {{$old_test_status := test_status $old_test}}
-                        <a title="{{ if eq $idx 0 }}Most recent test: {{ end }}{{ test_status_descr $old_test $old_test_status }}.
-{{ $old_test.FinishDate}}"
+                        <a title="{{ test_status_descr $old_test $old_test_status }}.
+{{ $old_test.FinishDate}}
+OK: {{ $old_test.Ok }}, Failures: {{ $old_test.Failures }}, Ignored: {{ $old_test.Ignored }}
+{{ if eq $idx 0 }}(Most recent test){{ end }}"
                            {{ if ne $old_test_status "step_missing" }}
                            href="{{ artifacts_url $matrix $old_test}}/artifacts"
                            {{ else }}
@@ -182,6 +203,7 @@
                         <span class="no_old_test no_old_test_{{ $idx}}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         {{ end }}
                       </td>
+                      {{ end }}
                     </tr>
                   </tbody>
                   {{ end }}

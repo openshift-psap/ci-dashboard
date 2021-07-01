@@ -15,7 +15,6 @@ jobs:
 
       - name: Generate the test matrix 🔧
         run: |
-          sed -i 's/nb_test_history:.*/nb_test_history: 2/' examples/gpu-operator.yml
-          sed -i 's/nb_test_history:.*/nb_test_history: 2/' examples/sro.yml
+          export CI_DASHBOARD_DAILYMATRIX_TEST_HISTORY=3
           make generate_daily_matrix
           make static
