@@ -34,6 +34,23 @@
           .old_test_parsing_error {
               background-color: black;
           }
+
+          .test_count_ok {
+              background-color: #DAF7A6;
+          }
+          .test_count_failures {
+              background-color: #ffb7a6;
+          }
+          .test_count_ignored {
+              background-color: #FFC300;
+          }
+
+          .results-cell {
+              width: 150px;
+          }
+          .date-cell {
+              width: 300px;
+          }
         </style>
   </head>
   <body id="index">
@@ -79,7 +96,7 @@
                   <thead>
                     <tr>
                       <th></th>
-                      <th></th>
+                      <th>Ansible tests</th>
                       <th></th>
                       <th class='cell_operator'>Node Feature Discovery Operator</th>
                       <th>Prow</th>
@@ -92,17 +109,19 @@
                   <tbody>
                     <tr class="changed">
                       
+                      
+                      
                       <td class="icon-cell" title="Test passed">
                         
                         <i class="material-icons state success">check_circle</i>
                         
                         
                       </td>
+                      <td class="results-cell">
+                        
+                        <span title="41 Tests OK" class="test_count_ok">&nbsp;41&nbsp;</span>|<span title="1 Tests Failures" class="test_count_failures">&nbsp;1&nbsp;</span>
+                        
 
-                      <td class="icon-cell">
-                        
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-nfd-operator-e2e-master/1410372593290055680/artifacts/operator-e2e-master/nightly/build-log.txt"><i class="icon-button material-icons" title="Node Feature Discovery Operator build logs">description</i></a>
-                        
                       </td>
                       <td class="icon-cell">
                         
@@ -112,7 +131,7 @@
                       <td class='cell_operator'>4.8</td>
                       <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-nfd-operator-e2e-master/1410372593290055680"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td></td>
-                      <td><div tabindex="0">
+                      <td class="date-cell"><div tabindex="0">
                           
                              2021-07-01 00:15
                           
@@ -120,8 +139,10 @@
                       <td class="old_tests">
                         
                         
-                        <a title="Most recent test: Test passed.
-2021-07-01 00:15"
+                        <a title="Test passed.
+2021-07-01 00:15
+OK: 41, Failures: 1, Ignored: 0
+(Most recent test)"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-nfd-operator-e2e-master/1410372593290055680/artifacts/operator-e2e-master/nightly/artifacts"
                            
@@ -132,7 +153,9 @@
                         
                         
                         <a title="Test failed but the operator step passed.
-2021-06-30 00:03"
+2021-06-30 00:03
+OK: 41, Failures: 1, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-nfd-operator-e2e-master/1410010296721870848/artifacts/operator-e2e-master/nightly/artifacts"
                            
@@ -141,7 +164,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-29 00:02"
+2021-06-29 00:02
+OK: 41, Failures: 1, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-nfd-operator-e2e-master/1409647998736011264/artifacts/operator-e2e-master/nightly/artifacts"
                            
@@ -150,7 +175,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-27 23:59"
+2021-06-27 23:59
+OK: 41, Failures: 1, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-nfd-operator-e2e-master/1409285442456522752/artifacts/operator-e2e-master/nightly/artifacts"
                            
@@ -159,7 +186,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-26 23:57"
+2021-06-26 23:57
+OK: 41, Failures: 1, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-nfd-operator-e2e-master/1408923050165932032/artifacts/operator-e2e-master/nightly/artifacts"
                            
@@ -168,7 +197,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-26 00:02"
+2021-06-26 00:02
+OK: 41, Failures: 1, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-nfd-operator-e2e-master/1408560882367074304/artifacts/operator-e2e-master/nightly/artifacts"
                            
@@ -177,7 +208,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-25 00:08"
+2021-06-25 00:08
+OK: 41, Failures: 1, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-nfd-operator-e2e-master/1408198315941564416/artifacts/operator-e2e-master/nightly/artifacts"
                            
@@ -186,7 +219,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-24 00:03"
+2021-06-24 00:03
+OK: 41, Failures: 1, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-nfd-operator-e2e-master/1407835914272509952/artifacts/operator-e2e-master/nightly/artifacts"
                            
@@ -195,7 +230,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-23 00:06"
+2021-06-23 00:06
+OK: 41, Failures: 1, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-nfd-operator-e2e-master/1407473716224331776/artifacts/operator-e2e-master/nightly/artifacts"
                            
@@ -216,6 +253,7 @@
                         <span class="no_old_test no_old_test_14">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         
                       </td>
+                      
                     </tr>
                   </tbody>
                   
@@ -231,7 +269,7 @@
         </main>
 
         <div id="footer">
-          Document generated on 2021-07-01 04h46.
+          Document generated on 2021-07-01 18h10.
         </div>
   </body>
 </html>

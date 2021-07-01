@@ -34,6 +34,23 @@
           .old_test_parsing_error {
               background-color: black;
           }
+
+          .test_count_ok {
+              background-color: #DAF7A6;
+          }
+          .test_count_failures {
+              background-color: #ffb7a6;
+          }
+          .test_count_ignored {
+              background-color: #FFC300;
+          }
+
+          .results-cell {
+              width: 150px;
+          }
+          .date-cell {
+              width: 300px;
+          }
         </style>
   </head>
   <body id="index">
@@ -79,7 +96,7 @@
                   <thead>
                     <tr>
                       <th></th>
-                      <th></th>
+                      <th>Ansible tests</th>
                       <th></th>
                       <th class='cell_operator'>Special Resource Operator</th>
                       <th>Prow</th>
@@ -92,17 +109,19 @@
                   <tbody>
                     <tr class="changed">
                       
+                      
+                      
                       <td class="icon-cell" title="Test failed because the operator step failed">
                         
                         <i class="material-icons state failure">error</i>
                         
                         
                       </td>
+                      <td class="results-cell">
+                        
+                        <span title="64 Tests OK" class="test_count_ok">&nbsp;64&nbsp;</span>|<span title="3 Tests Failures" class="test_count_failures">&nbsp;3&nbsp;</span>
+                        
 
-                      <td class="icon-cell">
-                        
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1410372594971971584/artifacts/e2e-master/nightly/build-log.txt"><i class="icon-button material-icons" title="Special Resource Operator build logs">description</i></a>
-                        
                       </td>
                       <td class="icon-cell">
                         
@@ -112,7 +131,7 @@
                       <td class='cell_operator'>master</td>
                       <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1410372594971971584"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td></td>
-                      <td><div tabindex="0">
+                      <td class="date-cell"><div tabindex="0">
                           
                              2021-07-01 00:54
                           
@@ -120,8 +139,10 @@
                       <td class="old_tests">
                         
                         
-                        <a title="Most recent test: Test failed because the operator step failed.
-2021-07-01 00:54"
+                        <a title="Test failed because the operator step failed.
+2021-07-01 00:54
+OK: 64, Failures: 3, Ignored: 0
+(Most recent test)"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1410372594971971584/artifacts/e2e-master/nightly/artifacts"
                            
@@ -132,7 +153,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-30 00:15"
+2021-06-30 00:15
+OK: 64, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1410010298391203840/artifacts/e2e-master/nightly/artifacts"
                            
@@ -141,7 +164,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-29 00:08"
+2021-06-29 00:08
+OK: 65, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1409648000443092992/artifacts/e2e-master/nightly/artifacts"
                            
@@ -150,7 +175,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-28 00:19"
+2021-06-28 00:19
+OK: 66, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1409285444138438656/artifacts/e2e-master/nightly/artifacts"
                            
@@ -159,7 +186,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-27 00:12"
+2021-06-27 00:12
+OK: 65, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1408923051881402368/artifacts/e2e-master/nightly/artifacts"
                            
@@ -168,7 +197,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-26 00:19"
+2021-06-26 00:19
+OK: 65, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1408560884048990208/artifacts/e2e-master/nightly/artifacts"
                            
@@ -177,7 +208,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-25 00:03"
+2021-06-25 00:03
+OK: 38, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1408198317627674624/artifacts/e2e-master/nightly/artifacts"
                            
@@ -186,7 +219,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-24 00:11"
+2021-06-24 00:11
+OK: 65, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1407835915954425856/artifacts/e2e-master/nightly/artifacts"
                            
@@ -195,7 +230,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-23 00:16"
+2021-06-23 00:16
+OK: 65, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1407473717893664768/artifacts/e2e-master/nightly/artifacts"
                            
@@ -204,7 +241,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-22 00:06"
+2021-06-22 00:06
+OK: 65, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1407111184976449536/artifacts/e2e-master/nightly/artifacts"
                            
@@ -213,7 +252,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-21 00:12"
+2021-06-21 00:12
+OK: 65, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1406748922835111936/artifacts/e2e-master/nightly/artifacts"
                            
@@ -222,7 +263,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-20 00:17"
+2021-06-20 00:17
+OK: 65, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1406386529554665472/artifacts/e2e-master/nightly/artifacts"
                            
@@ -231,7 +274,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-19 00:10"
+2021-06-19 00:10
+OK: 65, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1406024171049193472/artifacts/e2e-master/nightly/artifacts"
                            
@@ -240,7 +285,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-18 01:00"
+2021-06-18 01:00
+OK: 65, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1405661585719955456/artifacts/e2e-master/nightly/artifacts"
                            
@@ -249,7 +296,9 @@
                         
                         
                         <a title="Test passed.
-2021-06-17 02:12"
+2021-06-17 02:12
+OK: 66, Failures: 2, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1405299244335632384/artifacts/e2e-master/nightly/artifacts"
                            
@@ -258,6 +307,7 @@
                         
                         
                       </td>
+                      
                     </tr>
                   </tbody>
                   
@@ -285,7 +335,7 @@
                   <thead>
                     <tr>
                       <th></th>
-                      <th></th>
+                      <th>Ansible tests</th>
                       <th></th>
                       <th class='cell_operator'>Special Resource Operator</th>
                       <th>Prow</th>
@@ -298,17 +348,19 @@
                   <tbody>
                     <tr class="changed">
                       
+                      
+                      
                       <td class="icon-cell" title="Test failed because the operator step failed">
                         
                         <i class="material-icons state failure">error</i>
                         
                         
                       </td>
+                      <td class="results-cell">
+                        
+                        <span title="64 Tests OK" class="test_count_ok">&nbsp;64&nbsp;</span>|<span title="3 Tests Failures" class="test_count_failures">&nbsp;3&nbsp;</span>
+                        
 
-                      <td class="icon-cell">
-                        
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1410372591616528384/artifacts/e2e-master/nightly/build-log.txt"><i class="icon-button material-icons" title="Special Resource Operator build logs">description</i></a>
-                        
                       </td>
                       <td class="icon-cell">
                         
@@ -318,7 +370,7 @@
                       <td class='cell_operator'>master</td>
                       <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1410372591616528384"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td></td>
-                      <td><div tabindex="0">
+                      <td class="date-cell"><div tabindex="0">
                           
                              2021-07-01 00:46
                           
@@ -326,8 +378,10 @@
                       <td class="old_tests">
                         
                         
-                        <a title="Most recent test: Test failed because the operator step failed.
-2021-07-01 00:46"
+                        <a title="Test failed because the operator step failed.
+2021-07-01 00:46
+OK: 64, Failures: 3, Ignored: 0
+(Most recent test)"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1410372591616528384/artifacts/e2e-master/nightly/artifacts"
                            
@@ -338,7 +392,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-30 00:37"
+2021-06-30 00:37
+OK: 65, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1410010295023177728/artifacts/e2e-master/nightly/artifacts"
                            
@@ -347,7 +403,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-29 00:02"
+2021-06-29 00:02
+OK: 63, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1409647997066678272/artifacts/e2e-master/nightly/artifacts"
                            
@@ -356,7 +414,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-27 23:54"
+2021-06-27 23:54
+OK: 63, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1409285440996904960/artifacts/e2e-master/nightly/artifacts"
                            
@@ -365,7 +425,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-27 00:37"
+2021-06-27 00:37
+OK: 64, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1408923048492404736/artifacts/e2e-master/nightly/artifacts"
                            
@@ -374,7 +436,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-26 00:33"
+2021-06-26 00:33
+OK: 64, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1408560880680964096/artifacts/e2e-master/nightly/artifacts"
                            
@@ -383,7 +447,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-25 00:40"
+2021-06-25 00:40
+OK: 64, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1408198314284814336/artifacts/e2e-master/nightly/artifacts"
                            
@@ -392,7 +458,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-24 00:41"
+2021-06-24 00:41
+OK: 64, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1407835913018413056/artifacts/e2e-master/nightly/artifacts"
                            
@@ -401,7 +469,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-23 00:35"
+2021-06-23 00:35
+OK: 64, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1407473714538221568/artifacts/e2e-master/nightly/artifacts"
                            
@@ -410,7 +480,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-22 00:39"
+2021-06-22 00:39
+OK: 64, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1407111182459867136/artifacts/e2e-master/nightly/artifacts"
                            
@@ -419,7 +491,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-21 00:33"
+2021-06-21 00:33
+OK: 64, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1406748919479668736/artifacts/e2e-master/nightly/artifacts"
                            
@@ -428,7 +502,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-20 00:40"
+2021-06-20 00:40
+OK: 64, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1406386527033888768/artifacts/e2e-master/nightly/artifacts"
                            
@@ -437,7 +513,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-19 00:56"
+2021-06-19 00:56
+OK: 65, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1406024168540999680/artifacts/e2e-master/nightly/artifacts"
                            
@@ -446,7 +524,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-18 01:15"
+2021-06-18 01:15
+OK: 64, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1405661583211761664/artifacts/e2e-master/nightly/artifacts"
                            
@@ -455,7 +535,9 @@
                         
                         
                         <a title="Test failed because the operator step failed.
-2021-06-17 01:33"
+2021-06-17 01:33
+OK: 64, Failures: 3, Ignored: 0
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1405299241881964544/artifacts/e2e-master/nightly/artifacts"
                            
@@ -464,6 +546,7 @@
                         
                         
                       </td>
+                      
                     </tr>
                   </tbody>
                   
@@ -479,7 +562,7 @@
         </main>
 
         <div id="footer">
-          Document generated on 2021-07-01 04h46.
+          Document generated on 2021-07-01 18h10.
         </div>
   </body>
 </html>
