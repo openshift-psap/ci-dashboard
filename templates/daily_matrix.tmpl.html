@@ -41,6 +41,9 @@
           .old_test_step_missing {
               background-color: gray;
           }
+          .old_test_known_flake {
+              background-color: #FFC300;
+          }
           .old_test_parsing_error {
               background-color: black;
           }
@@ -148,6 +151,8 @@
                         <i class="material-icons state success">check_circle</i>
                         {{ else if eq $test_status "step_success" }}
                         <i class="material-icons state success">check_circle</i>
+                        {{ else if eq $test_status "known_flake" }}
+                        <i class="material-icons state known_flake">remove_circle</i>
                         {{ else if eq $test_status "step_failed" }}
                         <i class="material-icons state failure">error</i>
                         {{ else if eq $test_status "step_missing" }}

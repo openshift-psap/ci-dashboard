@@ -2,6 +2,7 @@ package populate
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -167,6 +168,20 @@ func PopulateTestMatrices(matricesSpec *v1.MatricesSpec, test_history int) error
 					}
 					if err = PopulateTestFromStepFinished(&old_test, step_old_test_finished); err != nil {
 						log.Warningf("Failed to store the results of test step %s/%s: %v", test.ProwName, old_test_build_id, err)
+					}
+					if !old_test.StepPassed {
+						contentBytes, err := artifacts.FetchTestStepResult(&test_matrix, test, old_test_build_id,
+							"artifacts/FLAKE", artifacts.TypeBytes)
+
+						if err == nil {
+							content := string(contentBytes.Bytes)
+							if !strings.Contains(content, "doctype html") {
+
+								old_test.KnownFlake = strings.TrimSuffix(content, "\n")
+							}
+						} else {
+							log.Warningf("Failed to check if %s/%s is a flake: %v", test.ProwName, old_test_build_id, err)
+						}
 					}
 				}
 			}
