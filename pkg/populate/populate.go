@@ -15,8 +15,6 @@ var log = logrus.New()
 func PopulateTestFromFinished(test *v1.TestResult, test_finished artifacts.ArtifactResult) error {
 	if test_finished.Json["passed"] != nil {
 		test.Passed = test_finished.Json["passed"].(bool)
-	} else {
-		test.Passed = false
 	}
 	if test_finished.Json["result"] != nil {
 		test.Result = test_finished.Json["result"].(string)
@@ -33,14 +31,13 @@ func PopulateTestFromFinished(test *v1.TestResult, test_finished artifacts.Artif
 }
 
 func PopulateTestFromStepFinished(test *v1.TestResult, step_test_finished artifacts.ArtifactResult) error {
-	test.StepExecuted = true
 	if step_test_finished.Json["passed"] != nil {
 		test.StepPassed = step_test_finished.Json["passed"].(bool)
-	} else {
-		test.StepPassed = false
+		test.StepExecuted = true
 	}
 	if step_test_finished.Json["result"] != nil {
 		test.StepResult = step_test_finished.Json["result"].(string)
+		test.StepExecuted = true
 	} else {
 		test.StepResult = "N/A"
 	}
@@ -68,7 +65,11 @@ func PopulateTestFromToolboxLogs(test *v1.TestResult, toolbox_logs map[string]ar
 		test.Failures += failures
 		test.Ignored += ignored
 	}
+
 	log.Debugf("Test: ok %d, failures %d, ignored %d", test.Ok, test.Failures, test.Ignored)
+	if test.Failures >= test.TestSpec.ExpectedFailures {
+		test.Failures -= test.TestSpec.ExpectedFailures
+	}
 
 	return nil
 }

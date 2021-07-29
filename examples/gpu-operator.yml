@@ -19,24 +19,29 @@ matrices:
       - branch: release-4.9
         test_name: gpu-operator-e2e-master
         operator_version: master
+        expected_failures: 3
 
       96_480|OpenShift 4.8:
       - branch: release-4.8
         test_name: gpu-operator-e2e-master
         operator_version: master
+        expected_failures: 3
 
       97_470|OpenShift 4.7:
       - branch: release-4.7
         test_name: gpu-operator-e2e-master
         operator_version: master
+        expected_failures: 3
 
       - branch: release-4.7
         test_name: gpu-operator-e2e-170
         operator_version: 1.7.0
+        expected_failures: 3
 
       - branch: release-4.7
         test_name: gpu-operator-e2e-162
         operator_version: 1.6.2
+        expected_failures: 3
 
       98_475|OpenShift 4.6 upgraded to 4.7:
       - branch: release-4.7
@@ -44,26 +49,32 @@ matrices:
         operator_version: master
         variant: upgrade
         prow_step: 2-postupgrade-gpu-operator-validate-deployment
+        expected_failures: 0
 
       - branch: release-4.7
         test_name: gpu-operator-e2e-upgrade-170
         operator_version: 1.7.0
         variant: upgrade
         prow_step: 2-postupgrade-gpu-operator-validate-deployment
+        expected_failures: 0
 
       99_460|OpenShift 4.6:
       - branch: release-4.6
         test_name: gpu-operator-e2e-170
         operator_version: 1.7.0
+        expected_failures: 3
 
       - branch: release-4.6
         test_name: gpu-operator-e2e-162
         operator_version: 1.6.2
+        expected_failures: 3
 
       - branch: release-4.6
         test_name: gpu-operator-e2e-152
         operator_version: 1.5.2
+        expected_failures: 3
 
       - branch: release-4.6
         test_name: gpu-operator-e2e-140
         operator_version: 1.4.0
+        expected_failures: 3
