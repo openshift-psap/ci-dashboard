@@ -43,6 +43,8 @@ type TestResult struct {
 	StepExecuted bool
 	StepPassed bool
 	StepResult string
+	KnownFlake string
+
 	/* *** */
 	TestSpec *TestSpec
 
@@ -63,6 +65,7 @@ type TestSpec struct {
 	OperatorVersion string `json:"operator_version,omitempty"`
 	Variant string         `json:"variant"`
 	ProwStep string        `json:"prow_step,omitempty"`
+	ExpectedFailures int   `json:"expected_failures"`
 
 	/* *** */
 

@@ -73,6 +73,8 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 		"test_status_descr": func(test v1.TestResult, status string) string {
 			if status == "success" {
 				return "Test passed"
+			} else if status == "known_flake" {
+				return "Test failed because of a known flake: " + test.KnownFlake
 			} else if status == "step_success" {
 				return "Test failed but the operator step passed"
 			} else if status == "step_failed" {
@@ -87,6 +89,8 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 		"test_status": func(test v1.TestResult) string {
 			if test.Passed {
 				return "success"
+			} else if test.KnownFlake != "" {
+				return "known_flake"
 			} else if !test.StepExecuted {
 				return "step_missing"
 			} else if test.StepPassed {

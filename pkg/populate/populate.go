@@ -2,6 +2,7 @@ package populate
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -15,8 +16,6 @@ var log = logrus.New()
 func PopulateTestFromFinished(test *v1.TestResult, test_finished artifacts.ArtifactResult) error {
 	if test_finished.Json["passed"] != nil {
 		test.Passed = test_finished.Json["passed"].(bool)
-	} else {
-		test.Passed = false
 	}
 	if test_finished.Json["result"] != nil {
 		test.Result = test_finished.Json["result"].(string)
@@ -33,14 +32,13 @@ func PopulateTestFromFinished(test *v1.TestResult, test_finished artifacts.Artif
 }
 
 func PopulateTestFromStepFinished(test *v1.TestResult, step_test_finished artifacts.ArtifactResult) error {
-	test.StepExecuted = true
 	if step_test_finished.Json["passed"] != nil {
 		test.StepPassed = step_test_finished.Json["passed"].(bool)
-	} else {
-		test.StepPassed = false
+		test.StepExecuted = true
 	}
 	if step_test_finished.Json["result"] != nil {
 		test.StepResult = step_test_finished.Json["result"].(string)
+		test.StepExecuted = true
 	} else {
 		test.StepResult = "N/A"
 	}
@@ -68,7 +66,11 @@ func PopulateTestFromToolboxLogs(test *v1.TestResult, toolbox_logs map[string]ar
 		test.Failures += failures
 		test.Ignored += ignored
 	}
+
 	log.Debugf("Test: ok %d, failures %d, ignored %d", test.Ok, test.Failures, test.Ignored)
+	if test.Failures >= test.TestSpec.ExpectedFailures {
+		test.Failures -= test.TestSpec.ExpectedFailures
+	}
 
 	return nil
 }
@@ -166,6 +168,20 @@ func PopulateTestMatrices(matricesSpec *v1.MatricesSpec, test_history int) error
 					}
 					if err = PopulateTestFromStepFinished(&old_test, step_old_test_finished); err != nil {
 						log.Warningf("Failed to store the results of test step %s/%s: %v", test.ProwName, old_test_build_id, err)
+					}
+					if !old_test.StepPassed {
+						contentBytes, err := artifacts.FetchTestStepResult(&test_matrix, test, old_test_build_id,
+							"artifacts/FLAKE", artifacts.TypeBytes)
+
+						if err == nil {
+							content := string(contentBytes.Bytes)
+							if !strings.Contains(content, "doctype html") {
+
+								old_test.KnownFlake = strings.TrimSuffix(content, "\n")
+							}
+						} else {
+							log.Warningf("Failed to check if %s/%s is a flake: %v", test.ProwName, old_test_build_id, err)
+						}
 					}
 				}
 			}
