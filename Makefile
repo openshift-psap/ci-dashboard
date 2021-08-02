@@ -74,6 +74,16 @@ static:
 	cp -rv static/* output/
 
 .PHONY: static
+
+#
+
+matrix_benchmarks:
+	go run cmd/main.go --debug matrix_benchmarks \
+           --config-file examples/gpu-operator.yml \
+           --output-dir output/matrix_benchmarks
+
+.PHONY: matrix_benchmarking
+
 #
 
 build:

@@ -46,6 +46,8 @@ type TestResult struct {
 	/* *** */
 	TestSpec *TestSpec
 
+	ToolboxSteps []string
+
 	ToolboxStepsResults []ToolboxStepResult
 
 	/* *** */
