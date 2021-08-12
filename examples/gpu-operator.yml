@@ -28,6 +28,11 @@ matrices:
         expected_failures: 3
 
       - branch: release-4.8
+        test_name: gpu-operator-e2e-18x
+        operator_version: 1.8
+        expected_failures: 3
+
+      - branch: release-4.8
         test_name: gpu-operator-e2e-17x
         operator_version: 1.7
         expected_failures: 3
@@ -36,6 +41,11 @@ matrices:
       - branch: release-4.7
         test_name: gpu-operator-e2e-master
         operator_version: master
+        expected_failures: 3
+
+      - branch: release-4.7
+        test_name: gpu-operator-e2e-18x
+        operator_version: 1.8
         expected_failures: 3
 
       - branch: release-4.7

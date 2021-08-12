@@ -15,7 +15,14 @@ matrices:
     prow_step: nightly
 
     tests:
-      0_480|OpenShift 4.8:
+      0_490|OpenShift 4.9:
+      - branch: release-4.9
+        test_name: operator-e2e-master
+        operator_version: 4.9
+        variant: nfd
+        expected_failures: 1
+
+      1_480|OpenShift 4.8:
       - branch: release-4.8
         test_name: operator-e2e-master
         operator_version: 4.8
