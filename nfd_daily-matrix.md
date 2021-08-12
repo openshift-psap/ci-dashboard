@@ -2,6 +2,14 @@
 Node Feature Discovery Operator Test Matrix
 ===========================================
 
+OpenShift 4.9
+-------------
+
+
+* Node Feature Discovery Operator 4.9: SUCCESS
+  - Test passed
+  - Test finished at 2021-08-12 00:06
+
 OpenShift 4.8
 -------------
 
@@ -12,4 +20,4 @@ OpenShift 4.8
 
 
 ---
-Document generated on 2021-08-12 04h52.
+Document generated on 2021-08-12 14h47.
