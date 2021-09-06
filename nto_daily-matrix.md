@@ -8,7 +8,7 @@ OpenShift 4.9
 
 * Node Tuning Operator 4.9: FAILURE
   - Test failed because the operator step failed
-  - Test finished at 2021-09-04 23:52
+  - Test finished at 2021-09-06 00:01
 
 OpenShift 4.8
 -------------
@@ -16,8 +16,8 @@ OpenShift 4.8
 
 * Node Tuning Operator 4.8: SUCCESS
   - Test passed
-  - Test finished at 2021-09-05 00:09
+  - Test finished at 2021-09-06 00:14
 
 
 ---
-Document generated on 2021-09-05 04h50.
+Document generated on 2021-09-06 04h54.
