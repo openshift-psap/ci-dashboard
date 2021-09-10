@@ -2,7 +2,10 @@ package artifacts
 
 import (
 	"bytes"
+	"crypto/md5"
+    "encoding/hex"
 	"encoding/json"
+
 	"fmt"
 	"io/ioutil"
     "net/http"
@@ -22,6 +25,12 @@ const (
 	TypeJsonArray ArtifactType = "type:json-array"
 	TypeHtml                   = "type:html"
 	TypeBytes                  = "type:bytes"
+	// Google GCP hosting doesn't return a 404 error when we request a
+	// file that doesn't exist, but instead serves "an empty dir"
+	// page.  From this page, we strip all the references to the path
+	// we're requesting and compare it against this MD5sum (which was
+	// printf-ed and reinjected here :#)
+	MissingPageMD5Sum          = "b66c9aae6e6cf88de034b25232ba0181"
 )
 
 type ArtifactResult struct {
@@ -39,6 +48,17 @@ func fetchRemoveFromCache(test_matrix *v1.MatrixSpec, path string) error {
 	return os.Remove(cache_path)
 }
 
+func IsPageNotFound(content []byte, path string) bool {
+	fname_pos := strings.LastIndex(path,"/")
+	content = []byte(strings.ReplaceAll(string(content), path, ""))
+	content = []byte(strings.ReplaceAll(string(content), path[0:fname_pos+1], ""))
+
+	hash := md5.Sum(content)
+	hashString := hex.EncodeToString(hash[:])
+
+	return hashString == MissingPageMD5Sum
+}
+
 func fetchArtifact(test_matrix *v1.MatrixSpec, path string) ([]byte, error) {
 	cache_path := fmt.Sprintf("%s/%s", test_matrix.ArtifactsCache, path)
 	artifact_url := fmt.Sprintf("%s/%s", test_matrix.ArtifactsURL, path)
@@ -49,6 +69,11 @@ func fetchArtifact(test_matrix *v1.MatrixSpec, path string) ([]byte, error) {
 
 	content, err := ioutil.ReadFile(cache_path)
 	if err == nil {
+		if IsPageNotFound(content, path) {
+			log.Debugf("File %s found in the cache, but 404", artifact_url)
+			return content, fmt.Errorf("Page doesn't exist: %s", artifact_url)
+		}
+
 		log.Debugf("File %s found in the cache", artifact_url)
 		return content, nil
 	}
@@ -79,6 +104,10 @@ func fetchArtifact(test_matrix *v1.MatrixSpec, path string) ([]byte, error) {
 	err = ioutil.WriteFile(cache_path, content, 0644)
 	if err != nil {
 		log.Warningf("Failed to write into cache file at %s: %v", cache_path, err)
+	}
+
+	if IsPageNotFound(content, path) {
+		return content, fmt.Errorf("Page doesn't exist: %s", artifact_url)
 	}
 
 	return content, nil

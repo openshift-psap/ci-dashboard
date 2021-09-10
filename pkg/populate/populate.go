@@ -129,10 +129,6 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 			test.ProwName, test_result.BuildId, err)
 	}
 
-	if test_result.Passed {
-		return test_result
-	}
-
 	step_test_result_finished, err := artifacts.FetchTestStepResult(test_result, "finished.json", artifacts.TypeJson)
 	if err != nil {
 		// if finished.json can be parsed as an HTML file, the file certainly does'nt exist --> do not warn about it
@@ -160,6 +156,38 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 		}
 	}
 
+	ocpVersion_content, err := artifacts.FetchTestStepResult(test_result, "artifacts/ocp.version", artifacts.TypeBytes)
+	if err == nil {
+		test_result.OpenShiftVersion = strings.TrimSuffix(string(ocpVersion_content.Bytes), "\n")
+	} else {
+		log.Warningf("Failed to read the OpenShift version (%s/%s): %v", test.ProwName, test_result.BuildId, err)
+	}
+	if strings.Contains(test_result.OpenShiftVersion, "doctype") {
+		// 404 page not recognized
+		test_result.OpenShiftVersion = "[PARSING ERROR]"
+	}
+
+	operatorVersion_content, err := artifacts.FetchTestStepResult(test_result, "artifacts/operator.version", artifacts.TypeBytes)
+	if err == nil {
+		test_result.OperatorVersion = strings.TrimSuffix(string(operatorVersion_content.Bytes), "\n")
+	} else {
+		log.Warningf("Failed to read the Operator version (%s/%s): %v", test.ProwName, test_result.BuildId, err)
+	}
+	if strings.Contains(test_result.OperatorVersion, "doctype") {
+		// 404 page not recognized
+		test_result.OperatorVersion = "[PARSING ERROR] " + test_result.TestSpec.OperatorVersion
+	}
+
+	ciartifactsVersion_content, err := artifacts.FetchTestStepResult(test_result, "artifacts/ci_artifact.git_version", artifacts.TypeBytes)
+	if err == nil {
+		test_result.CiArtifactsVersion = strings.TrimSuffix(string(ciartifactsVersion_content.Bytes), "\n")
+	} else {
+		log.Warningf("Failed to read the CI-Artifacts version (%s/%s): %v", test.ProwName, test_result.BuildId, err)
+	}
+	if strings.Contains(test_result.CiArtifactsVersion, "doctype") {
+		// 404 page not recognized
+		test_result.CiArtifactsVersion = "PARSING ERROR"
+	}
 	return test_result
 }
 

@@ -46,6 +46,12 @@ type TestResult struct {
 	KnownFlake string
 
 	/* *** */
+
+	OperatorVersion string
+	OpenShiftVersion string
+	CiArtifactsVersion string
+
+	/* *** */
 	TestSpec *TestSpec
 
 	ToolboxSteps []string
