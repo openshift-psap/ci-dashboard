@@ -128,6 +128,10 @@ func fetchJsonArrayArtifact(test_matrix *v1.MatrixSpec, path string) (JsonArray,
 	return result, nil
 }
 
+func fetchTestResultResult(test_result *v1.TestResult, filename string, filetype ArtifactType) (ArtifactResult, error) {
+	return fetchTestResult(test_result.TestSpec.Matrix, test_result.TestSpec.ProwName, test_result.BuildId, filename, filetype)
+}
+
 func fetchTestResult(test_matrix *v1.MatrixSpec, prow_name, build_id, filename string, filetype ArtifactType) (ArtifactResult, error) {
 	file_path := fmt.Sprintf("%s/%s/%s", prow_name, build_id, filename)
 	var result ArtifactResult
@@ -150,7 +154,7 @@ func fetchTestResult(test_matrix *v1.MatrixSpec, prow_name, build_id, filename s
 	return result, nil
 }
 
-func FetchLastTestResult(test_matrix *v1.MatrixSpec, matrix_name string, test *v1.TestSpec, filename string, filetype ArtifactType) (string, ArtifactResult, error) {
+func FetchLastTestResult(test_matrix *v1.MatrixSpec, test *v1.TestSpec, filename string, filetype ArtifactType) (string, ArtifactResult, error) {
 	last_test_path := fmt.Sprintf("%s/latest-build.txt", test.ProwName)
 	last_test_build_id, err := fetchArtifact(test_matrix, last_test_path)
 	if err != nil {
@@ -173,18 +177,21 @@ func FetchLastTestResult(test_matrix *v1.MatrixSpec, matrix_name string, test *v
 		string(last_test_build_id), filename, filetype)
 	if (err != nil) {
 		return "", ArtifactResult{}, fmt.Errorf("error fetching the results of the last test of %s: %s (%s): %v",
-			matrix_name, test.ProwName, last_test_build_id, err)
+			test_matrix.Name, test.ProwName, last_test_build_id, err)
 
 	}
 
 	return string(last_test_build_id), last_test_file, nil
 }
 
-func FetchLastNTestResults(test_matrix *v1.MatrixSpec, matrix_name, prow_name string, test_history int, filename string, filetype ArtifactType) ([]string, map[string]ArtifactResult, error) {
+func FetchLastNTestResults(test_matrix *v1.MatrixSpec, prow_name string, test_history int, filename string, filetype ArtifactType) ([]string, map[string]ArtifactResult, error) {
+	if test_history <= 0 {
+		panic(fmt.Sprintf("Invalid number of test history required (%d)", test_history))
+	}
 	test_list_path := fmt.Sprintf("%s/", prow_name)
 	test_list_html, err := fetchHtmlArtifact(test_matrix, test_list_path)
 	if err != nil {
-		return nil, nil, fmt.Errorf("error fetching the tests of %s / %s: %v", matrix_name, prow_name, err)
+		return nil, nil, fmt.Errorf("error fetching the tests of %s / %s: %v", test_matrix.Name, prow_name, err)
 	}
 
 	test_results := map[string]ArtifactResult{}
@@ -195,7 +202,6 @@ func FetchLastNTestResults(test_matrix *v1.MatrixSpec, matrix_name, prow_name st
 	}
 
 	// `build_ids` order is "oldest first" (alphanumeric order of timestamps)
-
 	if len(build_ids) > test_history {
 		build_ids = build_ids[len(build_ids) - test_history:]
 	}
@@ -208,7 +214,7 @@ func FetchLastNTestResults(test_matrix *v1.MatrixSpec, matrix_name, prow_name st
 		test_file, err := fetchTestResult(test_matrix, prow_name, test_build_id, filename, filetype)
 		if (err != nil) {
 			log.Warningf("error fetching the results of %s:%s/%s (%s): %v",
-				matrix_name, prow_name, test_build_id, filename, err)
+				test_matrix.Name, prow_name, test_build_id, filename, err)
 
 		}
 
@@ -218,18 +224,18 @@ func FetchLastNTestResults(test_matrix *v1.MatrixSpec, matrix_name, prow_name st
 	return build_ids, test_results, err
 }
 
-func FetchTestStepResult(test_matrix *v1.MatrixSpec, test_spec *v1.TestSpec, build_id string, filename string, filetype ArtifactType) (ArtifactResult, error) {
-	var prow_step = test_matrix.ProwStep
-	if test_spec.ProwStep != "" {
+func FetchTestStepResult(test_result *v1.TestResult, filename string, filetype ArtifactType) (ArtifactResult, error) {
+	var prow_step = test_result.TestSpec.Matrix.ProwStep
+	if test_result.TestSpec.ProwStep != "" {
 		// override test_matrix.ProwStep if ProwStep is test_spec.ProwStep is specified
-		prow_step = test_spec.ProwStep
+		prow_step = test_result.TestSpec.ProwStep
 	}
-	step_filenane := fmt.Sprintf("artifacts/%s/%s/%s", test_spec.TestName, prow_step, filename)
-	return fetchTestResult(test_matrix, test_spec.ProwName, build_id, step_filenane, filetype)
+	step_filenane := fmt.Sprintf("artifacts/%s/%s/%s", test_result.TestSpec.TestName, prow_step, filename)
+	return fetchTestResultResult(test_result, step_filenane, filetype)
 }
 
-func FetchTestToolboxSteps(test_matrix *v1.MatrixSpec, test_spec *v1.TestSpec, build_id string) ([]string, error) {
-	html_toolbox_steps, err := FetchTestStepResult(test_matrix, test_spec, build_id, "artifacts/", TypeHtml)
+func FetchTestToolboxSteps(test_result *v1.TestResult) ([]string, error) {
+	html_toolbox_steps, err := FetchTestStepResult(test_result, "artifacts/", TypeHtml)
 	if err != nil {
 		return []string{}, err
 	}
@@ -242,8 +248,8 @@ func FetchTestToolboxSteps(test_matrix *v1.MatrixSpec, test_spec *v1.TestSpec, b
 	return toolbox_steps, nil
 }
 
-func FetchTestToolboxLogs(test_matrix *v1.MatrixSpec, test_spec *v1.TestSpec, build_id string) (map[string]JsonArray, error) {
-	toolbox_steps, err := FetchTestToolboxSteps(test_matrix, test_spec, build_id)
+func FetchTestToolboxLogs(test_result *v1.TestResult) (map[string]JsonArray, error) {
+	toolbox_steps, err := FetchTestToolboxSteps(test_result)
 	if err != nil {
 		fmt.Println(err)
 		return map[string]JsonArray{}, err
@@ -252,7 +258,7 @@ func FetchTestToolboxLogs(test_matrix *v1.MatrixSpec, test_spec *v1.TestSpec, bu
 
 	for _, toolbox_step := range toolbox_steps {
 		ansible_log_path := "artifacts/"+ toolbox_step + "/_ansible.log.json"
-		json_toolbox_step_logs, err := FetchTestStepResult(test_matrix, test_spec, build_id, ansible_log_path, TypeJsonArray)
+		json_toolbox_step_logs, err := FetchTestStepResult(test_result, ansible_log_path, TypeJsonArray)
 		if err != nil {
 			log.Debugf("No logs for step %s: %v", toolbox_step, err)
 			// no `_ansible.log.json` in the current step, meaning

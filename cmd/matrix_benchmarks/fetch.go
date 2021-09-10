@@ -8,13 +8,13 @@ import (
 	"github.com/openshift-psap/ci-dashboard/pkg/artifacts"
 )
 
-func FetchGPUBurnLogs(test_matrix *v1.MatrixSpec, test_result *v1.TestResult, build_id string) (string, error) {
-	test_spec := test_result.TestSpec
+func FetchGPUBurnLogs(test_result *v1.TestResult) (string, error) {
 	for _, step_name := range test_result.ToolboxSteps {
 		if ! strings.Contains(step_name, "_run_gpu_burn") {
 			continue
 		}
-		html_gpu_burn_files, err := artifacts.FetchTestStepResult(test_matrix, test_spec, build_id, fmt.Sprintf("artifacts/%s/", step_name), artifacts.TypeHtml)
+		html_gpu_burn_files, err := artifacts.FetchTestStepResult(test_result,
+			fmt.Sprintf("artifacts/%s/", step_name), artifacts.TypeHtml)
 		if err != nil {
 			return "", err
 		}
@@ -28,7 +28,8 @@ func FetchGPUBurnLogs(test_matrix *v1.MatrixSpec, test_result *v1.TestResult, bu
 			if !(strings.HasPrefix(filename, "gpu_burn.") && strings.HasSuffix(filename, ".log")) {
 				continue
 			}
-			gpu_burn_logs, err := artifacts.FetchTestStepResult(test_matrix, test_spec, build_id, fmt.Sprintf("artifacts/%s/%s", step_name, filename), artifacts.TypeBytes)
+			gpu_burn_logs, err := artifacts.FetchTestStepResult(test_result,
+				fmt.Sprintf("artifacts/%s/%s", step_name, filename), artifacts.TypeBytes)
 			if err != nil {
 				return "", err
 			}

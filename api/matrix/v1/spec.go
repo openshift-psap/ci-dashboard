@@ -68,6 +68,7 @@ type TestSpec struct {
 	ExpectedFailures int   `json:"expected_failures"`
 
 	/* *** */
+	Matrix *MatrixSpec
 
 	ProwName string
 	TestGroup string
@@ -84,4 +85,8 @@ type MatrixSpec struct {
 	ProwStep string           `json:"prow_step,omitempty"`
 	OperatorName string       `json:"operator_name,omitempty"`
 	Tests map[string][]TestSpec `json:"tests,omitempty"`
+
+	/* *** */
+
+	Name string
 }
