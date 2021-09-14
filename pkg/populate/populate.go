@@ -76,8 +76,8 @@ func PopulateTestFromToolboxLogs(test *v1.TestResult, toolbox_logs map[string]ar
 }
 
 func PopulateTestStepLogs(matrices_spec *v1.MatricesSpec) {
-	var populateTestStepLogs = func(test_matrix *v1.MatrixSpec, test_result *v1.TestResult) error {
-		test_toolbox_logs, err := artifacts.FetchTestToolboxLogs(test_matrix, test_result.TestSpec, test_result.BuildId)
+	var populateTestStepLogs = func(test_result *v1.TestResult) error {
+		test_toolbox_logs, err := artifacts.FetchTestToolboxLogs(test_result)
 		if err != nil {
 			log.Warningf("Failed to get the toolbox steps of the test %s/%s: %v",
 				test_result.TestSpec.ProwName, test_result.BuildId, err)
@@ -95,12 +95,12 @@ func PopulateTestStepLogs(matrices_spec *v1.MatricesSpec) {
 	TraverseAllTestResults(matrices_spec, populateTestStepLogs)
 }
 
-func TraverseAllTestResults(matrices_spec *v1.MatricesSpec, cb func(test_matrix *v1.MatrixSpec, test_result *v1.TestResult) error) error {
+func TraverseAllTestResults(matrices_spec *v1.MatricesSpec, cb func(test_result *v1.TestResult) error) error {
 	for _, test_matrix := range matrices_spec.Matrices {
 		for _, tests := range test_matrix.Tests {
 			for _, test := range tests {
 				for _, test_result := range test.OldTests {
-					if err := cb(&test_matrix, test_result); err != nil {
+					if err := cb(test_result); err != nil {
 						return err
 					}
 				}
@@ -110,79 +110,131 @@ func TraverseAllTestResults(matrices_spec *v1.MatricesSpec, cb func(test_matrix 
 	return nil
 }
 
+func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifacts.ArtifactResult) *v1.TestResult {
+	test_result := &v1.TestResult{
+		TestSpec: test,
+		BuildId: build_id,
+	}
+	var err error
+
+	if err = PopulateTestFromFinished(test_result, finished_file); err != nil {
+		log.Warningf("Failed to store the last results of test %s/%s: %v",
+			test.ProwName, test_result.BuildId, err)
+		return test_result
+	}
+
+	test_result.ToolboxSteps, err = artifacts.FetchTestToolboxSteps(test_result)
+	if err != nil {
+		log.Warningf("Failed to parse the steps of test %s/%s: %v",
+			test.ProwName, test_result.BuildId, err)
+	}
+
+	step_test_result_finished, err := artifacts.FetchTestStepResult(test_result, "finished.json", artifacts.TypeJson)
+	if err != nil {
+		// if finished.json can be parsed as an HTML file, the file certainly does'nt exist --> do not warn about it
+		_, err_json_as_html := artifacts.FetchTestStepResult(test_result, "finished.json", artifacts.TypeHtml)
+		if err_json_as_html != nil {
+			log.Warningf("Failed to fetch the results of test step %s/%s: %v",
+				test.ProwName, test_result.BuildId, err)
+		}
+	}
+
+	if err = PopulateTestFromStepFinished(test_result, step_test_result_finished); err != nil {
+		log.Warningf("Failed to store the results of test step %s/%s: %v", test.ProwName, test_result.BuildId, err)
+	}
+
+	if !test_result.StepPassed {
+		contentBytes, err := artifacts.FetchTestStepResult(test_result, "artifacts/FLAKE", artifacts.TypeBytes)
+
+		if err == nil {
+			content := string(contentBytes.Bytes)
+			if !strings.Contains(content, "doctype html") {
+				test_result.KnownFlake = strings.TrimSuffix(content, "\n")
+			}
+		} else {
+			log.Warningf("Failed to check if %s/%s is a flake: %v", test.ProwName, test_result.BuildId, err)
+		}
+	}
+
+	ocpVersion_content, err := artifacts.FetchTestStepResult(test_result, "artifacts/ocp.version", artifacts.TypeBytes)
+	if err == nil {
+		test_result.OpenShiftVersion = strings.TrimSuffix(string(ocpVersion_content.Bytes), "\n")
+	} else {
+		log.Warningf("Failed to read the OpenShift version (%s/%s): %v", test.ProwName, test_result.BuildId, err)
+	}
+	if strings.Contains(test_result.OpenShiftVersion, "doctype") {
+		// 404 page not recognized
+		test_result.OpenShiftVersion = "[PARSING ERROR]"
+	}
+
+	operatorVersion_content, err := artifacts.FetchTestStepResult(test_result, "artifacts/operator.version", artifacts.TypeBytes)
+	if err == nil {
+		test_result.OperatorVersion = strings.TrimSuffix(string(operatorVersion_content.Bytes), "\n")
+	} else {
+		log.Warningf("Failed to read the Operator version (%s/%s): %v", test.ProwName, test_result.BuildId, err)
+	}
+	if strings.Contains(test_result.OperatorVersion, "doctype") {
+		// 404 page not recognized
+		test_result.OperatorVersion = "[PARSING ERROR] " + test_result.TestSpec.OperatorVersion
+	}
+
+	ciartifactsVersion_content, err := artifacts.FetchTestStepResult(test_result, "artifacts/ci_artifact.git_version", artifacts.TypeBytes)
+	if err == nil {
+		test_result.CiArtifactsVersion = strings.TrimSuffix(string(ciartifactsVersion_content.Bytes), "\n")
+	} else {
+		log.Warningf("Failed to read the CI-Artifacts version (%s/%s): %v", test.ProwName, test_result.BuildId, err)
+	}
+	if strings.Contains(test_result.CiArtifactsVersion, "doctype") {
+		// 404 page not recognized
+		test_result.CiArtifactsVersion = "PARSING ERROR"
+	}
+	return test_result
+}
+
+func populateTest(test_matrix *v1.MatrixSpec, test_group string, test *v1.TestSpec, test_history int) error {
+	test.TestGroup = test_group
+	test.Matrix = test_matrix
+
+	var branch string
+	if test.Variant != "" {
+		branch = fmt.Sprintf("%s-%s", test.Branch, test.Variant)
+	} else {
+		branch = test.Branch
+	}
+
+	test.ProwName = fmt.Sprintf("%s-%s-%s", test_matrix.ProwConfig, branch, test.TestName)
+
+	test_build_ids, finished_files, err := artifacts.FetchLastNTestResults(test_matrix, test.ProwName, test_history,
+		"finished.json", artifacts.TypeJson)
+	if err != nil {
+		return fmt.Errorf("Failed to fetch the last %d test results for %s: %v", test_history, test.ProwName, err)
+	}
+	for _, build_id := range test_build_ids {
+		test_result := populateTestResult(test, build_id, finished_files[build_id])
+
+		test.OldTests = append(test.OldTests, test_result)
+	}
+
+	return nil
+}
+
 func PopulateTestMatrices(matricesSpec *v1.MatricesSpec, test_history int) error {
-	for matrix_name, test_matrix := range matricesSpec.Matrices {
-		log.Printf("* %s: %s\n", matrix_name, test_matrix.Description)
+	// override matricesSpec.TestHistory if we received a flag value
+	if test_history >= 0 {
+		matricesSpec.TestHistory = test_history
+	} else {
+		test_history = matricesSpec.TestHistory
+	}
+
+	for matrix_name := range matricesSpec.Matrices {
+		test_matrix := matricesSpec.Matrices[matrix_name]
+		test_matrix.Name = matrix_name
+
+		log.Printf("* %s: %s\n", test_matrix.Name, test_matrix.Description)
 		for test_group, tests := range test_matrix.Tests {
 			for test_idx := range tests {
-				test := &tests[test_idx]
-				var branch string
-				if test.Variant != "" {
-					branch = fmt.Sprintf("%s-%s", test.Branch, test.Variant)
-				} else {
-					branch = test.Branch
-				}
-
-				test.ProwName = fmt.Sprintf("%s-%s-%s", test_matrix.ProwConfig, branch, test.TestName)
-				test.TestGroup = test_group
-
-				// override matricesSpec.TestHistory if we received a flag value
-				if test_history >= 0 {
-					matricesSpec.TestHistory = test_history
-				}
-
-				test_build_ids, old_tests, err := artifacts.FetchLastNTestResults(&test_matrix, matrix_name, test.ProwName, matricesSpec.TestHistory,
-					"finished.json", artifacts.TypeJson)
-				if err != nil {
-					return fmt.Errorf("Failed to fetch the last %d test results for %s: %v", matricesSpec.TestHistory, test.ProwName, err)
-				}
-				for _, old_test_build_id := range test_build_ids {
-					old_test_finished := old_tests[old_test_build_id]
-					old_test := v1.TestResult{TestSpec: test}
-					old_test.BuildId = old_test_build_id
-					test.OldTests = append(test.OldTests, &old_test)
-
-					if err = PopulateTestFromFinished(&old_test, old_test_finished); err != nil {
-						log.Warningf("Failed to store the last results of test %s/%s: %v",
-							test.ProwName, old_test_build_id, err)
-						continue
-					}
-
-					old_test.ToolboxSteps, err = artifacts.FetchTestToolboxSteps(&test_matrix, test, old_test_build_id)
-					if err != nil {
-						log.Warningf("Failed to parse the steps of test %s/%s: %v",
-							test.ProwName, old_test_build_id, err)
-					}
-
-					if old_test.Passed {
-						continue
-					}
-					step_old_test_finished, err := artifacts.FetchTestStepResult(&test_matrix, test, old_test_build_id, "finished.json", artifacts.TypeJson)
-					if err != nil {
-						// if finished.json can be parsed as an HTML file, the file certainly does'nt exist --> do not warn about it
-						_, err_json_as_html := artifacts.FetchTestStepResult(&test_matrix, test, old_test_build_id, "finished.json", artifacts.TypeHtml)
-						if err_json_as_html != nil {
-							log.Warningf("Failed to fetch the results of test step %s/%s: %v",
-								test.ProwName, old_test_build_id, err)
-						}
-					}
-					if err = PopulateTestFromStepFinished(&old_test, step_old_test_finished); err != nil {
-						log.Warningf("Failed to store the results of test step %s/%s: %v", test.ProwName, old_test_build_id, err)
-					}
-					if !old_test.StepPassed {
-						contentBytes, err := artifacts.FetchTestStepResult(&test_matrix, test, old_test_build_id,
-							"artifacts/FLAKE", artifacts.TypeBytes)
-
-						if err == nil {
-							content := string(contentBytes.Bytes)
-							if !strings.Contains(content, "doctype html") {
-
-								old_test.KnownFlake = strings.TrimSuffix(content, "\n")
-							}
-						} else {
-							log.Warningf("Failed to check if %s/%s is a flake: %v", test.ProwName, old_test_build_id, err)
-						}
-					}
+				if err := populateTest(&test_matrix, test_group, &tests[test_idx], test_history); err != nil {
+					return err
 				}
 			}
 		}

@@ -58,6 +58,13 @@
               background-color: #FFC300;
           }
 
+          .cell_ocp {
+              width: 150px;
+          }
+
+          .cell_operator {
+          }
+
           .results-cell {
               width: 150px;
           }
@@ -132,10 +139,10 @@
                     <tr>
                       <th><!-- success/error icon --></th>
                       <th>Ansible tests<!-- test ok/failures/ignored --></th>
-                      <th><!-- artifacts dir --></th>
-                      <th class='cell_operator'>{{ $matrix.OperatorName }}</th>
                       <th>Prow</th>
-                      <th></th>
+                      <th>CI-Artifacts</th>
+                      <th class='cell_operator'>{{ $matrix.OperatorName }}</th>
+                      <th>OpenShift</th>
                       <th>Last finished</th>
                       <th class="old_tests">History of the last {{ nb_last_test }} tests:</th>
                     </tr>
@@ -168,18 +175,28 @@
                       </td>
                       <td class="results-cell">
                         {{ if $test.OldTests }}
-                        <span title="{{ (index $test.OldTests 0).Ok }} Tests OK" class="test_count_ok">&nbsp;{{ (index $test.OldTests 0).Ok }}&nbsp;</span>{{ if (index $test.OldTests 0).Failures }}|<span title="{{ (index $test.OldTests 0).Failures }} Tests Failures" class="test_count_failures">&nbsp;{{ (index $test.OldTests 0).Failures }}&nbsp;</span>{{ end }}{{ if (index $test.OldTests 0).Ignored }}|<span title="{{ (index $test.OldTests 0).Ignored }} Tests Ignored" class="test_count_ignored">&nbsp;{{ (index $test.OldTests 0).Ignored }}&nbsp;</span>{{ end }}
-                        {{ end }}
-
-                      </td>
-                      <td class="icon-cell">
-                        {{ if $last_test.TestSpec }}
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="{{ artifacts_url $matrix $last_test }}/artifacts/"><i class="icon-button material-icons" title="{{ $matrix.OperatorName }} test artifacts">pageview</i></a>
+                        <span title="{{ $last_test.Ok }} Tests OK" class="test_count_ok">&nbsp;{{ $last_test.Ok }}&nbsp;</span>{{ if $last_test.Failures }}|<span title="{{ $last_test.Failures }} Tests Failures" class="test_count_failures">&nbsp;{{ $last_test.Failures }}&nbsp;</span>{{ end }}{{ if $last_test.Ignored }}|<span title="{{ $last_test.Ignored }} Tests Ignored" class="test_count_ignored">&nbsp;{{ $last_test.Ignored }}&nbsp;</span>{{ end }}
                         {{ end }}
                       </td>
-                      <td class='cell_operator'>{{ $test.OperatorVersion }}</td>
                       <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{  spyglass_url $matrix $test.ProwName $last_test}}"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
-                      <td></td>
+                      <td class='cell_repo'>
+                        {{ if $last_test.CiArtifactsVersion }}
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/{{ $last_test.CiArtifactsVersion }}">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #{{ $last_test.CiArtifactsVersion }}">hub</i></a>
+                        {{ end }}
+                      </td>
+                      <td class='cell_operator'>
+                        {{ if $last_test.OperatorVersion }}
+                          {{ $last_test.OperatorVersion }}
+                        {{ else }}
+                          {{ $test.OperatorVersion }}
+                        {{ end }}
+                      </td>
+                      <td class='cell_ocp'>
+                        {{ if $last_test.OpenShiftVersion }}
+                          {{ $last_test.OpenShiftVersion }}
+                        {{ end }}
+                      </td>
                       <td class="date-cell"><div tabindex="0">
                           {{ if $last_test.TestSpec }}
                              {{ $last_test.FinishDate }}

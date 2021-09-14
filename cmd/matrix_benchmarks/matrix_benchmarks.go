@@ -129,8 +129,8 @@ func matrix_benchWrapper(c *cli.Context, f *Flags) error {
 		return dest_dir, nil
 	}
 
-	var processGPUBurnLogs = func(test_matrix *v1.MatrixSpec, test_result *v1.TestResult) error {
-		gpu_burn_logs, err := FetchGPUBurnLogs(test_matrix, test_result, test_result.BuildId)
+	var processGPUBurnLogs = func(test_result *v1.TestResult) error {
+		gpu_burn_logs, err := FetchGPUBurnLogs(test_result)
 
 		if err != nil {
 			log.Warningf("Failed to fetch the GPU burn logs of the test %s/%s: %v", test_result.TestSpec.ProwName, test_result.BuildId, err)
@@ -155,7 +155,7 @@ func matrix_benchWrapper(c *cli.Context, f *Flags) error {
 		return nil
 	}
 
-	var processSteps = func(test_matrix *v1.MatrixSpec, test_result *v1.TestResult) error {
+	var processSteps = func(test_result *v1.TestResult) error {
 
 		exit_code := 0
 		dest_dir, err := saveSettings("test-properties", test_result, exit_code)
@@ -185,12 +185,12 @@ func matrix_benchWrapper(c *cli.Context, f *Flags) error {
 
 	populate.PopulateTestStepLogs(matrices_spec)
 
-	err = populate.TraverseAllTestResults(matrices_spec, func(test_matrix *v1.MatrixSpec, test_result *v1.TestResult) error {
-		if err := processGPUBurnLogs(test_matrix, test_result); err != nil {
+	err = populate.TraverseAllTestResults(matrices_spec, func(test_result *v1.TestResult) error {
+		if err := processGPUBurnLogs(test_result); err != nil {
 			return err
 		}
 
-		if err := processSteps(test_matrix, test_result); err != nil {
+		if err := processSteps(test_result); err != nil {
 			return err
 		}
 
