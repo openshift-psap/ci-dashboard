@@ -8,7 +8,7 @@ OpenShift 4.9
 
 * Node Feature Discovery Operator 4.9: SUCCESS
   - Test passed
-  - Test finished at 2021-09-15 23:53
+  - Test finished at 2021-09-17 00:01
 
 OpenShift 4.8
 -------------
@@ -16,8 +16,8 @@ OpenShift 4.8
 
 * Node Feature Discovery Operator 4.8: SUCCESS
   - Test passed
-  - Test finished at 2021-09-16 00:05
+  - Test finished at 2021-09-17 00:07
 
 
 ---
-Document generated on 2021-09-16 08h20.
+Document generated on 2021-09-17 04h53.
