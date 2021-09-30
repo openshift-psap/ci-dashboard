@@ -6,9 +6,9 @@ OpenShift 4.9
 -------------
 
 
-* Special Resource Operator master: SUCCESS
-  - Test passed
-  - Test finished at 2021-09-29 00:12
+* Special Resource Operator master: FAILURE
+  - Test failed because of a known flake: Failed because of the NFD Operator packagemanifest not available
+  - Test finished at 2021-09-30 00:06
 
 OpenShift 4.8
 -------------
@@ -16,7 +16,7 @@ OpenShift 4.8
 
 * Special Resource Operator master: SUCCESS
   - Test passed
-  - Test finished at 2021-09-29 00:24
+  - Test finished at 2021-09-30 00:14
 
 OpenShift 4.7
 -------------
@@ -24,8 +24,8 @@ OpenShift 4.7
 
 * Special Resource Operator master: SUCCESS
   - Test passed
-  - Test finished at 2021-09-29 00:15
+  - Test finished at 2021-09-30 00:14
 
 
 ---
-Document generated on 2021-09-29 04h54.
+Document generated on 2021-09-30 04h57.
