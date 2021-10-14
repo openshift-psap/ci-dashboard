@@ -121,47 +121,63 @@
                       
                       
                       
-                      <td class="icon-cell" title="Test failed but operator step wasn&#39;t executed">
+                      <td class="icon-cell" title="Test passed">
                         
-                        <i class="material-icons state aborted">remove_circle</i>
+                        <i class="material-icons state success">check_circle</i>
                         
                         
                       </td>
                       <td class="results-cell">
                         
-                        <span title="0 Tests OK" class="test_count_ok">&nbsp;0&nbsp;</span>
+                        <span title="281 Tests OK" class="test_count_ok">&nbsp;281&nbsp;</span>|<span title="2 Tests Failures" class="test_count_failures">&nbsp;2&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.9-gpu-operator-e2e-master/1448076235853795328"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.9-gpu-operator-e2e-master/1448423528176029696"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
+                        
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
                         
-                          master
+                          21.10.12-git.95dfff7
                         
                       </td>
                       <td class='cell_ocp'>
                         
+                          4.9.0-0.nightly-2021-10-13-170616
+                        
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 00:05
+                             2021-10-14 00:30
                           
                       </td>
                       <td class="old_tests">
                         
                         
+                        <a title="Test passed.
+2021-10-14 00:30
+OK: 281, Failures: 2, Ignored: 0
+(Most recent test)"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.9-gpu-operator-e2e-master/1448423528176029696/artifacts/gpu-operator-e2e-master/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
                         <a title="Test failed but operator step wasn&#39;t executed.
 2021-10-13 00:05
 OK: 0, Failures: 0, Ignored: 0
-(Most recent test)"
+"
                            
                            href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.9-gpu-operator-e2e-master/1448076235853795328"
                            
                            class="old_tests old_test_step_missing">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        |
                         
                         
                         
@@ -308,17 +324,6 @@ OK: 127, Failures: 1, Ignored: 0
                         
                         
                         
-                        <a title="Test failed because of a known flake: Failed because of the NFD Operator packagemanifest not available.
-2021-10-01 00:12
-OK: 127, Failures: 1, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.9-gpu-operator-e2e-master/1443712379119472640/artifacts/gpu-operator-e2e-master/nightly/artifacts"
-                           
-                           class="old_tests old_test_known_flake">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -374,11 +379,11 @@ OK: 127, Failures: 1, Ignored: 0
                         <span title="270 Tests OK" class="test_count_ok">&nbsp;270&nbsp;</span>|<span title="2 Tests Failures" class="test_count_failures">&nbsp;2&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-master/1448076227473575936"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-master/1448423524833169408"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/0db2202">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #0db2202">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -388,27 +393,38 @@ OK: 127, Failures: 1, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.8.0-0.nightly-2021-10-09-130601
+                          4.8.0-0.nightly-2021-10-13-134752
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 01:43
+                             2021-10-14 00:38
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2021-10-13 01:43
+2021-10-14 00:38
 OK: 270, Failures: 2, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-master/1448076227473575936/artifacts/gpu-operator-e2e-master/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-master/1448423524833169408/artifacts/gpu-operator-e2e-master/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2021-10-13 01:43
+OK: 270, Failures: 2, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-master/1448076227473575936/artifacts/gpu-operator-e2e-master/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -555,17 +571,6 @@ OK: 247, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-09-30 00:51
-OK: 247, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-master/1443350101702479872/artifacts/gpu-operator-e2e-master/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -587,11 +592,11 @@ OK: 247, Failures: 0, Ignored: 0
                         <span title="214 Tests OK" class="test_count_ok">&nbsp;214&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-18x/1448076226626326528"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-18x/1448423523998502912"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/0db2202">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #0db2202">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -601,27 +606,38 @@ OK: 247, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.8.0-0.nightly-2021-10-09-130601
+                          4.8.0-0.nightly-2021-10-13-134752
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 01:28
+                             2021-10-14 00:36
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2021-10-13 01:28
+2021-10-14 00:36
 OK: 214, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-18x/1448076226626326528/artifacts/gpu-operator-e2e-18x/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-18x/1448423523998502912/artifacts/gpu-operator-e2e-18x/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2021-10-13 01:28
+OK: 214, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-18x/1448076226626326528/artifacts/gpu-operator-e2e-18x/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -768,17 +784,6 @@ OK: 211, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-09-30 00:31
-OK: 211, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-18x/1443350100872007680/artifacts/gpu-operator-e2e-18x/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -789,22 +794,22 @@ OK: 211, Failures: 0, Ignored: 0
                       
                       
                       
-                      <td class="icon-cell" title="Test failed because the operator step failed">
+                      <td class="icon-cell" title="Test passed">
                         
-                        <i class="material-icons state failure">error</i>
+                        <i class="material-icons state success">check_circle</i>
                         
                         
                       </td>
                       <td class="results-cell">
                         
-                        <span title="168 Tests OK" class="test_count_ok">&nbsp;168&nbsp;</span>|<span title="1 Tests Failures" class="test_count_failures">&nbsp;1&nbsp;</span>
+                        <span title="202 Tests OK" class="test_count_ok">&nbsp;202&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-17x/1448076225791660032"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-17x/1448423523461632000"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/0db2202">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #0db2202">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -814,27 +819,38 @@ OK: 211, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.8.0-0.nightly-2021-10-09-130601
+                          4.8.0-0.nightly-2021-10-13-134752
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 01:45
+                             2021-10-14 00:27
                           
                       </td>
                       <td class="old_tests">
                         
                         
+                        <a title="Test passed.
+2021-10-14 00:27
+OK: 202, Failures: 0, Ignored: 0
+(Most recent test)"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-17x/1448423523461632000/artifacts/gpu-operator-e2e-17x/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
                         <a title="Test failed because the operator step failed.
 2021-10-13 01:45
 OK: 168, Failures: 1, Ignored: 0
-(Most recent test)"
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-17x/1448076225791660032/artifacts/gpu-operator-e2e-17x/nightly/artifacts"
                            
                            class="old_tests old_test_step_failed">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        |
                         
                         
                         
@@ -981,17 +997,6 @@ OK: 201, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-09-30 00:29
-OK: 202, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-gpu-operator-e2e-17x/1443350100372885504/artifacts/gpu-operator-e2e-17x/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -1044,14 +1049,14 @@ OK: 202, Failures: 0, Ignored: 0
                       </td>
                       <td class="results-cell">
                         
-                        <span title="269 Tests OK" class="test_count_ok">&nbsp;269&nbsp;</span>|<span title="2 Tests Failures" class="test_count_failures">&nbsp;2&nbsp;</span>
+                        <span title="270 Tests OK" class="test_count_ok">&nbsp;270&nbsp;</span>|<span title="2 Tests Failures" class="test_count_failures">&nbsp;2&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-master/1448076218237718528"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-master/1448423523394523136"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/0db2202">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #0db2202">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -1061,27 +1066,38 @@ OK: 202, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.7.0-0.nightly-2021-10-12-211956
+                          4.7.0-0.nightly-2021-10-13-171417
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 01:38
+                             2021-10-14 00:31
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2021-10-13 01:38
-OK: 269, Failures: 2, Ignored: 0
+2021-10-14 00:31
+OK: 270, Failures: 2, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-master/1448076218237718528/artifacts/gpu-operator-e2e-master/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-master/1448423523394523136/artifacts/gpu-operator-e2e-master/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2021-10-13 01:38
+OK: 269, Failures: 2, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-master/1448076218237718528/artifacts/gpu-operator-e2e-master/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -1228,17 +1244,6 @@ OK: 247, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-10-01 00:48
-OK: 248, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-master/1443712371968184320/artifacts/gpu-operator-e2e-master/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -1257,14 +1262,14 @@ OK: 248, Failures: 0, Ignored: 0
                       </td>
                       <td class="results-cell">
                         
-                        <span title="215 Tests OK" class="test_count_ok">&nbsp;215&nbsp;</span>
+                        <span title="216 Tests OK" class="test_count_ok">&nbsp;216&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-18x/1448076217411440640"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-18x/1448423523365163008"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/0db2202">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #0db2202">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -1274,27 +1279,38 @@ OK: 248, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.7.0-0.nightly-2021-10-12-211956
+                          4.7.0-0.nightly-2021-10-13-171417
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 01:45
+                             2021-10-14 00:36
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2021-10-13 01:45
-OK: 215, Failures: 0, Ignored: 0
+2021-10-14 00:36
+OK: 216, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-18x/1448076217411440640/artifacts/gpu-operator-e2e-18x/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-18x/1448423523365163008/artifacts/gpu-operator-e2e-18x/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2021-10-13 01:45
+OK: 215, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-18x/1448076217411440640/artifacts/gpu-operator-e2e-18x/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -1441,17 +1457,6 @@ OK: 0, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-10-01 00:43
-OK: 213, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-18x/1443712371917852672/artifacts/gpu-operator-e2e-18x/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -1462,22 +1467,22 @@ OK: 213, Failures: 0, Ignored: 0
                       
                       
                       
-                      <td class="icon-cell" title="Test failed because the operator step failed">
+                      <td class="icon-cell" title="Test passed">
                         
-                        <i class="material-icons state failure">error</i>
+                        <i class="material-icons state success">check_circle</i>
                         
                         
                       </td>
                       <td class="results-cell">
                         
-                        <span title="168 Tests OK" class="test_count_ok">&nbsp;168&nbsp;</span>|<span title="1 Tests Failures" class="test_count_failures">&nbsp;1&nbsp;</span>
+                        <span title="202 Tests OK" class="test_count_ok">&nbsp;202&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-170/1448076216576774144"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-170/1448423523331608576"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/0db2202">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #0db2202">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -1487,27 +1492,38 @@ OK: 213, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.7.0-0.nightly-2021-10-12-211956
+                          4.7.0-0.nightly-2021-10-13-171417
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 01:34
+                             2021-10-14 00:22
                           
                       </td>
                       <td class="old_tests">
                         
                         
+                        <a title="Test passed.
+2021-10-14 00:22
+OK: 202, Failures: 0, Ignored: 0
+(Most recent test)"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-170/1448423523331608576/artifacts/gpu-operator-e2e-170/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
                         <a title="Test failed because the operator step failed.
 2021-10-13 01:34
 OK: 168, Failures: 1, Ignored: 0
-(Most recent test)"
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-170/1448076216576774144/artifacts/gpu-operator-e2e-170/nightly/artifacts"
                            
                            class="old_tests old_test_step_failed">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        |
                         
                         
                         
@@ -1654,17 +1670,6 @@ OK: 202, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-10-01 00:30
-OK: 201, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-170/1443712371884298240/artifacts/gpu-operator-e2e-170/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -1686,11 +1691,11 @@ OK: 201, Failures: 0, Ignored: 0
                         <span title="203 Tests OK" class="test_count_ok">&nbsp;203&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-162/1448076215784050688"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-162/1448423523302248448"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/0db2202">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #0db2202">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -1700,27 +1705,38 @@ OK: 201, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.7.0-0.nightly-2021-10-12-211956
+                          4.7.0-0.nightly-2021-10-13-171417
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 01:22
+                             2021-10-14 00:21
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2021-10-13 01:22
+2021-10-14 00:21
 OK: 203, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-162/1448076215784050688/artifacts/gpu-operator-e2e-162/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-162/1448423523302248448/artifacts/gpu-operator-e2e-162/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2021-10-13 01:22
+OK: 203, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-162/1448076215784050688/artifacts/gpu-operator-e2e-162/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -1867,17 +1883,6 @@ OK: 202, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-09-30 00:24
-OK: 202, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-gpu-operator-e2e-162/1443350100192530432/artifacts/gpu-operator-e2e-162/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -1930,14 +1935,14 @@ OK: 202, Failures: 0, Ignored: 0
                       </td>
                       <td class="results-cell">
                         
-                        <span title="65 Tests OK" class="test_count_ok">&nbsp;65&nbsp;</span>
+                        <span title="68 Tests OK" class="test_count_ok">&nbsp;68&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade/1445720736009293824"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade/1448257348106719232"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/bf79c1a">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #bf79c1a">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -1947,27 +1952,38 @@ OK: 202, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.7.0-0.nightly-2021-10-05-183054
+                          4.7.0-0.nightly-2021-10-12-211956
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-06 15:10
+                             2021-10-13 14:48
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2021-10-06 15:10
-OK: 65, Failures: 0, Ignored: 0
+2021-10-13 14:48
+OK: 68, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade/1445720736009293824/artifacts/gpu-operator-e2e-upgrade/2-postupgrade-gpu-operator-validate-deployment/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade/1448257348106719232/artifacts/gpu-operator-e2e-upgrade/2-postupgrade-gpu-operator-validate-deployment/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2021-10-06 15:10
+OK: 65, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade/1445720736009293824/artifacts/gpu-operator-e2e-upgrade/2-postupgrade-gpu-operator-validate-deployment/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -2114,17 +2130,6 @@ OK: 9, Failures: 1, Ignored: 0
                         
                         
                         
-                        <a title="Test failed but operator step wasn&#39;t executed.
-2021-06-30 13:57
-OK: 0, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade/1410206629525196800"
-                           
-                           class="old_tests old_test_step_missing">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -2143,14 +2148,14 @@ OK: 0, Failures: 0, Ignored: 0
                       </td>
                       <td class="results-cell">
                         
-                        <span title="55 Tests OK" class="test_count_ok">&nbsp;55&nbsp;</span>
+                        <span title="56 Tests OK" class="test_count_ok">&nbsp;56&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade-170/1445720736047042560"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade-170/1448257348165439488"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/bf79c1a">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #bf79c1a">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -2160,27 +2165,38 @@ OK: 0, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.7.0-0.nightly-2021-10-05-183054
+                          4.7.0-0.nightly-2021-10-12-211956
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-06 14:33
+                             2021-10-13 14:45
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2021-10-06 14:33
-OK: 55, Failures: 0, Ignored: 0
+2021-10-13 14:45
+OK: 56, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade-170/1445720736047042560/artifacts/gpu-operator-e2e-upgrade-170/2-postupgrade-gpu-operator-validate-deployment/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade-170/1448257348165439488/artifacts/gpu-operator-e2e-upgrade-170/2-postupgrade-gpu-operator-validate-deployment/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2021-10-06 14:33
+OK: 55, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade-170/1445720736047042560/artifacts/gpu-operator-e2e-upgrade-170/2-postupgrade-gpu-operator-validate-deployment/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -2327,17 +2343,6 @@ OK: 0, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-06-30 14:58
-OK: 29, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-upgrade-gpu-operator-e2e-upgrade-170/1410206629554556928/artifacts/gpu-operator-e2e-upgrade-170/2-postupgrade-gpu-operator-validate-deployment/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -2382,22 +2387,22 @@ OK: 29, Failures: 0, Ignored: 0
                       
                       
                       
-                      <td class="icon-cell" title="Test failed because the operator step failed">
+                      <td class="icon-cell" title="Test passed">
                         
-                        <i class="material-icons state failure">error</i>
+                        <i class="material-icons state success">check_circle</i>
                         
                         
                       </td>
                       <td class="results-cell">
                         
-                        <span title="168 Tests OK" class="test_count_ok">&nbsp;168&nbsp;</span>|<span title="1 Tests Failures" class="test_count_failures">&nbsp;1&nbsp;</span>
+                        <span title="202 Tests OK" class="test_count_ok">&nbsp;202&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-170/1448076209840721920"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-170/1448423523260305408"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/0db2202">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #0db2202">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -2407,27 +2412,38 @@ OK: 29, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.6.0-0.nightly-2021-10-12-191516
+                          4.6.0-0.nightly-2021-10-13-171932
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 01:40
+                             2021-10-14 00:16
                           
                       </td>
                       <td class="old_tests">
                         
                         
+                        <a title="Test passed.
+2021-10-14 00:16
+OK: 202, Failures: 0, Ignored: 0
+(Most recent test)"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-170/1448423523260305408/artifacts/gpu-operator-e2e-170/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
                         <a title="Test failed because the operator step failed.
 2021-10-13 01:40
 OK: 168, Failures: 1, Ignored: 0
-(Most recent test)"
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-170/1448076209840721920/artifacts/gpu-operator-e2e-170/nightly/artifacts"
                            
                            class="old_tests old_test_step_failed">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        |
                         
                         
                         
@@ -2574,17 +2590,6 @@ OK: 201, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-10-01 00:20
-OK: 201, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-170/1443712371812995072/artifacts/gpu-operator-e2e-170/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -2595,52 +2600,63 @@ OK: 201, Failures: 0, Ignored: 0
                       
                       
                       
-                      <td class="icon-cell" title="Test failed because of a known flake: Failed because of the GPU Operator packagemanifest not available">
+                      <td class="icon-cell" title="Test passed">
                         
-                        <i class="material-icons state known_flake">remove_circle</i>
+                        <i class="material-icons state success">check_circle</i>
                         
                         
                       </td>
                       <td class="results-cell">
                         
-                        <span title="128 Tests OK" class="test_count_ok">&nbsp;128&nbsp;</span>|<span title="1 Tests Failures" class="test_count_failures">&nbsp;1&nbsp;</span>
+                        <span title="203 Tests OK" class="test_count_ok">&nbsp;203&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-162/1448076209001861120"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-162/1448423523226750976"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/0db2202">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #0db2202">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
                         
-                          1.6
+                          1.6.2
                         
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.6.0-0.nightly-2021-10-12-191516
+                          4.6.0-0.nightly-2021-10-13-171932
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 01:07
+                             2021-10-14 00:23
                           
                       </td>
                       <td class="old_tests">
                         
                         
+                        <a title="Test passed.
+2021-10-14 00:23
+OK: 203, Failures: 0, Ignored: 0
+(Most recent test)"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-162/1448423523226750976/artifacts/gpu-operator-e2e-162/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
                         <a title="Test failed because of a known flake: Failed because of the GPU Operator packagemanifest not available.
 2021-10-13 01:07
 OK: 128, Failures: 1, Ignored: 0
-(Most recent test)"
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-162/1448076209001861120/artifacts/gpu-operator-e2e-162/nightly/artifacts"
                            
                            class="old_tests old_test_known_flake">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        |
                         
                         
                         
@@ -2787,17 +2803,6 @@ OK: 202, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-09-30 00:26
-OK: 203, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-162/1443350100112838656/artifacts/gpu-operator-e2e-162/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -2816,14 +2821,14 @@ OK: 203, Failures: 0, Ignored: 0
                       </td>
                       <td class="results-cell">
                         
-                        <span title="203 Tests OK" class="test_count_ok">&nbsp;203&nbsp;</span>
+                        <span title="204 Tests OK" class="test_count_ok">&nbsp;204&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-152/1448076208171388928"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-152/1448423523189002240"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/0db2202">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #0db2202">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -2833,27 +2838,38 @@ OK: 203, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.6.0-0.nightly-2021-10-12-191516
+                          4.6.0-0.nightly-2021-10-13-171932
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 01:27
+                             2021-10-14 00:28
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2021-10-13 01:27
-OK: 203, Failures: 0, Ignored: 0
+2021-10-14 00:28
+OK: 204, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-152/1448076208171388928/artifacts/gpu-operator-e2e-152/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-152/1448423523189002240/artifacts/gpu-operator-e2e-152/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2021-10-13 01:27
+OK: 203, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-152/1448076208171388928/artifacts/gpu-operator-e2e-152/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -3000,17 +3016,6 @@ OK: 202, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-09-30 00:23
-OK: 202, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-152/1443350100070895616/artifacts/gpu-operator-e2e-152/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -3029,14 +3034,14 @@ OK: 202, Failures: 0, Ignored: 0
                       </td>
                       <td class="results-cell">
                         
-                        <span title="204 Tests OK" class="test_count_ok">&nbsp;204&nbsp;</span>
+                        <span title="203 Tests OK" class="test_count_ok">&nbsp;203&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-140/1448076207324139520"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-140/1448423523159642112"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/0db2202">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #0db2202">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/24e0a9b">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #24e0a9b">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -3046,27 +3051,38 @@ OK: 202, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.6.0-0.nightly-2021-10-12-191516
+                          4.6.0-0.nightly-2021-10-13-171932
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-13 01:34
+                             2021-10-14 00:24
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2021-10-13 01:34
-OK: 204, Failures: 0, Ignored: 0
+2021-10-14 00:24
+OK: 203, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-140/1448076207324139520/artifacts/gpu-operator-e2e-140/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-140/1448423523159642112/artifacts/gpu-operator-e2e-140/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2021-10-13 01:34
+OK: 204, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-140/1448076207324139520/artifacts/gpu-operator-e2e-140/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -3213,17 +3229,6 @@ OK: 203, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test failed because the operator step failed.
-2021-10-01 00:03
-OK: 135, Failures: 1, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.6-gpu-operator-e2e-140/1443712371708137472/artifacts/gpu-operator-e2e-140/nightly/artifacts"
-                           
-                           class="old_tests old_test_step_failed">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -3241,7 +3246,7 @@ OK: 135, Failures: 1, Ignored: 0
         </main>
 
         <div id="footer">
-          Document generated on 2021-10-13 04h52.
+          Document generated on 2021-10-14 04h49.
         </div>
   </body>
 </html>
