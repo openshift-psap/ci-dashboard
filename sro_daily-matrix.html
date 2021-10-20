@@ -121,22 +121,19 @@
                       
                       
                       
-                      <td class="icon-cell" title="Test passed">
+                      <td class="icon-cell" title="Test failed but operator step wasn&#39;t executed">
                         
-                        <i class="material-icons state success">check_circle</i>
+                        <i class="material-icons state aborted">remove_circle</i>
                         
                         
                       </td>
                       <td class="results-cell">
                         
-                        <span title="104 Tests OK" class="test_count_ok">&nbsp;104&nbsp;</span>
+                        <span title="0 Tests OK" class="test_count_ok">&nbsp;0&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.9-sro-e2e-master/1450235360318590976"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.9-sro-e2e-master/1450597796896837632"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
-                        
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/208dd91">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #208dd91">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -146,27 +143,36 @@
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.9.0-0.nightly-2021-10-18-141510
-                        
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-19 00:23
+                             2021-10-19 23:34
                           
                       </td>
                       <td class="old_tests">
                         
                         
+                        <a title="Test failed but operator step wasn&#39;t executed.
+2021-10-19 23:34
+OK: 0, Failures: 0, Ignored: 0
+(Most recent test)"
+                           
+                           href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.9-sro-e2e-master/1450597796896837632"
+                           
+                           class="old_tests old_test_step_missing">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
                         <a title="Test passed.
 2021-10-19 00:23
 OK: 104, Failures: 0, Ignored: 0
-(Most recent test)"
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.9-sro-e2e-master/1450235360318590976/artifacts/e2e-master/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        |
                         
                         
                         
@@ -313,17 +319,6 @@ OK: 66, Failures: 1, Ignored: 0
                         
                         
                         
-                        <a title="Test failed because of a known flake: Failed because of the NFD Operator packagemanifest not available.
-2021-10-05 00:03
-OK: 66, Failures: 1, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.9-sro-e2e-master/1445161934365134848/artifacts/e2e-master/nightly/artifacts"
-                           
-                           class="old_tests old_test_known_flake">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -379,11 +374,11 @@ OK: 66, Failures: 1, Ignored: 0
                         <span title="104 Tests OK" class="test_count_ok">&nbsp;104&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1450235356958953472"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1450597792870305792"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/208dd91">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #208dd91">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/95d0cbf">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #95d0cbf">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -398,22 +393,33 @@ OK: 66, Failures: 1, Ignored: 0
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-19 00:27
+                             2021-10-20 00:29
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2021-10-19 00:27
+2021-10-20 00:29
 OK: 104, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1450235356958953472/artifacts/e2e-master/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1450597792870305792/artifacts/e2e-master/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2021-10-19 00:27
+OK: 104, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1450235356958953472/artifacts/e2e-master/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -560,17 +566,6 @@ OK: 104, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-10-05 00:25
-OK: 104, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.8-sro-e2e-master/1445161931009691648/artifacts/e2e-master/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -626,11 +621,11 @@ OK: 104, Failures: 0, Ignored: 0
                         <span title="104 Tests OK" class="test_count_ok">&nbsp;104&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1450235350742994944"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1450597788193656832"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/208dd91">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #208dd91">hub</i></a>
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/95d0cbf">
+                          <i class="icon-button material-icons" title="ci-artifacts commit #95d0cbf">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
@@ -640,27 +635,38 @@ OK: 104, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.7.0-0.nightly-2021-10-18-161301
+                          4.7.0-0.nightly-2021-10-18-191324
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2021-10-19 00:23
+                             2021-10-20 00:07
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2021-10-19 00:23
+2021-10-20 00:07
 OK: 104, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1450235350742994944/artifacts/e2e-master/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1450597788193656832/artifacts/e2e-master/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2021-10-19 00:23
+OK: 104, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1450235350742994944/artifacts/e2e-master/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -807,17 +813,6 @@ OK: 104, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2021-10-05 00:20
-OK: 104, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-psap-ci-artifacts-release-4.7-sro-e2e-master/1445161924596600832/artifacts/e2e-master/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                     </tr>
@@ -835,7 +830,7 @@ OK: 104, Failures: 0, Ignored: 0
         </main>
 
         <div id="footer">
-          Document generated on 2021-10-19 04h54.
+          Document generated on 2021-10-20 04h58.
         </div>
   </body>
 </html>
