@@ -19,13 +19,23 @@ matrices:
       - branch: release-4.9
         test_name: gpu-operator-e2e-master
         operator_version: master
-        expected_failures: 1
+        expected_failures: 4
+
+      - branch: release-4.9
+        test_name: gpu-operator-e2e-18x
+        operator_version: 1.8
+        expected_failures: 3
+
+      - branch: release-4.9
+        test_name: gpu-operator-e2e-17x
+        operator_version: 1.7
+        expected_failures: 3
 
       96_480|OpenShift 4.8:
       - branch: release-4.8
         test_name: gpu-operator-e2e-master
         operator_version: master
-        expected_failures: 1
+        expected_failures: 4
 
       - branch: release-4.8
         test_name: gpu-operator-e2e-18x
@@ -41,7 +51,7 @@ matrices:
       - branch: release-4.7
         test_name: gpu-operator-e2e-master
         operator_version: master
-        expected_failures: 1
+        expected_failures: 3
 
       - branch: release-4.7
         test_name: gpu-operator-e2e-18x
