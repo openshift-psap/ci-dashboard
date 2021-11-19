@@ -29,6 +29,11 @@
               text-align: center;
           }
 
+          .test_warning {
+              background-color: #FFC300;
+              text-align: right;
+          }
+
           .old_test_success {
               background-color: green;
           }
@@ -125,7 +130,7 @@
                 <table id="builds">
                   <thead>
                     <tr>
-                      <th class="test_group">{{ $test_group | group_name}}</th>
+                      <th class="test_group">{{ $test_group | group_name }}</th>
                     </tr>
                   </thead>
                 </table>
@@ -225,6 +230,16 @@ OK: {{ $old_test.Ok }}, Failures: {{ $old_test.Failures }}, Ignored: {{ $old_tes
                         <span class="no_old_test no_old_test_{{ $idx}}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         {{ end }}
                       </td>
+                      {{ if $last_test.Warnings }}
+                      {{ range $warning, $message := $last_test.Warnings -}}
+                    </tr>
+                    <tr>
+                      <td colspan="8" class="test_warning" title="{{ $warning }}">
+                        <i class="material-icons state known_flake">warning</i> {{ $message }}.
+                      </td>
+                    </tr>
+                      {{ end }}
+                      {{ end }}
                       {{ end }}
                     </tr>
                   </tbody>

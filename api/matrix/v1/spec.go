@@ -32,6 +32,8 @@ type ToolboxStepResult struct {
 	Ok int
 	Failures int
 	Ignored int
+
+	ExpectedFailure string
 }
 
 type TestResult struct {
@@ -44,6 +46,8 @@ type TestResult struct {
 	StepPassed bool
 	StepResult string
 	KnownFlake string
+
+	Warnings map[string]string
 
 	/* *** */
 
@@ -71,7 +75,6 @@ type TestSpec struct {
 	OperatorVersion string `json:"operator_version,omitempty"`
 	Variant string         `json:"variant"`
 	ProwStep string        `json:"prow_step,omitempty"`
-	ExpectedFailures int   `json:"expected_failures"`
 
 	/* *** */
 	Matrix *MatrixSpec

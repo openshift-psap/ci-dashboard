@@ -20,11 +20,9 @@ matrices:
         test_name: operator-e2e-master
         operator_version: 4.9
         variant: nfd
-        expected_failures: 1
 
       1_480|OpenShift 4.8:
       - branch: release-4.8
         test_name: operator-e2e-master
         operator_version: 4.8
         variant: nfd
-        expected_failures: 1
