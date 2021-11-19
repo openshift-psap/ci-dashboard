@@ -31,16 +31,16 @@ func PopulateTestFromFinished(test *v1.TestResult, test_finished artifacts.Artif
 	return nil
 }
 
-func PopulateTestFromStepFinished(test *v1.TestResult, step_test_finished artifacts.ArtifactResult) error {
+func PopulateTestFromStepFinished(test_result *v1.TestResult, step_test_finished artifacts.ArtifactResult) error {
 	if step_test_finished.Json["passed"] != nil {
-		test.StepPassed = step_test_finished.Json["passed"].(bool)
-		test.StepExecuted = true
+		test_result.StepPassed = step_test_finished.Json["passed"].(bool)
+		test_result.StepExecuted = true
 	}
 	if step_test_finished.Json["result"] != nil {
-		test.StepResult = step_test_finished.Json["result"].(string)
-		test.StepExecuted = true
+		test_result.StepResult = step_test_finished.Json["result"].(string)
+		test_result.StepExecuted = true
 	} else {
-		test.StepResult = "N/A"
+		test_result.StepResult = "N/A"
 	}
 
 	return nil
