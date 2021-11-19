@@ -46,12 +46,13 @@ func PopulateTestFromStepFinished(test *v1.TestResult, step_test_finished artifa
 	return nil
 }
 
-func PopulateTestFromToolboxLogs(test *v1.TestResult, toolbox_logs map[string]artifacts.JsonArray) error {
-	test.Ok = 0
-	test.Failures = 0
-	test.Ignored = 0
+func PopulateTestFromToolboxLogs(test_result *v1.TestResult, toolbox_logs map[string]artifacts.JsonArray) error {
+	test_result.Ok = 0
+	test_result.Failures = 0
+	test_result.Ignored = 0
 
 	for toolbox_step_name, toolbox_step_json := range toolbox_logs {
+		fmt.Println(toolbox_step_name)
 
 		stats := toolbox_step_json[len(toolbox_step_json)-1].(map[string]interface{})["stats"].(map[string]interface{})["localhost"].(map[string]interface{})
 		ok := int(stats["ok"].(float64))
@@ -59,18 +60,28 @@ func PopulateTestFromToolboxLogs(test *v1.TestResult, toolbox_logs map[string]ar
 		ignored := int(stats["ignored"].(float64))
 		log.Debugf("Step %s: ok %d, failures %d, ignored %d", toolbox_step_name, ok, failures, ignored)
 
-		test.ToolboxStepsResults = append(test.ToolboxStepsResults,
-			v1.ToolboxStepResult{Name: toolbox_step_name, Ok: ok, Failures: failures, Ignored: ignored}, )
+		test_result.ToolboxStepsResults = append(test_result.ToolboxStepsResults, v1.ToolboxStepResult{Name: toolbox_step_name, Ok: ok, Failures: failures, Ignored: ignored})
+		stepResults := &test_result.ToolboxStepsResults[len(test_result.ToolboxStepsResults)-1]
 
-		test.Ok += ok
-		test.Failures += failures
-		test.Ignored += ignored
+		test_result.Ok += ok
+		test_result.Failures += failures
+		test_result.Ignored += ignored
+
+		path := "artifacts/"+ toolbox_step_name + "/EXPECTED_FAIL"
+		expectedFailBytes, err := artifacts.FetchTestStepResult(test_result, path, artifacts.TypeBytes)
+		if err == nil {
+			expectedFail := string(expectedFailBytes.Bytes)
+			stepResults.ExpectedFailure = expectedFail
+			log.Debugf("Expected failure: %s", expectedFail)
+			test_result.Failures -= 1
+		} else {
+			// not an expected fail, ignore
+		}
+		fmt.Println("--------------------------");
 	}
 
-	log.Debugf("Test: ok %d, failures %d, ignored %d", test.Ok, test.Failures, test.Ignored)
-	if test.Failures >= test.TestSpec.ExpectedFailures {
-		test.Failures -= test.TestSpec.ExpectedFailures
-	}
+	log.Debugf("Test: ok %d, failures %d, ignored %d, expected fail: %d",
+		test_result.Ok, test_result.Failures, test_result.Ignored)
 
 	return nil
 }
