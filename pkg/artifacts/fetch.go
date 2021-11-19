@@ -278,7 +278,7 @@ func FetchTestToolboxSteps(test_result *v1.TestResult) ([]string, error) {
 }
 
 func FetchTestWarnings(test_result *v1.TestResult) (map[string]string, error) {
-	warning_dir := "artifacts/_WARNING"
+	warning_dir := "artifacts/_WARNING/"
 	test_warnings_html, err := FetchTestStepResult(test_result, warning_dir, TypeHtml)
 	if err != nil {
 		return map[string]string{}, err
