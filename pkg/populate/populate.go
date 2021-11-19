@@ -46,6 +46,25 @@ func PopulateTestFromStepFinished(test_result *v1.TestResult, step_test_finished
 	return nil
 }
 
+func PopulateTestWarnings(test_result *v1.TestResult) error {
+	warnings, err := artifacts.FetchTestWarnings(test_result)
+	if err != nil {
+		log.Warningf("Failed to get the warnings of the test %s/%s: %v",
+			test_result.TestSpec.ProwName, test_result.BuildId, err)
+		return nil
+	}
+	if len(warnings) == 0 {
+		return nil
+	}
+	test_result.Warnings = make(map[string]string)
+	for warning_name, warning_value := range warnings {
+		test_result.Warnings[warning_name] = warning_value
+		log.Debugf("Test warning: %s: %s", warning_name, warning_value)
+	}
+
+	return nil
+}
+
 func PopulateTestFromToolboxLogs(test_result *v1.TestResult, toolbox_logs map[string]artifacts.JsonArray) error {
 	test_result.Ok = 0
 	test_result.Failures = 0
@@ -166,6 +185,12 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 			log.Warningf("Failed to check if %s/%s is a flake: %v", test.ProwName, test_result.BuildId, err)
 		}
 	}
+
+	if err = PopulateTestWarnings(test_result); err != nil {
+		log.Warningf("Failed to fetch the warnings of test step %s/%s: %v", test.ProwName, test_result.BuildId, err)
+	}
+
+	/* --- */
 
 	ocpVersion_content, err := artifacts.FetchTestStepResult(test_result, "artifacts/ocp.version", artifacts.TypeBytes)
 	if err == nil {

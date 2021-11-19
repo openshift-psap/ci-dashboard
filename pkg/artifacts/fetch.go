@@ -277,6 +277,30 @@ func FetchTestToolboxSteps(test_result *v1.TestResult) ([]string, error) {
 	return toolbox_steps, nil
 }
 
+func FetchTestWarnings(test_result *v1.TestResult) (map[string]string, error) {
+	warning_dir := "artifacts/_WARNING"
+	test_warnings_html, err := FetchTestStepResult(test_result, warning_dir, TypeHtml)
+	if err != nil {
+		return map[string]string{}, err
+	}
+
+	test_warning_files, err := ListFilesInDirectory(test_warnings_html.Html, false, true)
+	if err != nil {
+		return map[string]string{}, fmt.Errorf("error fetching toolbox steps: %v", err)
+	}
+
+	warnings := map[string]string{}
+	for _, test_warning_filename := range test_warning_files {
+		test_warning, err := FetchTestStepResult(test_result, warning_dir+"/"+test_warning_filename,
+			TypeBytes)
+		if err != nil {
+			return map[string]string{}, err
+		}
+		warnings[test_warning_filename] = string(test_warning.Bytes)
+	}
+	return warnings, nil
+}
+
 func FetchTestToolboxLogs(test_result *v1.TestResult) (map[string]JsonArray, error) {
 	toolbox_steps, err := FetchTestToolboxSteps(test_result)
 	if err != nil {

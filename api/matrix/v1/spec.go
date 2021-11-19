@@ -47,6 +47,8 @@ type TestResult struct {
 	StepResult string
 	KnownFlake string
 
+	Warnings map[string]string
+
 	/* *** */
 
 	OperatorVersion string
