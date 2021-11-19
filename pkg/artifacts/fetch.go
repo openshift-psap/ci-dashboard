@@ -259,8 +259,8 @@ func FetchTestStepResult(test_result *v1.TestResult, filename string, filetype A
 		// override test_matrix.ProwStep if ProwStep is test_spec.ProwStep is specified
 		prow_step = test_result.TestSpec.ProwStep
 	}
-	step_filenane := fmt.Sprintf("artifacts/%s/%s/%s", test_result.TestSpec.TestName, prow_step, filename)
-	return fetchTestResultResult(test_result, step_filenane, filetype)
+	step_filename := fmt.Sprintf("artifacts/%s/%s/%s", test_result.TestSpec.TestName, prow_step, filename)
+	return fetchTestResultResult(test_result, step_filename, filetype)
 }
 
 func FetchTestToolboxSteps(test_result *v1.TestResult) ([]string, error) {
