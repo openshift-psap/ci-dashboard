@@ -9,6 +9,7 @@
 {{ $test_group | group_name | md_subsection}}
 
 {{ range $test := $tests -}}
+{{ if $test.OldTests }}
 {{ $last_test := (index $test.OldTests 0) }}
 {{$test_status := test_status $last_test -}}
 
@@ -17,6 +18,7 @@
 {{ if $last_test.Warnings -}}
 {{ range $warning, $value := $last_test.Warnings -}}
 WARNING: {{ $warning }}: {{ $value }}
+{{ end -}}
 {{ end -}}
 {{ end }}
 {{ end -}}
