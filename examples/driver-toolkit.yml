@@ -1,0 +1,34 @@
+version: v1
+description: OpenShift Driver Toolkit
+test_history: 15
+matrices:
+  nightlies:
+    description: Red Hat OpenShift Nightlies
+    operator_name: Driver Toolkit
+
+    viewer_url: https://prow.ci.openshift.org/view/gs/origin-ci-test/logs
+
+    artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs
+    artifacts_cache: cache
+
+    prow_config: periodic-ci-openshift-driver-toolkit
+    prow_step: nightly
+
+    tests:
+      0_410|OpenShift 4.10:
+      - branch: master
+        test_name: e2e-aws-driver-toolkit
+        operator_version: "4.10"
+        variant: "4.10"
+
+      1_490|OpenShift 4.9:
+      - branch: master
+        test_name: e2e-aws-driver-toolkit
+        operator_version: 4.9
+        variant: 4.9
+
+      2_480|OpenShift 4.8:
+      - branch: master
+        test_name: e2e-aws-driver-toolkit
+        operator_version: 4.8
+        variant: 4.8
