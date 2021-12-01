@@ -12,7 +12,7 @@ matrices:
     artifacts_cache: cache
 
     prow_config: periodic-ci-openshift-driver-toolkit
-    prow_step: nightly
+    prow_step: test
 
     tests:
       0_410|OpenShift 4.10:
