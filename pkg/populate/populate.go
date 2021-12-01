@@ -56,6 +56,7 @@ func PopulateTestWarnings(test_result *v1.TestResult) error {
 	if len(warnings) == 0 {
 		return nil
 	}
+
 	test_result.Warnings = make(map[string]string)
 	for warning_name, warning_value := range warnings {
 		test_result.Warnings[warning_name] = warning_value
@@ -69,6 +70,7 @@ func PopulateTestFromToolboxLogs(test_result *v1.TestResult, toolbox_logs map[st
 	test_result.Ok = 0
 	test_result.Failures = 0
 	test_result.Ignored = 0
+	test_result.Flakes = make(map[string]string)
 
 	for toolbox_step_name, toolbox_step_json := range toolbox_logs {
 		fmt.Println(toolbox_step_name)
@@ -82,20 +84,52 @@ func PopulateTestFromToolboxLogs(test_result *v1.TestResult, toolbox_logs map[st
 		test_result.ToolboxStepsResults = append(test_result.ToolboxStepsResults, v1.ToolboxStepResult{Name: toolbox_step_name, Ok: ok, Failures: failures, Ignored: ignored})
 		stepResults := &test_result.ToolboxStepsResults[len(test_result.ToolboxStepsResults)-1]
 
+		step_files_html, err := artifacts.FetchTestStepResult(test_result, "artifacts/"+ toolbox_step_name + "/", artifacts.TypeHtml)
+
+		step_files, err := artifacts.ListFilesInDirectory(step_files_html.Html, false, true)
+		if err != nil {
+			return fmt.Errorf("error fetching toolbox step files: %v", err)
+		}
+
+		for _, step_filename := range step_files {
+			if step_filename == "FLAKE" {
+				path := "artifacts/"+ toolbox_step_name + "/" + step_filename
+				contentBytes, err := artifacts.FetchTestStepResult(test_result, path, artifacts.TypeBytes)
+				var content string
+				if err != nil {
+					log.Warningf("error fetching the FLAKE results of %s (%s): %v", path, err)
+					content = "message cannot be downloaded"
+				} else {
+					content = string(contentBytes.Bytes)
+					log.Debugf("Flake failure: %s", content)
+				}
+				stepResults.FlakeFailure = content
+				test_result.Flakes[toolbox_step_name] = content
+				if failures != 0 {
+					test_result.FlakeFailure = true
+				}
+			}
+
+			if step_filename == "EXPECTED_FAIL" {
+				path := "artifacts/"+ toolbox_step_name + "/" + step_filename
+				contentBytes, err := artifacts.FetchTestStepResult(test_result, path, artifacts.TypeBytes)
+				if err != nil {
+					log.Warningf("error fetching the EXPECTED_FAIL results of %s (%s): %v", path, err)
+					stepResults.ExpectedFailure = "message cannot be downloaded"
+				} else {
+					content := string(contentBytes.Bytes)
+					stepResults.ExpectedFailure = content
+					log.Debugf("Expected failure: %s", content)
+				}
+
+				failures -= 1
+			}
+		}
+
 		test_result.Ok += ok
 		test_result.Failures += failures
 		test_result.Ignored += ignored
 
-		path := "artifacts/"+ toolbox_step_name + "/EXPECTED_FAIL"
-		expectedFailBytes, err := artifacts.FetchTestStepResult(test_result, path, artifacts.TypeBytes)
-		if err == nil {
-			expectedFail := string(expectedFailBytes.Bytes)
-			stepResults.ExpectedFailure = expectedFail
-			log.Debugf("Expected failure: %s", expectedFail)
-			test_result.Failures -= 1
-		} else {
-			// not an expected fail, ignore
-		}
 		fmt.Println("--------------------------");
 	}
 
@@ -179,7 +213,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 		if err == nil {
 			content := string(contentBytes.Bytes)
 			if !strings.Contains(content, "doctype html") {
-				test_result.KnownFlake = strings.TrimSuffix(content, "\n")
+				test_result.Flakes["test driver script"] = strings.TrimSuffix(content, "\n")
 			}
 		} else {
 			log.Warningf("Failed to check if %s/%s is a flake: %v", test.ProwName, test_result.BuildId, err)
