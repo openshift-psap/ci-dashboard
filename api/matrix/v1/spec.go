@@ -34,6 +34,8 @@ type ToolboxStepResult struct {
 	Ignored int
 
 	ExpectedFailure string
+
+	FlakeFailure string
 }
 
 type TestResult struct {
@@ -45,9 +47,9 @@ type TestResult struct {
 	StepExecuted bool
 	StepPassed bool
 	StepResult string
-	KnownFlake string
 
 	Warnings map[string]string
+	Flakes map[string]string
 
 	/* *** */
 
@@ -67,6 +69,8 @@ type TestResult struct {
 	Ok int
 	Failures int
 	Ignored int
+
+	FlakeFailure bool
 }
 
 type TestSpec struct {

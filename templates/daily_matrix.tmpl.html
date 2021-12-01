@@ -230,6 +230,16 @@ OK: {{ $old_test.Ok }}, Failures: {{ $old_test.Failures }}, Ignored: {{ $old_tes
                         <span class="no_old_test no_old_test_{{ $idx}}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         {{ end }}
                       </td>
+                      {{ if $last_test.Flakes }}
+                      {{ range $flake, $message := $last_test.Flakes -}}
+                    </tr>
+                    <tr>
+                      <td colspan="8" class="test_warning" title="{{ $flake }}">
+FLAKE: {{ $message }}.
+                      </td>
+                    </tr>
+                      {{ end }}
+                      {{ end }}
                       {{ if $last_test.Warnings }}
                       {{ range $warning, $message := $last_test.Warnings -}}
                     </tr>
