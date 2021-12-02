@@ -7,8 +7,8 @@ OpenShift 4.9
 
 
 
-* Special Resource Operator master: SUCCESS
-  - Test passed, finished at 2021-12-01 00:08
+* Special Resource Operator master: FAILURE
+  - Test failed because the operator step failed, finished at 2021-12-02 00:03
 
 OpenShift 4.8
 -------------
@@ -16,7 +16,7 @@ OpenShift 4.8
 
 
 * Special Resource Operator master: FAILURE
-  - Test failed but operator step wasn't executed, finished at 2021-11-30 23:44
+  - Test failed because the operator step failed, finished at 2021-12-02 00:07
 
 OpenShift 4.7
 -------------
@@ -24,7 +24,7 @@ OpenShift 4.7
 
 
 * Special Resource Operator master: FAILURE
-  - Test failed because the operator step failed, finished at 2021-11-30 23:53
+  - Test failed because the operator step failed, finished at 2021-12-01 23:59
 
 ---
-Document generated on 2021-12-01 12h23.
+Document generated on 2021-12-02 05h08.
