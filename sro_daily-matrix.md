@@ -27,4 +27,4 @@ OpenShift 4.7
   - Test failed but operator step wasn't executed, finished at 2021-12-03 23:05
 
 ---
-Document generated on 2021-12-04 05h13.
+Document generated on 2021-12-04 18h21.
