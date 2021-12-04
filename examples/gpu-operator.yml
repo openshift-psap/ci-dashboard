@@ -21,6 +21,10 @@ matrices:
         operator_version: master
 
       - branch: release-4.9
+        test_name: gpu-operator-e2e-19x
+        operator_version: 1.9
+
+      - branch: release-4.9
         test_name: gpu-operator-e2e-18x
         operator_version: 1.8
 
@@ -34,6 +38,10 @@ matrices:
         operator_version: master
 
       - branch: release-4.8
+        test_name: gpu-operator-e2e-19x
+        operator_version: 1.9
+
+      - branch: release-4.8
         test_name: gpu-operator-e2e-18x
         operator_version: 1.8
 
@@ -42,10 +50,6 @@ matrices:
         operator_version: 1.7
 
       97_470|OpenShift 4.7:
-      - branch: release-4.7
-        test_name: gpu-operator-e2e-master
-        operator_version: master
-
       - branch: release-4.7
         test_name: gpu-operator-e2e-18x
         operator_version: 1.8
