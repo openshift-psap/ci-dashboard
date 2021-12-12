@@ -8,23 +8,23 @@ OpenShift 4.9
 
 
 * Special Resource Operator master: SUCCESS
-  - Test passed, finished at 2021-12-11 00:16
+  - Test passed, finished at 2021-12-12 00:06
 
 OpenShift 4.8
 -------------
 
 
 
-* Special Resource Operator master: FAILURE
-  - Test failed but operator step wasn't executed, finished at 2021-12-10 23:38
+* Special Resource Operator master: SUCCESS
+  - Test passed, finished at 2021-12-12 00:12
 
 OpenShift 4.7
 -------------
 
 
 
-* Special Resource Operator master: FAILURE
-  - Test failed but operator step wasn't executed, finished at 2021-12-10 23:36
+* Special Resource Operator master: SUCCESS
+  - Test passed, finished at 2021-12-12 00:02
 
 ---
-Document generated on 2021-12-11 05h08.
+Document generated on 2021-12-12 04h58.
