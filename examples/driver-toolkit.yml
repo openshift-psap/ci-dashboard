@@ -16,19 +16,16 @@ matrices:
 
     tests:
       0_410|OpenShift 4.10:
-      - branch: master
+      - branch: release-4.10
         test_name: e2e-aws-driver-toolkit
         operator_version: "4.10"
-        variant: "4.10"
 
       1_490|OpenShift 4.9:
-      - branch: master
+      - branch: release-4.9
         test_name: e2e-aws-driver-toolkit
         operator_version: 4.9
-        variant: 4.9
 
       2_480|OpenShift 4.8:
-      - branch: master
+      - branch: release-4.8
         test_name: e2e-aws-driver-toolkit
         operator_version: 4.8
-        variant: 4.8
