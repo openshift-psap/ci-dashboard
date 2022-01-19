@@ -8,15 +8,15 @@ OpenShift 4.10
 
 
 * Driver Toolkit 4.10: SUCCESS
-  - Test passed, finished at 2022-01-18 08:53
+  - Test passed, finished at 2022-01-19 01:03
 
 OpenShift 4.9
 -------------
 
 
 
-* Driver Toolkit 4.9: SUCCESS
-  - Test passed, finished at 2022-01-18 08:53
+* Driver Toolkit 4.9: FAILURE
+  - Test failed but operator step wasn't executed, finished at 2022-01-19 00:34
 
 OpenShift 4.8
 -------------
@@ -24,7 +24,7 @@ OpenShift 4.8
 
 
 * Driver Toolkit 4.8: SUCCESS
-  - Test passed, finished at 2022-01-18 08:57
+  - Test passed, finished at 2022-01-19 00:58
 
 ---
-Document generated on 2022-01-18 10h35.
+Document generated on 2022-01-19 04h51.
