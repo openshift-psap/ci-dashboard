@@ -8,15 +8,15 @@ OpenShift 4.9
 
 
 * Special Resource Operator master: SUCCESS
-  - Test passed, finished at 2022-01-21 00:17
+  - Test passed, finished at 2022-01-22 00:06
 
 OpenShift 4.8
 -------------
 
 
 
-* Special Resource Operator master: FAILURE
-  - Test failed but operator step wasn't executed, finished at 2022-01-20 23:37
+* Special Resource Operator master: SUCCESS
+  - Test passed, finished at 2022-01-22 00:24
 
 OpenShift 4.7
 -------------
@@ -24,7 +24,9 @@ OpenShift 4.7
 
 
 * Special Resource Operator master: FAILURE
-  - Test failed but operator step wasn't executed, finished at 2022-01-20 23:36
+  - Test failed because the operator step failed, finished at 2022-01-22 00:49
+WARNING: NFD_deployed_from_master: NFD was deployed from master (not available in OperatorHub)
+
 
 ---
-Document generated on 2022-01-21 04h52.
+Document generated on 2022-01-22 04h52.
