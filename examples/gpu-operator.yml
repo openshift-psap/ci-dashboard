@@ -69,11 +69,11 @@ matrices:
         variant: "4.6"
 
       - branch: master
-        test_name: gpu-operator-e2e-1-5-2
+        test_name: nvidia-gpu-operator-e2e-1-5-2
         operator_version: 1.5
         variant: "4.6"
 
       - branch: master
-        test_name: gpu-operator-e2e-1-4-0
+        test_name: nvidia-gpu-operator-e2e-1-4-0
         operator_version: 1.4
         variant: "4.6"
