@@ -40,15 +40,15 @@ output/dtk_daily-matrix.md: templates/daily_matrix.mail.tmpl.md
 
 # DTK-informing
 
-dtk-release: output/dtk_daily-matrix-release.html output/dtk_daily-matrix-release.md
+dtk-release: output/dtk-release_daily-matrix.html output/dtk-release_daily-matrix.md
 
-output/dtk_daily-matrix-release.html: templates/daily_matrix.tmpl.html
+output/dtk-release_daily-matrix.html: templates/daily_matrix.tmpl.html
 	go run cmd/main.go --debug daily_matrix \
            --config-file examples/driver-toolkit-release.yml \
            --template $< \
            --output-file $@
 
-output/dtk_daily-matrix-release.md: templates/daily_matrix.mail.tmpl.md
+output/dtk-release_daily-matrix.md: templates/daily_matrix.mail.tmpl.md
 	go run cmd/main.go --debug daily_matrix \
            --config-file examples/driver-toolkit-release.yml \
            --template $< \
