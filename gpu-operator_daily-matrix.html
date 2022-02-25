@@ -126,18 +126,18 @@
                       
                       
                       
-                      <td class="icon-cell" title="Test passed">
+                      <td class="icon-cell" title="Test failed because the operator step failed">
                         
-                        <i class="material-icons state success">check_circle</i>
+                        <i class="material-icons state failure">error</i>
                         
                         
                       </td>
                       <td class="results-cell">
                         
-                        <span title="360 Tests OK" class="test_count_ok">&nbsp;360&nbsp;</span>
+                        <span title="49 Tests OK" class="test_count_ok">&nbsp;49&nbsp;</span>|<span title="2 Tests Failures" class="test_count_failures">&nbsp;2&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-master/1496620939914252288"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-master/1496998601484668928"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                         <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
@@ -146,32 +146,54 @@
                       </td>
                       <td class='cell_operator'>
                         
-                          22.2.18-git.ac5eb78
+                          master
                         
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.10.0-0.nightly-2022-02-22-093600
+                          4.10.0-0.nightly-2022-02-24-141514
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:20
+                             2022-02-25 00:54
                           
                       </td>
                       <td class="old_tests">
                         
                         
+                        <a title="Test failed because the operator step failed.
+2022-02-25 00:54
+OK: 49, Failures: 2, Ignored: 0
+(Most recent test)"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-master/1496998601484668928/artifacts/nvidia-gpu-operator-e2e-master/nightly/artifacts"
+                           
+                           class="old_tests old_test_step_failed">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
+                        <a title="Test failed because the operator step failed.
+2022-02-24 23:53
+OK: 49, Failures: 2, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-master/1496983341356814336/artifacts/nvidia-gpu-operator-e2e-master/nightly/artifacts"
+                           
+                           class="old_tests old_test_step_failed">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        
+                        
                         <a title="Test passed.
 2022-02-24 00:20
 OK: 360, Failures: 0, Ignored: 0
-(Most recent test)"
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-master/1496620939914252288/artifacts/nvidia-gpu-operator-e2e-master/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        |
                         
                         
                         
@@ -307,38 +329,7 @@ OK: 360, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test failed but operator step wasn&#39;t executed.
-2022-02-14 00:10
-OK: 0, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-master/1492997064366231552"
-                           
-                           class="old_tests old_test_step_missing">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
-                        <a title="Test passed.
-2022-02-13 00:25
-OK: 339, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-master/1492634666983755776/artifacts/nvidia-gpu-operator-e2e-master/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
-                      
-                      
-                      </tr>
-                    <tr>
-                      <td colspan="8" class="test_warning" title="NFD_Operator_deployed_from_previous">
-                        <i class="material-icons state known_flake">warning</i> The NFD Operator was deployed from the version N-1 of the catalog (USE_PREV_RELEASE_CATALOG variable was set)
-.
-                      </td>
-                    </tr>
                       
                       
                       
@@ -350,52 +341,69 @@ OK: 339, Failures: 0, Ignored: 0
                       
                       
                       
-                      <td class="icon-cell" title="Test passed">
+                      <td class="icon-cell" title="Test failed but operator step wasn&#39;t executed">
                         
-                        <i class="material-icons state success">check_circle</i>
+                        <i class="material-icons state aborted">remove_circle</i>
                         
                         
                       </td>
                       <td class="results-cell">
                         
-                        <span title="335 Tests OK" class="test_count_ok">&nbsp;335&nbsp;</span>
+                        <span title="0 Tests OK" class="test_count_ok">&nbsp;0&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-9-x/1496620939071197184"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-9-x/1496998600721305600"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
-                        
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
-                          <i class="icon-button material-icons" title="ci-artifacts commit #3fd47e4">hub</i></a>
                         
                       </td>
                       <td class='cell_operator'>
                         
-                          1.9.0
+                          1.9
                         
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.10.0-0.nightly-2022-02-22-093600
-                        
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:10
+                             2022-02-25 00:34
                           
                       </td>
                       <td class="old_tests">
                         
                         
+                        <a title="Test failed but operator step wasn&#39;t executed.
+2022-02-25 00:34
+OK: 0, Failures: 0, Ignored: 0
+(Most recent test)"
+                           
+                           href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-9-x/1496998600721305600"
+                           
+                           class="old_tests old_test_step_missing">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
+                        <a title="Test failed but operator step wasn&#39;t executed.
+2022-02-24 23:18
+OK: 0, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-9-x/1496983340442456064"
+                           
+                           class="old_tests old_test_step_missing">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        
+                        
                         <a title="Test passed.
 2022-02-24 00:10
 OK: 335, Failures: 0, Ignored: 0
-(Most recent test)"
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-9-x/1496620939071197184/artifacts/nvidia-gpu-operator-e2e-1-9-x/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        |
                         
                         
                         
@@ -531,45 +539,7 @@ OK: 310, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-02-13 00:13
-OK: 310, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-9-x/1492634666161672192/artifacts/nvidia-gpu-operator-e2e-1-9-x/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
-                        <a title="Test passed.
-2022-02-12 00:29
-OK: 310, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-9-x/1492272384382603264/artifacts/nvidia-gpu-operator-e2e-1-9-x/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
-                      
-                      
-                      </tr>
-                    <tr>
-                      <td colspan="8" class="test_warning" title="GPU_Operator_deployed_from_previous">
-                        <i class="material-icons state known_flake">warning</i> The GPU Operator was deployed from the version N-1 of the catalog (USE_PREV_RELEASE_CATALOG variable was set)
-.
-                      </td>
-                    </tr>
-                      </tr>
-                    <tr>
-                      <td colspan="8" class="test_warning" title="NFD_Operator_deployed_from_previous">
-                        <i class="material-icons state known_flake">warning</i> The NFD Operator was deployed from the version N-1 of the catalog (USE_PREV_RELEASE_CATALOG variable was set)
-.
-                      </td>
-                    </tr>
                       
                       
                       
@@ -592,7 +562,7 @@ OK: 310, Failures: 0, Ignored: 0
                         <span title="330 Tests OK" class="test_count_ok">&nbsp;330&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-8-x/1496620938244919296"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-8-x/1496983339595206656"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                         <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
@@ -606,27 +576,38 @@ OK: 310, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.10.0-0.nightly-2022-02-22-093600
+                          4.10.0-0.nightly-2022-02-24-141514
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:20
+                             2022-02-25 00:16
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2022-02-24 00:20
+2022-02-25 00:16
 OK: 330, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-8-x/1496620938244919296/artifacts/nvidia-gpu-operator-e2e-1-8-x/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-8-x/1496983339595206656/artifacts/nvidia-gpu-operator-e2e-1-8-x/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-02-24 00:20
+OK: 330, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-8-x/1496620938244919296/artifacts/nvidia-gpu-operator-e2e-1-8-x/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -773,17 +754,6 @@ OK: 305, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-02-11 00:26
-OK: 305, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-8-x/1491909912714809344/artifacts/nvidia-gpu-operator-e2e-1-8-x/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                       
@@ -823,7 +793,7 @@ OK: 305, Failures: 0, Ignored: 0
                         <span title="319 Tests OK" class="test_count_ok">&nbsp;319&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-7-x/1496620937397669888"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-7-x/1496983338785705984"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                         <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
@@ -837,27 +807,38 @@ OK: 305, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.10.0-0.nightly-2022-02-22-093600
+                          4.10.0-0.nightly-2022-02-24-141514
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:13
+                             2022-02-25 00:16
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2022-02-24 00:13
+2022-02-25 00:16
 OK: 319, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-7-x/1496620937397669888/artifacts/nvidia-gpu-operator-e2e-1-7-x/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-7-x/1496983338785705984/artifacts/nvidia-gpu-operator-e2e-1-7-x/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-02-24 00:13
+OK: 319, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-7-x/1496620937397669888/artifacts/nvidia-gpu-operator-e2e-1-7-x/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -1004,17 +985,6 @@ OK: 294, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-02-11 01:32
-OK: 294, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.10-nvidia-gpu-operator-e2e-1-7-x/1491925248411439104/artifacts/nvidia-gpu-operator-e2e-1-7-x/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                       
@@ -1077,18 +1047,18 @@ OK: 294, Failures: 0, Ignored: 0
                       
                       
                       
-                      <td class="icon-cell" title="Test passed">
+                      <td class="icon-cell" title="Test failed because the operator step failed">
                         
-                        <i class="material-icons state success">check_circle</i>
+                        <i class="material-icons state failure">error</i>
                         
                         
                       </td>
                       <td class="results-cell">
                         
-                        <span title="345 Tests OK" class="test_count_ok">&nbsp;345&nbsp;</span>
+                        <span title="49 Tests OK" class="test_count_ok">&nbsp;49&nbsp;</span>|<span title="2 Tests Failures" class="test_count_failures">&nbsp;2&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-master/1496620950391623680"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-master/1496998603124641792"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                         <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
@@ -1097,32 +1067,54 @@ OK: 294, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_operator'>
                         
-                          22.2.18-git.ac5eb78
+                          master
                         
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.9.0-0.nightly-2022-02-23-182709
+                          4.9.0-0.nightly-2022-02-24-113925
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:29
+                             2022-02-25 00:53
                           
                       </td>
                       <td class="old_tests">
                         
                         
+                        <a title="Test failed because the operator step failed.
+2022-02-25 00:53
+OK: 49, Failures: 2, Ignored: 0
+(Most recent test)"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-master/1496998603124641792/artifacts/nvidia-gpu-operator-e2e-master/nightly/artifacts"
+                           
+                           class="old_tests old_test_step_failed">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
+                        <a title="Test failed because the operator step failed.
+2022-02-24 23:57
+OK: 49, Failures: 2, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-master/1496983348826869760/artifacts/nvidia-gpu-operator-e2e-master/nightly/artifacts"
+                           
+                           class="old_tests old_test_step_failed">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        
+                        
                         <a title="Test passed.
 2022-02-24 00:29
 OK: 345, Failures: 0, Ignored: 0
-(Most recent test)"
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-master/1496620950391623680/artifacts/nvidia-gpu-operator-e2e-master/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        |
                         
                         
                         
@@ -1258,28 +1250,6 @@ OK: 345, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-02-11 00:25
-OK: 345, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-master/1491909923628388352/artifacts/nvidia-gpu-operator-e2e-master/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
-                        <a title="Test passed.
-2022-02-10 00:33
-OK: 345, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-master/1491547669749829632/artifacts/nvidia-gpu-operator-e2e-master/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                       
@@ -1303,7 +1273,7 @@ OK: 345, Failures: 0, Ignored: 0
                         <span title="305 Tests OK" class="test_count_ok">&nbsp;305&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-9-x/1496620949154304000"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-9-x/1496983347983814656"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                         <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
@@ -1317,27 +1287,38 @@ OK: 345, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.9.0-0.nightly-2022-02-23-182709
+                          4.9.0-0.nightly-2022-02-24-113925
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:20
+                             2022-02-25 00:15
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2022-02-24 00:20
+2022-02-25 00:15
 OK: 305, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-9-x/1496620949154304000/artifacts/nvidia-gpu-operator-e2e-1-9-x/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-9-x/1496983347983814656/artifacts/nvidia-gpu-operator-e2e-1-9-x/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-02-24 00:20
+OK: 305, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-9-x/1496620949154304000/artifacts/nvidia-gpu-operator-e2e-1-9-x/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -1484,17 +1465,6 @@ OK: 305, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-02-10 00:19
-OK: 305, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-9-x/1491547668906774528/artifacts/nvidia-gpu-operator-e2e-1-9-x/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                       
@@ -1518,7 +1488,7 @@ OK: 305, Failures: 0, Ignored: 0
                         <span title="300 Tests OK" class="test_count_ok">&nbsp;300&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-8-x/1496620948307054592"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-8-x/1496998602327724032"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                         <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
@@ -1532,27 +1502,49 @@ OK: 305, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.9.0-0.nightly-2022-02-23-182709
+                          4.9.0-0.nightly-2022-02-24-113925
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:26
+                             2022-02-25 01:17
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2022-02-24 00:26
+2022-02-25 01:17
 OK: 300, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-8-x/1496620948307054592/artifacts/nvidia-gpu-operator-e2e-1-8-x/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-8-x/1496998602327724032/artifacts/nvidia-gpu-operator-e2e-1-8-x/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test failed but operator step wasn&#39;t executed.
+2022-02-24 23:15
+OK: 0, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-8-x/1496983347149148160"
+                           
+                           class="old_tests old_test_step_missing">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-02-24 00:26
+OK: 300, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-8-x/1496620948307054592/artifacts/nvidia-gpu-operator-e2e-1-8-x/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -1688,28 +1680,6 @@ OK: 300, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-02-12 00:28
-OK: 300, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-8-x/1492272391110266880/artifacts/nvidia-gpu-operator-e2e-1-8-x/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
-                        <a title="Test passed.
-2022-02-11 00:24
-OK: 300, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-8-x/1491909921124388864/artifacts/nvidia-gpu-operator-e2e-1-8-x/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                       
@@ -1733,7 +1703,7 @@ OK: 300, Failures: 0, Ignored: 0
                         <span title="289 Tests OK" class="test_count_ok">&nbsp;289&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-7-x/1496620945786277888"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-7-x/1496983346310287360"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                         <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
@@ -1747,27 +1717,38 @@ OK: 300, Failures: 0, Ignored: 0
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.9.0-0.nightly-2022-02-23-182709
+                          4.9.0-0.nightly-2022-02-24-113925
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:21
+                             2022-02-25 00:18
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2022-02-24 00:21
+2022-02-25 00:18
 OK: 289, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-7-x/1496620945786277888/artifacts/nvidia-gpu-operator-e2e-1-7-x/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-7-x/1496983346310287360/artifacts/nvidia-gpu-operator-e2e-1-7-x/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-02-24 00:21
+OK: 289, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-7-x/1496620945786277888/artifacts/nvidia-gpu-operator-e2e-1-7-x/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -1914,17 +1895,6 @@ OK: 289, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-02-10 00:29
-OK: 289, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.9-nvidia-gpu-operator-e2e-1-7-x/1491547667220664320/artifacts/nvidia-gpu-operator-e2e-1-7-x/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                       
@@ -1979,10 +1949,10 @@ OK: 289, Failures: 0, Ignored: 0
                       </td>
                       <td class="results-cell">
                         
-                        <span title="289 Tests OK" class="test_count_ok">&nbsp;289&nbsp;</span>
+                        <span title="288 Tests OK" class="test_count_ok">&nbsp;288&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-7-0/1496620944951611392"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-7-0/1496983344632565760"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                         <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
@@ -2001,22 +1971,33 @@ OK: 289, Failures: 0, Ignored: 0
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:25
+                             2022-02-25 00:24
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2022-02-24 00:25
-OK: 289, Failures: 0, Ignored: 0
+2022-02-25 00:24
+OK: 288, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-7-0/1496620944951611392/artifacts/nvidia-gpu-operator-e2e-1-7-0/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-7-0/1496983344632565760/artifacts/nvidia-gpu-operator-e2e-1-7-0/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-02-24 00:25
+OK: 289, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-7-0/1496620944951611392/artifacts/nvidia-gpu-operator-e2e-1-7-0/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -2163,17 +2144,6 @@ OK: 288, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-02-10 00:34
-OK: 288, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-7-0/1491547666423746560/artifacts/nvidia-gpu-operator-e2e-1-7-0/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                       
@@ -2197,7 +2167,7 @@ OK: 288, Failures: 0, Ignored: 0
                         <span title="290 Tests OK" class="test_count_ok">&nbsp;290&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-6-2/1496620944112750592"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-6-2/1496983343806287872"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                         <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
@@ -2216,22 +2186,33 @@ OK: 288, Failures: 0, Ignored: 0
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:36
+                             2022-02-25 00:42
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2022-02-24 00:36
+2022-02-25 00:42
 OK: 290, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-6-2/1496620944112750592/artifacts/nvidia-gpu-operator-e2e-1-6-2/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-6-2/1496983343806287872/artifacts/nvidia-gpu-operator-e2e-1-6-2/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-02-24 00:36
+OK: 290, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-6-2/1496620944112750592/artifacts/nvidia-gpu-operator-e2e-1-6-2/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -2378,17 +2359,6 @@ OK: 290, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-02-10 00:38
-OK: 289, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-6-2/1491547665563914240/artifacts/nvidia-gpu-operator-e2e-1-6-2/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                       
@@ -2412,7 +2382,7 @@ OK: 289, Failures: 0, Ignored: 0
                         <span title="289 Tests OK" class="test_count_ok">&nbsp;289&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-5-2/1496620943273889792"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-5-2/1496983343248445440"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                         <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
@@ -2431,22 +2401,33 @@ OK: 289, Failures: 0, Ignored: 0
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:20
+                             2022-02-25 00:39
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2022-02-24 00:20
+2022-02-25 00:39
 OK: 289, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-5-2/1496620943273889792/artifacts/nvidia-gpu-operator-e2e-1-5-2/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-5-2/1496983343248445440/artifacts/nvidia-gpu-operator-e2e-1-5-2/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-02-24 00:20
+OK: 289, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-5-2/1496620943273889792/artifacts/nvidia-gpu-operator-e2e-1-5-2/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -2593,17 +2574,6 @@ OK: 290, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-02-12 00:38
-OK: 289, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-5-2/1492272386953711616/artifacts/nvidia-gpu-operator-e2e-1-5-2/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                       
@@ -2624,10 +2594,10 @@ OK: 289, Failures: 0, Ignored: 0
                       </td>
                       <td class="results-cell">
                         
-                        <span title="289 Tests OK" class="test_count_ok">&nbsp;289&nbsp;</span>
+                        <span title="288 Tests OK" class="test_count_ok">&nbsp;288&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-4-0/1496620940761501696"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-4-0/1496983342308921344"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                         <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/3fd47e4">
@@ -2646,22 +2616,33 @@ OK: 289, Failures: 0, Ignored: 0
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-02-24 00:36
+                             2022-02-25 00:23
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2022-02-24 00:36
-OK: 289, Failures: 0, Ignored: 0
+2022-02-25 00:23
+OK: 288, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-4-0/1496620940761501696/artifacts/nvidia-gpu-operator-e2e-1-4-0/nightly/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-4-0/1496983342308921344/artifacts/nvidia-gpu-operator-e2e-1-4-0/nightly/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-02-24 00:36
+OK: 289, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-4-0/1496620940761501696/artifacts/nvidia-gpu-operator-e2e-1-4-0/nightly/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -2810,17 +2791,6 @@ OK: 290, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-02-11 01:49
-OK: 290, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-rh-ecosystem-edge-ci-artifacts-master-4.6-nvidia-gpu-operator-e2e-1-4-0/1491925249250299904/artifacts/nvidia-gpu-operator-e2e-1-4-0/nightly/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
                       
                       
@@ -2840,7 +2810,7 @@ OK: 290, Failures: 0, Ignored: 0
         </main>
 
         <div id="footer">
-          Document generated on 2022-02-24 04h53.
+          Document generated on 2022-02-25 05h00.
         </div>
   </body>
 </html>
