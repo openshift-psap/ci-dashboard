@@ -75,6 +75,13 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 		"spyglass_url": func(matrix v1.MatrixSpec, prowName string, test v1.TestResult) string {
 			return fmt.Sprintf("%s/%s/%s", matrix.ViewerURL, prowName, test.BuildId)
 		},
+		"repository_url": func(matrix v1.MatrixSpec, test v1.TestResult) string {
+			base := matrix.RepositoryURL
+			if base == "" {
+				base = "https://github.com/openshift-psap/ci-artifacts"
+			}
+			return fmt.Sprintf("%s/commit/%s", base, test.CiArtifactsVersion)
+		},
 		"test_status_descr": func(test v1.TestResult, status string) string {
 			if status == "success" {
 				return "Test passed"
