@@ -64,8 +64,13 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 				// override test_matrix.ProwStep if ProwStep is test_spec.ProwStep is specified
 				prow_step = test.TestSpec.ProwStep
 			}
-			return fmt.Sprintf("%s/%s/%s/artifacts/%s/%s",
+			base := fmt.Sprintf("%s/%s/%s/artifacts/%s/%s",
 				matrix.ArtifactsURL, test.TestSpec.ProwName, test.BuildId, test.TestSpec.TestName, prow_step)
+			if test.TestSpec.IsCiOperator == nil || *test.TestSpec.IsCiOperator == true {
+				return base + "/artifacts"
+			} else {
+				return base
+			}
 		},
 		"spyglass_url": func(matrix v1.MatrixSpec, prowName string, test v1.TestResult) string {
 			return fmt.Sprintf("%s/%s/%s", matrix.ViewerURL, prowName, test.BuildId)

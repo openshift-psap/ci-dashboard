@@ -217,7 +217,7 @@
 OK: {{ $old_test.Ok }}, Failures: {{ $old_test.Failures }}, Ignored: {{ $old_test.Ignored }}
 {{ if eq $idx 0 }}(Most recent test){{ end }}"
                            {{ if ne $old_test_status "step_missing" }}
-                           href="{{ artifacts_url $matrix $old_test}}/artifacts"
+                           href="{{ artifacts_url $matrix $old_test}}"
                            {{ else }}
                            href="{{  spyglass_url $matrix $test.ProwName $old_test}}"
                            {{ end }}
