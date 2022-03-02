@@ -15,6 +15,12 @@ matrices:
     prow_step: nightly
 
     tests:
+      93_410|OpenShift Dedicated:
+      - branch: master
+        prow_name: osde2e-stage-aws-addon-gpu-operator
+        prow_step: install/ci-artifacts
+        is_ci_operator: false
+
       94_410|OpenShift 4.10:
       - branch: master
         test_name: nvidia-gpu-operator-e2e-master
