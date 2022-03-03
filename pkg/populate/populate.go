@@ -84,7 +84,7 @@ func PopulateTestFromToolboxLogs(test_result *v1.TestResult, toolbox_logs map[st
 		test_result.ToolboxStepsResults = append(test_result.ToolboxStepsResults, v1.ToolboxStepResult{Name: toolbox_step_name, Ok: ok, Failures: failures, Ignored: ignored})
 		stepResults := &test_result.ToolboxStepsResults[len(test_result.ToolboxStepsResults)-1]
 
-		step_files_html, err := artifacts.FetchTestStepResult(test_result, "artifacts/"+ toolbox_step_name + "/", artifacts.TypeHtml)
+		step_files_html, err := artifacts.FetchTestStepResult(test_result, toolbox_step_name + "/", artifacts.TypeHtml)
 
 		step_files, err := artifacts.ListFilesInDirectory(step_files_html.Html, false, true)
 		if err != nil {
@@ -93,7 +93,7 @@ func PopulateTestFromToolboxLogs(test_result *v1.TestResult, toolbox_logs map[st
 
 		for _, step_filename := range step_files {
 			if step_filename == "FLAKE" {
-				path := "artifacts/"+ toolbox_step_name + "/" + step_filename
+				path := toolbox_step_name + "/" + step_filename
 				contentBytes, err := artifacts.FetchTestStepResult(test_result, path, artifacts.TypeBytes)
 				var content string
 				if err != nil {
@@ -111,7 +111,7 @@ func PopulateTestFromToolboxLogs(test_result *v1.TestResult, toolbox_logs map[st
 			}
 
 			if step_filename == "EXPECTED_FAIL" {
-				path := "artifacts/"+ toolbox_step_name + "/" + step_filename
+				path := toolbox_step_name + "/" + step_filename
 				contentBytes, err := artifacts.FetchTestStepResult(test_result, path, artifacts.TypeBytes)
 				if err != nil {
 					log.Warningf("error fetching the EXPECTED_FAIL results of %s (%s): %v", path, err)
@@ -208,8 +208,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	}
 
 	if !test_result.StepPassed {
-		contentBytes, err := artifacts.FetchTestStepResult(test_result, "artifacts/FLAKE", artifacts.TypeBytes)
-
+		contentBytes, err := artifacts.FetchTestStepResult(test_result, "FLAKE", artifacts.TypeBytes)
 		if err == nil {
 			content := string(contentBytes.Bytes)
 			if !strings.Contains(content, "doctype html") {
@@ -218,6 +217,19 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 		} else {
 			log.Warningf("Failed to check if %s/%s is a flake: %v", test.ProwName, test_result.BuildId, err)
 		}
+
+		contentBytes, err = artifacts.FetchTestStepResult(test_result, "FAILURE", artifacts.TypeBytes)
+		if err == nil {
+			content := string(contentBytes.Bytes)
+			if !strings.Contains(content, "doctype html") {
+				if !test_result.StepExecuted {
+					test_result.StepExecuted = true
+				}
+			}
+		} else {
+			log.Warningf("Failed to check if %s/%s is a failure: %v", test.ProwName, test_result.BuildId, err)
+		}
+
 	}
 
 	if err = PopulateTestWarnings(test_result); err != nil {
@@ -226,7 +238,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 
 	/* --- */
 
-	ocpVersion_content, err := artifacts.FetchTestStepResult(test_result, "artifacts/ocp.version", artifacts.TypeBytes)
+	ocpVersion_content, err := artifacts.FetchTestStepResult(test_result, "ocp.version", artifacts.TypeBytes)
 	if err == nil {
 		test_result.OpenShiftVersion = strings.TrimSuffix(string(ocpVersion_content.Bytes), "\n")
 	} else {
@@ -239,7 +251,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 		test_result.OpenShiftVersion = ""
 	}
 
-	operatorVersion_content, err := artifacts.FetchTestStepResult(test_result, "artifacts/operator.version", artifacts.TypeBytes)
+	operatorVersion_content, err := artifacts.FetchTestStepResult(test_result, "operator.version", artifacts.TypeBytes)
 	if err == nil {
 		test_result.OperatorVersion = strings.TrimSuffix(string(operatorVersion_content.Bytes), "\n")
 	} else {
@@ -252,7 +264,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 		test_result.OperatorVersion = ""
 	}
 
-	ciartifactsVersion_content, err := artifacts.FetchTestStepResult(test_result, "artifacts/ci_artifact.git_version", artifacts.TypeBytes)
+	ciartifactsVersion_content, err := artifacts.FetchTestStepResult(test_result, "ci_artifact.git_version", artifacts.TypeBytes)
 	if err == nil {
 		test_result.CiArtifactsVersion = strings.TrimSuffix(string(ciartifactsVersion_content.Bytes), "\n")
 	} else {
@@ -271,14 +283,16 @@ func populateTest(test_matrix *v1.MatrixSpec, test_group string, test *v1.TestSp
 	test.TestGroup = test_group
 	test.Matrix = test_matrix
 
-	var branch string
-	if test.Variant != "" {
-		branch = fmt.Sprintf("%s-%s", test.Branch, test.Variant)
-	} else {
-		branch = test.Branch
-	}
+	if test.ProwName == "" {
+		var branch string
+		if test.Variant != "" {
+			branch = fmt.Sprintf("%s-%s", test.Branch, test.Variant)
+		} else {
+			branch = test.Branch
+		}
 
-	test.ProwName = fmt.Sprintf("%s-%s-%s", test_matrix.ProwConfig, branch, test.TestName)
+		test.ProwName = fmt.Sprintf("%s-%s-%s", test_matrix.ProwConfig, branch, test.TestName)
+	}
 
 	test_build_ids, finished_files, err := artifacts.FetchLastNTestResults(test_matrix, test.ProwName, test_history,
 		"finished.json", artifacts.TypeJson)

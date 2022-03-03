@@ -80,10 +80,13 @@ type TestSpec struct {
 	Variant string         `json:"variant,omitempty"`
 	ProwStep string        `json:"prow_step,omitempty"`
 
+	ProwName string        `json:"prow_name,omitempty"`
+	IsCiOperator *bool     `json:"is_ci_operator,omitempty"`
+
 	/* *** */
+
 	Matrix *MatrixSpec
 
-	ProwName string
 	TestGroup string
 
 	OldTests []*TestResult
@@ -97,6 +100,7 @@ type MatrixSpec struct {
 	ProwConfig string         `json:"prow_config,omitempty"`
 	ProwStep string           `json:"prow_step,omitempty"`
 	OperatorName string       `json:"operator_name,omitempty"`
+	RepositoryURL string      `json:"repository_url,omitempty"`
 	Tests map[string][]TestSpec `json:"tests,omitempty"`
 
 	/* *** */

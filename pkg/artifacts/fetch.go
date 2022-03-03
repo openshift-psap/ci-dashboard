@@ -259,12 +259,17 @@ func FetchTestStepResult(test_result *v1.TestResult, filename string, filetype A
 		// override test_matrix.ProwStep if ProwStep is test_spec.ProwStep is specified
 		prow_step = test_result.TestSpec.ProwStep
 	}
-	step_filename := fmt.Sprintf("artifacts/%s/%s/%s", test_result.TestSpec.TestName, prow_step, filename)
+	step_filename := ""
+	if test_result.TestSpec.IsCiOperator == nil || *test_result.TestSpec.IsCiOperator == true {
+		step_filename = fmt.Sprintf("artifacts/%s/%s/artifacts/%s", test_result.TestSpec.TestName, prow_step, filename)
+	} else {
+		step_filename = fmt.Sprintf("artifacts/%s/%s", prow_step, filename)
+	}
 	return fetchTestResultResult(test_result, step_filename, filetype)
 }
 
 func FetchTestToolboxSteps(test_result *v1.TestResult) ([]string, error) {
-	html_toolbox_steps, err := FetchTestStepResult(test_result, "artifacts/", TypeHtml)
+	html_toolbox_steps, err := FetchTestStepResult(test_result, "/", TypeHtml)
 	if err != nil {
 		return []string{}, err
 	}
@@ -278,7 +283,7 @@ func FetchTestToolboxSteps(test_result *v1.TestResult) ([]string, error) {
 }
 
 func FetchTestWarnings(test_result *v1.TestResult) (map[string]string, error) {
-	warning_dir := "artifacts/_WARNING/"
+	warning_dir := "_WARNING/"
 	test_warnings_html, err := FetchTestStepResult(test_result, warning_dir, TypeHtml)
 	if err != nil {
 		return map[string]string{}, err
@@ -310,7 +315,7 @@ func FetchTestToolboxLogs(test_result *v1.TestResult) (map[string]JsonArray, err
 	logs := map[string]JsonArray{}
 
 	for _, toolbox_step := range toolbox_steps {
-		ansible_log_path := "artifacts/"+ toolbox_step + "/_ansible.log.json"
+		ansible_log_path := toolbox_step + "/_ansible.log.json"
 		json_toolbox_step_logs, err := FetchTestStepResult(test_result, ansible_log_path, TypeJsonArray)
 		if err != nil {
 			log.Debugf("No logs for step %s: %v", toolbox_step, err)

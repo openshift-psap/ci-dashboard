@@ -11,10 +11,18 @@ matrices:
     artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs
     artifacts_cache: cache
 
+    repository_url: https://github.com/rh-ecosystem-edge/ci-artifacts
+
     prow_config: periodic-ci-rh-ecosystem-edge-ci-artifacts
     prow_step: nightly
 
     tests:
+      93_410|OpenShift Dedicated:
+      - branch: master
+        prow_name: osde2e-stage-aws-addon-gpu-operator
+        prow_step: install/ci-artifacts
+        is_ci_operator: false
+
       94_410|OpenShift 4.10:
       - branch: master
         test_name: nvidia-gpu-operator-e2e-master

@@ -183,10 +183,10 @@
                         <span title="{{ $last_test.Ok }} Tests OK" class="test_count_ok">&nbsp;{{ $last_test.Ok }}&nbsp;</span>{{ if $last_test.Failures }}|<span title="{{ $last_test.Failures }} Tests Failures" class="test_count_failures">&nbsp;{{ $last_test.Failures }}&nbsp;</span>{{ end }}{{ if $last_test.Ignored }}|<span title="{{ $last_test.Ignored }} Tests Ignored" class="test_count_ignored">&nbsp;{{ $last_test.Ignored }}&nbsp;</span>{{ end }}
                         {{ end }}
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{  spyglass_url $matrix $test.ProwName $last_test}}"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="{{ spyglass_url $matrix $test.ProwName $last_test}}"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         {{ if $last_test.CiArtifactsVersion }}
-                        <a class="mdl-button mdl-js-button mdl-button--icon" href="https://github.com/openshift-psap/ci-artifacts/commit/{{ $last_test.CiArtifactsVersion }}">
+                        <a class="mdl-button mdl-js-button mdl-button--icon" href="{{ repository_url $matrix $last_test }}">
                           <i class="icon-button material-icons" title="ci-artifacts commit #{{ $last_test.CiArtifactsVersion }}">hub</i></a>
                         {{ end }}
                       </td>
@@ -217,7 +217,7 @@
 OK: {{ $old_test.Ok }}, Failures: {{ $old_test.Failures }}, Ignored: {{ $old_test.Ignored }}
 {{ if eq $idx 0 }}(Most recent test){{ end }}"
                            {{ if ne $old_test_status "step_missing" }}
-                           href="{{ artifacts_url $matrix $old_test}}/artifacts"
+                           href="{{ artifacts_url $matrix $old_test}}"
                            {{ else }}
                            href="{{  spyglass_url $matrix $test.ProwName $old_test}}"
                            {{ end }}
