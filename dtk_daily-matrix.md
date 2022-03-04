@@ -27,4 +27,4 @@ OpenShift 4.8
   - Test passed, finished at 2022-02-09 09:00
 
 ---
-Document generated on 2022-03-03 11h32.
+Document generated on 2022-03-04 05h05.
