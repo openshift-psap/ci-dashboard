@@ -7,16 +7,16 @@ OpenShift 4.9
 
 
 
-* Node Tuning Operator 4.9: FAILURE
-  - Test failed but operator step wasn't executed, finished at 2022-03-07 23:19
+* Node Tuning Operator 4.9: SUCCESS
+  - Test passed, finished at 2022-03-09 00:13
 
 OpenShift 4.8
 -------------
 
 
 
-* Node Tuning Operator 4.8: FAILURE
-  - Test failed but operator step wasn't executed, finished at 2022-03-08 00:12
+* Node Tuning Operator 4.8: SUCCESS
+  - Test passed, finished at 2022-03-09 00:32
 
 ---
-Document generated on 2022-03-08 05h09.
+Document generated on 2022-03-09 04h58.
