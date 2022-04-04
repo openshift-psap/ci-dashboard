@@ -17,6 +17,13 @@ matrices:
     prow_step: nightly
 
     tests:
+      92_410|Benchmarking:
+      - branch: master
+        test_name: e2e-mlperf-ssd
+        operator_version: latest
+        variant: "master"
+        prow_name: periodic-ci-openshift-psap-ci-artifacts-master-4.10-e2e-mlperf-ssd
+
       93_410|OpenShift Dedicated:
       - branch: master
         prow_name: osde2e-stage-aws-addon-gpu-operator
