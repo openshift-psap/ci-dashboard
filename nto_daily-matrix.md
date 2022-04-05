@@ -19,4 +19,4 @@ OpenShift 4.8
   - Test failed because the operator step failed, finished at 2022-04-05 00:05
 
 ---
-Document generated on 2022-04-05 04h50.
+Document generated on 2022-04-05 09h58.
