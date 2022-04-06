@@ -21,13 +21,19 @@ matrices:
         operator_version: master
         variant: nfd
 
-      0_490|OpenShift 4.9:
+      1_4100|OpenShift 4.10:
+      - branch: release-4.10
+        test_name: operator-e2e-master
+        operator_version: 4.10
+        variant: nfd
+
+      2_490|OpenShift 4.9:
       - branch: release-4.9
         test_name: operator-e2e-master
         operator_version: 4.9
         variant: nfd
 
-      1_480|OpenShift 4.8:
+      3_480|OpenShift 4.8:
       - branch: release-4.8
         test_name: operator-e2e-master
         operator_version: 4.8
