@@ -230,7 +230,12 @@
                         <a title="{{ test_status_descr $old_test $old_test_status }}.
 {{ $old_test.FinishDate}}
 OK: {{ $old_test.Ok }}, Failures: {{ $old_test.Failures }}, Ignored: {{ $old_test.Ignored }}
-{{ if eq $idx 0 }}(Most recent test){{ end }}"
+{{ range $message_type := test_message_types -}}
+{{ range $flake, $message := test_messages $message_type $old_test -}}
+{{ $message_type}}: {{ $message -}}
+{{ end -}}
+{{ end -}}
+"
                            {{ if ne $old_test_status "step_missing" }}
                            href="{{ artifacts_url $matrix $old_test}}"
                            {{ else }}
