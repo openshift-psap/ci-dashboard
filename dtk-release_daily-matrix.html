@@ -19,8 +19,23 @@
               text-align: center;
           }
 
-          .test_warning {
+          .test_message_error {
               background-color: #FFC300;
+              text-align: right;
+          }
+
+          .test_message_warning {
+              background-color: #FFC300;
+              text-align: right;
+          }
+
+          .test_message_info {
+              background-color: lightgreen;
+              text-align: right;
+          }
+
+          .test_message_flake {
+              background-color: darksalmon;
               text-align: right;
           }
 
@@ -126,9 +141,9 @@
                       
                       
                       
-                      <td class="icon-cell" title="Test failed but operator step wasn&#39;t executed">
+                      <td class="icon-cell" title="Test passed">
                         
-                        <i class="material-icons state aborted">remove_circle</i>
+                        <i class="material-icons state success">check_circle</i>
                         
                         
                       </td>
@@ -137,7 +152,7 @@
                         <span title="0 Tests OK" class="test_count_ok">&nbsp;0&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.10-e2e-aws-driver-toolkit/1511923204438888448"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.10-e2e-aws-driver-toolkit/1511977328337489920"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                       </td>
@@ -148,27 +163,38 @@
                       </td>
                       <td class='cell_ocp'>
                         
-                          4.10.0-0.nightly-2022-04-07-042325
+                          4.10.0-0.nightly-2022-04-06-195507
                         
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             N/A
+                             2022-04-07 08:42
                           
                       </td>
                       <td class="old_tests">
                         
                         
-                        <a title="Test failed but operator step wasn&#39;t executed.
-N/A
+                        <a title="Test passed.
+2022-04-07 08:42
 OK: 0, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.10-e2e-aws-driver-toolkit/1511923204438888448"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.10-e2e-aws-driver-toolkit/1511977328337489920/artifacts/e2e-aws-driver-toolkit/test/artifacts"
                            
-                           class="old_tests old_test_step_missing">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-04-07 05:05
+OK: 0, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.10-e2e-aws-driver-toolkit/1511923204438888448/artifacts/e2e-aws-driver-toolkit/test/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -315,18 +341,10 @@ OK: 0, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-04-03 16:44
-OK: 0, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.10-e2e-aws-driver-toolkit/1510648528332918784/artifacts/e2e-aws-driver-toolkit/test/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
+                      
+                      
+                      
                       
                       
                       
@@ -349,7 +367,7 @@ OK: 0, Failures: 0, Ignored: 0
                         <span title="0 Tests OK" class="test_count_ok">&nbsp;0&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.9-e2e-aws-driver-toolkit/1511888209636757504"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.9-e2e-aws-driver-toolkit/1511977334213709824"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                       </td>
@@ -365,22 +383,33 @@ OK: 0, Failures: 0, Ignored: 0
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-04-07 02:55
+                             2022-04-07 08:52
                           
                       </td>
                       <td class="old_tests">
                         
                         
                         <a title="Test passed.
-2022-04-07 02:55
+2022-04-07 08:52
 OK: 0, Failures: 0, Ignored: 0
 (Most recent test)"
                            
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.9-e2e-aws-driver-toolkit/1511888209636757504/artifacts/e2e-aws-driver-toolkit/test/artifacts"
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.9-e2e-aws-driver-toolkit/1511977334213709824/artifacts/e2e-aws-driver-toolkit/test/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         |
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-04-07 02:55
+OK: 0, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.9-e2e-aws-driver-toolkit/1511888209636757504/artifacts/e2e-aws-driver-toolkit/test/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         
                         
                         
@@ -527,18 +556,10 @@ OK: 0, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test failed but operator step wasn&#39;t executed.
-2022-04-04 08:31
-OK: 0, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.9-e2e-aws-driver-toolkit/1510890129957326848"
-                           
-                           class="old_tests old_test_step_missing">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
+                      
+                      
+                      
                       
                       
                       
@@ -550,9 +571,9 @@ OK: 0, Failures: 0, Ignored: 0
                       
                       
                       
-                      <td class="icon-cell" title="Test passed">
+                      <td class="icon-cell" title="Test failed but operator step wasn&#39;t executed">
                         
-                        <i class="material-icons state success">check_circle</i>
+                        <i class="material-icons state aborted">remove_circle</i>
                         
                         
                       </td>
@@ -561,7 +582,7 @@ OK: 0, Failures: 0, Ignored: 0
                         <span title="0 Tests OK" class="test_count_ok">&nbsp;0&nbsp;</span>
                         
                       </td>
-                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.8-e2e-aws-driver-toolkit/1511856640737939456"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
+                      <td class="icon-cell"><a class="mdl-button mdl-js-button mdl-button--icon" href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.8-e2e-aws-driver-toolkit/1511977333374849024"><i class="icon-button material-icons" title="View test result in Prow">visibility</i></a></td>
                       <td class='cell_repo'>
                         
                       </td>
@@ -577,22 +598,44 @@ OK: 0, Failures: 0, Ignored: 0
                       </td>
                       <td class="date-cell"><div tabindex="0">
                           
-                             2022-04-07 00:51
+                             N/A
                           
                       </td>
                       <td class="old_tests">
                         
                         
+                        <a title="Test failed but operator step wasn&#39;t executed.
+N/A
+OK: 0, Failures: 0, Ignored: 0
+(Most recent test)"
+                           
+                           href="https://prow.ci.openshift.org/view/gs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.8-e2e-aws-driver-toolkit/1511977333374849024"
+                           
+                           class="old_tests old_test_step_missing">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        |
+                        
+                        
+                        
+                        <a title="Test passed.
+2022-04-07 06:26
+OK: 0, Failures: 0, Ignored: 0
+"
+                           
+                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.8-e2e-aws-driver-toolkit/1511938481755000832/artifacts/e2e-aws-driver-toolkit/test/artifacts"
+                           
+                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        
+                        
+                        
                         <a title="Test passed.
 2022-04-07 00:51
 OK: 0, Failures: 0, Ignored: 0
-(Most recent test)"
+"
                            
                            href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.8-e2e-aws-driver-toolkit/1511856640737939456/artifacts/e2e-aws-driver-toolkit/test/artifacts"
                            
                            class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        |
                         
                         
                         
@@ -728,29 +771,10 @@ OK: 0, Failures: 0, Ignored: 0
                         
                         
                         
-                        <a title="Test passed.
-2022-04-03 16:57
-OK: 0, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.8-e2e-aws-driver-toolkit/1510648531688361984/artifacts/e2e-aws-driver-toolkit/test/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
-                        <a title="Test passed.
-2022-04-03 08:50
-OK: 0, Failures: 0, Ignored: 0
-"
-                           
-                           href="https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs/periodic-ci-openshift-release-master-nightly-4.8-e2e-aws-driver-toolkit/1510527739692584960/artifacts/e2e-aws-driver-toolkit/test/artifacts"
-                           
-                           class="old_tests old_test_success">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        
-                        
-                        
                       </td>
+                      
+                      
+                      
                       
                       
                       
@@ -769,7 +793,7 @@ OK: 0, Failures: 0, Ignored: 0
         </main>
 
         <div id="footer">
-          Document generated on 2022-04-07 04h59.
+          Document generated on 2022-04-07 08h53.
         </div>
   </body>
 </html>
