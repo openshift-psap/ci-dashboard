@@ -46,21 +46,26 @@ func PopulateTestFromStepFinished(test_result *v1.TestResult, step_test_finished
 	return nil
 }
 
-func PopulateTestWarnings(test_result *v1.TestResult) error {
-	warnings, err := artifacts.FetchTestWarnings(test_result)
-	if err != nil {
-		log.Warningf("Failed to get the warnings of the test %s/%s: %v",
-			test_result.TestSpec.ProwName, test_result.BuildId, err)
-		return nil
-	}
-	if len(warnings) == 0 {
-		return nil
-	}
+func PopulateTestMessages(test_result *v1.TestResult) error {
+	var message_types = []v1.TestMessageType{v1.TestMessageTypeInfo, v1.TestMessageTypeWarning,
+		v1.TestMessageTypeError, v1.TestMessageTypeFlake}
+	for _, message_type := range message_types {
+		messages, err := artifacts.FetchTestMessages(message_type.String(), test_result)
+		if err != nil {
+			if err != artifacts.MissingPageError {
+				log.Warningf("Failed to get the '%s' messages of the test %s/%s: %v",
+					message_type.String(), test_result.TestSpec.ProwName, test_result.BuildId, err)
+			}
+			continue
+		}
 
-	test_result.Warnings = make(map[string]string)
-	for warning_name, warning_value := range warnings {
-		test_result.Warnings[warning_name] = warning_value
-		log.Debugf("Test warning: %s: %s", warning_name, warning_value)
+		test_result.Messages[message_type] = make(map[string]string)
+
+		test_messages := test_result.Messages[message_type]
+		for message_name, message_value := range messages {
+			test_messages[message_name] = message_value
+			log.Debugf("Test %s: %s: %s", message_type.String(), message_name, message_value)
+		}
 	}
 
 	return nil
@@ -70,7 +75,7 @@ func PopulateTestFromToolboxLogs(test_result *v1.TestResult, toolbox_logs map[st
 	test_result.Ok = 0
 	test_result.Failures = 0
 	test_result.Ignored = 0
-	test_result.Flakes = make(map[string]string)
+	test_result.Messages[v1.TestMessageTypeFlake] = make(map[string]string)
 
 	for toolbox_step_name, toolbox_step_json := range toolbox_logs {
 		fmt.Println(toolbox_step_name)
@@ -104,7 +109,7 @@ func PopulateTestFromToolboxLogs(test_result *v1.TestResult, toolbox_logs map[st
 					log.Debugf("Flake failure: %s", content)
 				}
 				stepResults.FlakeFailure = content
-				test_result.Flakes[toolbox_step_name] = content
+				test_result.Messages[v1.TestMessageTypeFlake][toolbox_step_name] = content
 				if failures != 0 {
 					test_result.FlakeFailure = true
 				}
@@ -178,7 +183,9 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	test_result := &v1.TestResult{
 		TestSpec: test,
 		BuildId: build_id,
+		Messages: make(map[v1.TestMessageType]map[string]string),
 	}
+
 	var err error
 
 	if err = PopulateTestFromFinished(test_result, finished_file); err != nil {
@@ -197,7 +204,10 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	if err != nil {
 		// if finished.json can be parsed as an HTML file, the file certainly does'nt exist --> do not warn about it
 		_, err_json_as_html := artifacts.FetchTestStepResult(test_result, "finished.json", artifacts.TypeHtml)
-		if err_json_as_html != nil {
+		if err_json_as_html == artifacts.MissingPageError {
+			log.Infof("No results for test step %s/%s: %v",
+				test.ProwName, test_result.BuildId, err)
+		} else if err_json_as_html != nil {
 			log.Warningf("Failed to fetch the results of test step %s/%s: %v",
 				test.ProwName, test_result.BuildId, err)
 		}
@@ -208,17 +218,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	}
 
 	if !test_result.StepPassed {
-		contentBytes, err := artifacts.FetchTestStepResult(test_result, "FLAKE", artifacts.TypeBytes)
-		if err == nil {
-			content := string(contentBytes.Bytes)
-			if !strings.Contains(content, "doctype html") {
-				test_result.Flakes["test driver script"] = strings.TrimSuffix(content, "\n")
-			}
-		} else {
-			log.Warningf("Failed to check if %s/%s is a flake: %v", test.ProwName, test_result.BuildId, err)
-		}
-
-		contentBytes, err = artifacts.FetchTestStepResult(test_result, "FAILURE", artifacts.TypeBytes)
+		contentBytes, err := artifacts.FetchTestStepResult(test_result, "FAILURE", artifacts.TypeBytes)
 		if err == nil {
 			content := string(contentBytes.Bytes)
 			if !strings.Contains(content, "doctype html") {
@@ -226,14 +226,14 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 					test_result.StepExecuted = true
 				}
 			}
-		} else {
+		} else if err != artifacts.MissingPageError {
 			log.Warningf("Failed to check if %s/%s is a failure: %v", test.ProwName, test_result.BuildId, err)
 		}
 
 	}
 
-	if err = PopulateTestWarnings(test_result); err != nil {
-		log.Warningf("Failed to fetch the warnings of test step %s/%s: %v", test.ProwName, test_result.BuildId, err)
+	if err = PopulateTestMessages(test_result); err != nil {
+		log.Warningf("Failed to fetch the messages of test step %s/%s: %v", test.ProwName, test_result.BuildId, err)
 	}
 
 	/* --- */
@@ -241,6 +241,8 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	ocpVersion_content, err := artifacts.FetchTestStepResult(test_result, "ocp.version", artifacts.TypeBytes)
 	if err == nil {
 		test_result.OpenShiftVersion = strings.TrimSuffix(string(ocpVersion_content.Bytes), "\n")
+	} else if err == artifacts.MissingPageError {
+			log.Infof("OpenShift version file (%s/%s) was not generated.", test.ProwName, test_result.BuildId)
 	} else {
 		log.Warningf("Failed to read the OpenShift version (%s/%s): %v", test.ProwName, test_result.BuildId, err)
 	}
@@ -254,6 +256,8 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	operatorVersion_content, err := artifacts.FetchTestStepResult(test_result, "operator.version", artifacts.TypeBytes)
 	if err == nil {
 		test_result.OperatorVersion = strings.TrimSuffix(string(operatorVersion_content.Bytes), "\n")
+	} else if err == artifacts.MissingPageError {
+		log.Infof("Operator version file (%s/%s) was not generated.", test.ProwName, test_result.BuildId)
 	} else {
 		log.Warningf("Failed to read the Operator version (%s/%s): %v", test.ProwName, test_result.BuildId, err)
 	}
@@ -267,8 +271,10 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	ciartifactsVersion_content, err := artifacts.FetchTestStepResult(test_result, "ci_artifact.git_version", artifacts.TypeBytes)
 	if err == nil {
 		test_result.CiArtifactsVersion = strings.TrimSuffix(string(ciartifactsVersion_content.Bytes), "\n")
+	} else if err == artifacts.MissingPageError {
+		log.Infof("ci-artifacts version file (%s/%s) was not generated.", test.ProwName, test_result.BuildId)
 	} else {
-		log.Warningf("Failed to read the CI-Artifacts version (%s/%s): %v", test.ProwName, test_result.BuildId, err)
+		log.Warningf("Failed to read the ci-artifacts version (%s/%s): %v", test.ProwName, test_result.BuildId, err)
 	}
 	if strings.Contains(test_result.CiArtifactsVersion, "doctype") {
 		// 404 page not recognized

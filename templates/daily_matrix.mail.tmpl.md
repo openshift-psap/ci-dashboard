@@ -15,11 +15,11 @@
 
 * {{ $matrix.OperatorName }} {{ $test.OperatorVersion }}: {{ $last_test.Result }}
   - {{ test_status_descr $last_test $test_status | unescape_html }}, finished at {{ $last_test.FinishDate }}
-{{ if $last_test.Warnings -}}
-{{ range $warning, $value := $last_test.Warnings -}}
-WARNING: {{ $warning }}: {{ $value }}
-{{ end -}}
-{{ end -}}
+{{ range $message_type := test_message_types -}}
+{{ range $flake, $message := test_messages $message_type $last_test -}}
+{{ $message_type}}: {{ $message }}.
+{{ end }}
+{{ end }}
 {{ end }}
 {{ end -}}
 {{ end -}}

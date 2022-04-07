@@ -19,6 +19,29 @@ package v1
 
 const Version = "v1"
 
+type TestMessageType int64
+
+const (
+	TestMessageTypeInfo TestMessageType = iota
+	TestMessageTypeWarning
+	TestMessageTypeError
+	TestMessageTypeFlake
+)
+
+func (t TestMessageType) String() string {
+	switch t {
+	case TestMessageTypeInfo:
+		return "_INFO"
+	case TestMessageTypeWarning:
+		return "_WARNING"
+	case TestMessageTypeError:
+		return "_ERROR"
+	case TestMessageTypeFlake:
+		return "_FLAKE"
+	}
+	return "unknown"
+}
+
 type MatricesSpec struct {
 	Version string                 `json:"version"`
 	Description string             `json:"description,omitempty"`
@@ -48,8 +71,7 @@ type TestResult struct {
 	StepPassed bool
 	StepResult string
 
-	Warnings map[string]string
-	Flakes map[string]string
+	Messages map[TestMessageType]map[string]string
 
 	/* *** */
 

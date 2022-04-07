@@ -33,6 +33,8 @@ const (
 	MissingPageMD5Sum          = "b66c9aae6e6cf88de034b25232ba0181"
 )
 
+var MissingPageError = fmt.Errorf("Page does not exist.")
+
 type ArtifactResult struct {
 	Json JsonResult
 	JsonArray JsonArray
@@ -70,8 +72,8 @@ func fetchArtifact(test_matrix *v1.MatrixSpec, path string) ([]byte, error) {
 	content, err := ioutil.ReadFile(cache_path)
 	if err == nil {
 		if IsPageNotFound(content, path) {
-			log.Debugf("File %s found in the cache, but 404", artifact_url)
-			return content, fmt.Errorf("Page doesn't exist: %s", artifact_url)
+			log.Debugf("File %s found in the cache as 404", artifact_url)
+			return content, MissingPageError
 		}
 
 		log.Debugf("File %s found in the cache", artifact_url)
@@ -81,7 +83,7 @@ func fetchArtifact(test_matrix *v1.MatrixSpec, path string) ([]byte, error) {
 	log.Debugf("Fetching %s ...", artifact_url)
 	resp, err := http.Get(artifact_url)
 	if err != nil {
-		return []byte{}, fmt.Errorf("error fetching %s: %v", artifact_url, err)
+		return []byte{}, MissingPageError
 	}
 
 	defer resp.Body.Close()
@@ -107,7 +109,7 @@ func fetchArtifact(test_matrix *v1.MatrixSpec, path string) ([]byte, error) {
 	}
 
 	if IsPageNotFound(content, path) {
-		return content, fmt.Errorf("Page doesn't exist: %s", artifact_url)
+		return content, MissingPageError
 	}
 
 	return content, nil
@@ -175,6 +177,9 @@ func fetchTestResult(test_matrix *v1.MatrixSpec, prow_name, build_id, filename s
 		result.Bytes, err = fetchArtifact(test_matrix, file_path)
 	} else {
 		return result, fmt.Errorf("code error: invalid file type requested %s", filetype)
+	}
+	if err == MissingPageError {
+		return result, err
 	}
 	if err != nil {
 		return result, fmt.Errorf("error fetching the test results from %s: %v", file_path, err)
@@ -282,28 +287,27 @@ func FetchTestToolboxSteps(test_result *v1.TestResult) ([]string, error) {
 	return toolbox_steps, nil
 }
 
-func FetchTestWarnings(test_result *v1.TestResult) (map[string]string, error) {
-	warning_dir := "_WARNING/"
-	test_warnings_html, err := FetchTestStepResult(test_result, warning_dir, TypeHtml)
+func FetchTestMessages(message_dir string, test_result *v1.TestResult) (map[string]string, error) {
+	message_dir_html, err := FetchTestStepResult(test_result, message_dir + "/", TypeHtml)
 	if err != nil {
 		return map[string]string{}, err
 	}
 
-	test_warning_files, err := ListFilesInDirectory(test_warnings_html.Html, false, true)
+	message_files, err := ListFilesInDirectory(message_dir_html.Html, false, true)
 	if err != nil {
 		return map[string]string{}, fmt.Errorf("error fetching toolbox steps: %v", err)
 	}
 
-	warnings := map[string]string{}
-	for _, test_warning_filename := range test_warning_files {
-		test_warning, err := FetchTestStepResult(test_result, warning_dir+"/"+test_warning_filename,
-			TypeBytes)
+	messages := map[string]string{}
+	for _, message_filename := range message_files {
+		message_file, err := FetchTestStepResult(test_result, message_dir+"/"+message_filename, TypeBytes)
+
 		if err != nil {
 			return map[string]string{}, err
 		}
-		warnings[test_warning_filename] = string(test_warning.Bytes)
+		messages[message_filename] = string(message_file.Bytes)
 	}
-	return warnings, nil
+	return messages, nil
 }
 
 func FetchTestToolboxLogs(test_result *v1.TestResult) (map[string]JsonArray, error) {

@@ -29,8 +29,23 @@
               text-align: center;
           }
 
-          .test_warning {
+          .test_message_error {
               background-color: #FFC300;
+              text-align: right;
+          }
+
+          .test_message_warning {
+              background-color: #FFC300;
+              text-align: right;
+          }
+
+          .test_message_info {
+              background-color: lightgreen;
+              text-align: right;
+          }
+
+          .test_message_flake {
+              background-color: darksalmon;
               text-align: right;
           }
 
@@ -230,22 +245,12 @@ OK: {{ $old_test.Ok }}, Failures: {{ $old_test.Failures }}, Ignored: {{ $old_tes
                         <span class="no_old_test no_old_test_{{ $idx}}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         {{ end }}
                       </td>
-                      {{ if $last_test.Flakes }}
-                      {{ range $flake, $message := $last_test.Flakes -}}
+                      {{ range $message_type := test_message_types -}}
+                      {{ range $message_id, $message := test_messages $message_type $last_test -}}
                     </tr>
                     <tr>
-                      <td colspan="8" class="test_warning" title="{{ $flake }}">
-FLAKE: {{ $message }}.
-                      </td>
-                    </tr>
-                      {{ end }}
-                      {{ end }}
-                      {{ if $last_test.Warnings }}
-                      {{ range $warning, $message := $last_test.Warnings -}}
-                    </tr>
-                    <tr>
-                      <td colspan="8" class="test_warning" title="{{ $warning }}">
-                        <i class="material-icons state known_flake">warning</i> {{ $message }}.
+                      <td colspan="8" class="test_message_{{ $message_type }}" title="{{ $message }}">
+{{ $message }}.
                       </td>
                     </tr>
                       {{ end }}
