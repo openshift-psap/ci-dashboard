@@ -87,7 +87,7 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 				return "Test passed"
 			} else if status == "known_flake" {
 				msg := "Test failed because of a known flake: "
-				for _, flake := range test.Flakes {
+				for _, flake := range test.Messages[v1.TestMessageTypeFlake] {
 					msg += "\n- " + flake
 				}
 				return msg
@@ -105,7 +105,7 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 		"test_status": func(test v1.TestResult) string {
 			if test.Passed {
 				return "success"
-			} else if len(test.Flakes) != 0 {
+			} else if len(test.Messages[v1.TestMessageTypeFlake]) != 0 {
 				return "known_flake"
 			} else if !test.StepExecuted {
 				return "step_missing"
@@ -116,6 +116,21 @@ func Generate(matrixTemplate string, matrices *v1.MatricesSpec, date string) ([]
 			} else {
 				return "parsing_error"
 			}
+		},
+		"test_messages": func(message_type string, test v1.TestResult) map[string]string {
+			if message_type == "flake" {
+				return test.Messages[v1.TestMessageTypeFlake]
+			} else if message_type == "info" {
+				return test.Messages[v1.TestMessageTypeInfo]
+			} else if message_type == "warning" {
+				return test.Messages[v1.TestMessageTypeWarning]
+			} else if message_type == "error" {
+				return test.Messages[v1.TestMessageTypeError]
+			}
+			return nil
+		},
+		"test_message_types": func() []string {
+			return []string{"flake", "info", "warning", "error"}
 		},
     }
 
