@@ -4,7 +4,7 @@ name: Test the generation of test matrices pages
 on:
   pull_request:
     branches:
-      - master
+      - main
 jobs:
   test-generate-matrix:
     runs-on: ubuntu-latest
