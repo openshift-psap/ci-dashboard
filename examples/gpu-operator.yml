@@ -37,18 +37,8 @@ matrices:
         variant: "4.10"
 
       - branch: master
-        test_name: nvidia-gpu-operator-e2e-1-9-x
+        test_name: nvidia-gpu-operator-e2e-1-10-x
         operator_version: 1.9
-        variant: "4.10"
-
-      - branch: master
-        test_name: nvidia-gpu-operator-e2e-1-8-x
-        operator_version: 1.8
-        variant: "4.10"
-
-      - branch: master
-        test_name: nvidia-gpu-operator-e2e-1-7-x
-        operator_version: 1.7
         variant: "4.10"
 
       95_490|OpenShift 4.9:
