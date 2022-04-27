@@ -7,8 +7,8 @@ OpenShift Release Informing Jobs
 
 
 
-* Driver Toolkit 4.10: FAILURE
-  - Test failed but operator step wasn't executed, finished at 2022-04-26 00:44
+* Driver Toolkit 4.10: SUCCESS
+  - Test passed, finished at 2022-04-27 04:37
 
 
 
@@ -18,7 +18,7 @@ OpenShift Release Informing Jobs
 
 
 * Driver Toolkit 4.9: SUCCESS
-  - Test passed, finished at 2022-04-26 00:51
+  - Test passed, finished at 2022-04-27 00:33
 
 
 
@@ -28,7 +28,7 @@ OpenShift Release Informing Jobs
 
 
 * Driver Toolkit 4.8: SUCCESS
-  - Test passed, finished at 2022-04-26 00:39
+  - Test passed, finished at 2022-04-27 00:52
 
 
 
@@ -36,4 +36,4 @@ OpenShift Release Informing Jobs
 
 
 ---
-Document generated on 2022-04-26 05h17.
+Document generated on 2022-04-27 05h26.
