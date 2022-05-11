@@ -1,9 +1,7 @@
 generate_daily_matrix: \
 	gpu \
-	sro \
 	nto \
 	nfd \
-	dtk \
 	dtk-release
 
 # GPU Operator
@@ -22,21 +20,6 @@ output/gpu-operator_daily-matrix.html: templates/daily_matrix.tmpl.html
            --template $< \
            --output-file $@
 
-# DTK
-
-dtk: output/dtk_daily-matrix.html output/dtk_daily-matrix.md
-
-output/dtk_daily-matrix.html: templates/daily_matrix.tmpl.html
-	go run cmd/main.go --debug daily_matrix \
-           --config-file examples/driver-toolkit.yml \
-           --template $< \
-           --output-file $@
-
-output/dtk_daily-matrix.md: templates/daily_matrix.mail.tmpl.md
-	go run cmd/main.go --debug daily_matrix \
-           --config-file examples/driver-toolkit.yml \
-           --template $< \
-           --output-file $@
 
 # DTK-informing
 
@@ -51,22 +34,6 @@ output/dtk-release_daily-matrix.html: templates/daily_matrix.tmpl.html
 output/dtk-release_daily-matrix.md: templates/daily_matrix.mail.tmpl.md
 	go run cmd/main.go --debug daily_matrix \
            --config-file examples/driver-toolkit-release.yml \
-           --template $< \
-           --output-file $@
-
-# SRO
-
-sro: output/sro_daily-matrix.html output/sro_daily-matrix.md
-
-output/sro_daily-matrix.html: templates/daily_matrix.tmpl.html
-	go run cmd/main.go --debug daily_matrix \
-           --config-file examples/sro.yml \
-           --template $< \
-           --output-file $@
-
-output/sro_daily-matrix.md: templates/daily_matrix.mail.tmpl.md
-	go run cmd/main.go --debug daily_matrix \
-           --config-file examples/sro.yml \
            --template $< \
            --output-file $@
 
