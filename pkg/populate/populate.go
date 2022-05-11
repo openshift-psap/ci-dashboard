@@ -241,6 +241,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	ocpVersion_content, err := artifacts.FetchTestStepResult(test_result, "ocp.version", artifacts.TypeBytes)
 	if err == nil {
 		test_result.OpenShiftVersion = strings.TrimSuffix(string(ocpVersion_content.Bytes), "\n")
+		test_result.StepExecuted = true
 	} else if err == artifacts.MissingPageError {
 			log.Infof("OpenShift version file (%s/%s) was not generated.", test.ProwName, test_result.BuildId)
 	} else {
@@ -256,6 +257,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	operatorVersion_content, err := artifacts.FetchTestStepResult(test_result, "operator.version", artifacts.TypeBytes)
 	if err == nil {
 		test_result.OperatorVersion = strings.TrimSuffix(string(operatorVersion_content.Bytes), "\n")
+		test_result.StepExecuted = true
 	} else if err == artifacts.MissingPageError {
 		log.Infof("Operator version file (%s/%s) was not generated.", test.ProwName, test_result.BuildId)
 	} else {
@@ -271,6 +273,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	ciartifactsVersion_content, err := artifacts.FetchTestStepResult(test_result, "ci_artifact.git_version", artifacts.TypeBytes)
 	if err == nil {
 		test_result.CiArtifactsVersion = strings.TrimSuffix(string(ciartifactsVersion_content.Bytes), "\n")
+		test_result.StepExecuted = true
 	} else if err == artifacts.MissingPageError {
 		log.Infof("ci-artifacts version file (%s/%s) was not generated.", test.ProwName, test_result.BuildId)
 	} else {
