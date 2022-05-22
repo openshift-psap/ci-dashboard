@@ -8,7 +8,7 @@ OpenShift master
 
 
 * Node Feature Discovery Operator master: SUCCESS
-  - Test passed, finished at 2022-05-20 23:55
+  - Test passed, finished at 2022-05-21 23:54
 
 
 
@@ -20,8 +20,8 @@ OpenShift 4.10
 
 
 
-* Node Feature Discovery Operator 4.1: SUCCESS
-  - Test passed, finished at 2022-05-15 01:01
+* Node Feature Discovery Operator 4.1: FAILURE
+  - Test failed but operator step wasn't executed, finished at 2022-05-22 00:13
 
 
 
@@ -33,8 +33,8 @@ OpenShift 4.9
 
 
 
-* Node Feature Discovery Operator 4.9: SUCCESS
-  - Test passed, finished at 2022-05-15 01:12
+* Node Feature Discovery Operator 4.9: FAILURE
+  - Test failed but operator step wasn't executed, finished at 2022-05-22 00:21
 
 
 
@@ -46,8 +46,8 @@ OpenShift 4.8
 
 
 
-* Node Feature Discovery Operator 4.8: SUCCESS
-  - Test passed, finished at 2022-05-15 01:15
+* Node Feature Discovery Operator 4.8: FAILURE
+  - Test failed but operator step wasn't executed, finished at 2022-05-22 00:17
 
 
 
@@ -55,4 +55,4 @@ OpenShift 4.8
 
 
 ---
-Document generated on 2022-05-21 04h59.
+Document generated on 2022-05-22 05h08.
