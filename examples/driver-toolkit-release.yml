@@ -19,15 +19,3 @@ matrices:
       - branch: "4.11"
         test_name: e2e-aws-driver-toolkit
         operator_version: "4.11"
-
-      - branch: "4.10"
-        test_name: e2e-aws-driver-toolkit
-        operator_version: "4.10"
-
-      - branch: "4.9"
-        test_name: e2e-aws-driver-toolkit
-        operator_version: "4.9"
-
-      - branch: "4.8"
-        test_name: e2e-aws-driver-toolkit
-        operator_version: "4.8"
