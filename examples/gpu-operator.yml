@@ -17,18 +17,29 @@ matrices:
     prow_step: nightly
 
     tests:
-      92_410|Benchmarking:
+      91_410|Benchmarking:
       - branch: master
         test_name: e2e-mlperf-ssd
         operator_version: latest
         variant: "master"
         prow_name: periodic-ci-openshift-psap-ci-artifacts-master-4.10-e2e-mlperf-ssd
 
-      93_410|OpenShift Dedicated:
+      92_410|OpenShift Dedicated:
       - branch: master
         prow_name: osde2e-stage-aws-addon-gpu-operator
         prow_step: install/ci-artifacts
         is_ci_operator: false
+
+      93_411|OpenShift 4.11:
+      - branch: master
+        test_name: nvidia-gpu-operator-e2e-master
+        operator_version: master
+        variant: "4.11"
+
+      - branch: master
+        test_name: nvidia-gpu-operator-e2e-1-10-x
+        operator_version: "1.10"
+        variant: "4.11"
 
       94_410|OpenShift 4.10:
       - branch: master
@@ -43,42 +54,24 @@ matrices:
 
       95_490|OpenShift 4.9:
       - branch: master
-        test_name: nvidia-gpu-operator-e2e-master
+        test_name: nvidia-gpu-operator-e2e-1-10-x
         operator_version: master
         variant: "4.9"
 
+      97_480|OpenShift 4.8:
       - branch: master
         test_name: nvidia-gpu-operator-e2e-1-9-x
         operator_version: 1.9
-        variant: "4.9"
+        variant: "4.8"
 
+      98_470|OpenShift 4.7:
       - branch: master
         test_name: nvidia-gpu-operator-e2e-1-8-x
         operator_version: 1.8
-        variant: "4.9"
-
-      - branch: master
-        test_name: nvidia-gpu-operator-e2e-1-7-x
-        operator_version: 1.7
-        variant: "4.9"
+        variant: "4.7"
 
       99_460|OpenShift 4.6:
       - branch: master
-        test_name: nvidia-gpu-operator-e2e-1-7-0
+        test_name: nvidia-gpu-operator-e2e-1-7-x
         operator_version: 1.7
-        variant: "4.6"
-
-      - branch: master
-        test_name: nvidia-gpu-operator-e2e-1-6-2
-        operator_version: 1.6
-        variant: "4.6"
-
-      - branch: master
-        test_name: nvidia-gpu-operator-e2e-1-5-2
-        operator_version: 1.5
-        variant: "4.6"
-
-      - branch: master
-        test_name: nvidia-gpu-operator-e2e-1-4-0
-        operator_version: 1.4
         variant: "4.6"
