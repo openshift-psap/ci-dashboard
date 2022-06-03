@@ -26,7 +26,7 @@ matrices:
 
       92_410|OpenShift Dedicated:
       - branch: master
-        prow_name: osde2e-staging-aws-nvidia-gpu-addon
+        prow_name: osde2e-stage-aws-nvidia-gpu-addon
         prow_step: install/ci-artifacts
         operator_version: "staging"
         is_ci_operator: false
@@ -35,7 +35,7 @@ matrices:
         prow_name: osde2e-int-aws-nvidia-gpu-addon
         prow_step: install/ci-artifacts
         is_ci_operator: false
-        operator_version: "internal"
+        operator_version: "integration"
 
       93_411|OpenShift 4.11:
       - branch: master
