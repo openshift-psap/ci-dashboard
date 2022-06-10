@@ -11,24 +11,23 @@ matrices:
     artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs
     artifacts_cache: cache
 
-    prow_config: periodic-ci-openshift-psap-ci-artifacts
+    repository_url: https://github.com/openshift/cluster-node-tuning-operator/
+
+    prow_config: periodic-ci-openshift-cluster-node-tuning-operator
     prow_step: nightly
 
     tests:
       0_410|OpenShift 4.10:
       - branch: release-4.10
-        test_name: e2e-master
-        operator_version: 4.10
-        variant: nto
+        test_name: e2e-nightly
+        operator_version: "4.10"
 
       1_490|OpenShift 4.9:
       - branch: release-4.9
-        test_name: e2e-master
+        test_name: e2e-nightly
         operator_version: 4.9
-        variant: nto
 
       2_480|OpenShift 4.8:
       - branch: release-4.8
-        test_name: e2e-master
+        test_name: e2e-nightly
         operator_version: 4.8
-        variant: nto
