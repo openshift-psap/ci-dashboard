@@ -8,7 +8,7 @@ OpenShift master
 
 
 * Node Feature Discovery Operator master: SUCCESS
-  - Test passed, finished at 2022-06-23 23:57
+  - Test passed, finished at 2022-06-25 00:07
 
 
 
@@ -55,4 +55,4 @@ OpenShift 4.8
 
 
 ---
-Document generated on 2022-06-24 05h06.
+Document generated on 2022-06-25 05h01.
