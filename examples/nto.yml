@@ -17,17 +17,22 @@ matrices:
     prow_step: nightly
 
     tests:
-      0_410|OpenShift 4.10:
+      6_411|OpenShift 4.11:
+      - branch: release-4.11
+        test_name: e2e-nightly
+        operator_version: "4.11"
+        
+      7_410|OpenShift 4.10:
       - branch: release-4.10
         test_name: e2e-nightly
         operator_version: "4.10"
 
-      1_490|OpenShift 4.9:
+      8_490|OpenShift 4.9:
       - branch: release-4.9
         test_name: e2e-nightly
         operator_version: 4.9
 
-      2_480|OpenShift 4.8:
+      9_480|OpenShift 4.8:
       - branch: release-4.8
         test_name: e2e-nightly
         operator_version: 4.8
