@@ -8,7 +8,7 @@ OpenShift master
 
 
 * Node Feature Discovery Operator master: FAILURE
-  - Test failed because the operator step failed, finished at 2022-08-08 00:17
+  - Test failed because the operator step failed, finished at 2022-08-09 00:12
 
 
 
@@ -55,4 +55,4 @@ OpenShift 4.8
 
 
 ---
-Document generated on 2022-08-08 05h06.
+Document generated on 2022-08-09 05h15.
