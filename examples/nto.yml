@@ -26,13 +26,3 @@ matrices:
       - branch: release-4.10
         test_name: e2e-nightly
         operator_version: "4.10"
-
-      8_490|OpenShift 4.9:
-      - branch: release-4.9
-        test_name: e2e-nightly
-        operator_version: 4.9
-
-      9_480|OpenShift 4.8:
-      - branch: release-4.8
-        test_name: e2e-nightly
-        operator_version: 4.8
