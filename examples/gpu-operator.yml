@@ -50,11 +50,6 @@ matrices:
 
       94_410|OpenShift 4.10:
       - branch: master
-        test_name: nvidia-gpu-operator-e2e-master
-        operator_version: master
-        variant: "4.10"
-
-      - branch: master
         test_name: nvidia-gpu-operator-e2e-1-10-x
         operator_version: "1.10"
         variant: "4.10"
