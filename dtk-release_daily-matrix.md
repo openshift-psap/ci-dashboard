@@ -8,7 +8,7 @@ OpenShift Release Informing Jobs
 
 
 * Driver Toolkit 4.11: SUCCESS
-  - Test passed, finished at 2022-09-09 04:20
+  - Test passed, finished at 2022-09-10 02:44
 
 
 
@@ -16,4 +16,4 @@ OpenShift Release Informing Jobs
 
 
 ---
-Document generated on 2022-09-09 05h43.
+Document generated on 2022-09-10 05h35.
