@@ -16,4 +16,4 @@ OpenShift Release Informing Jobs
 
 
 ---
-Document generated on 2022-09-17 05h27.
+Document generated on 2022-09-18 05h34.
