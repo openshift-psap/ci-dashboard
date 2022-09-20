@@ -17,14 +17,8 @@ matrices:
     prow_step: nightly
 
     tests:
-      91_410|Benchmarking:
-      - branch: master
-        test_name: e2e-mlperf-ssd
-        operator_version: latest
-        variant: "master"
-        prow_name: periodic-ci-openshift-psap-ci-artifacts-master-4.10-e2e-mlperf-ssd
 
-      92_410|OpenShift Dedicated:
+      91_410|OpenShift Dedicated:
       - branch: master
         prow_name: osde2e-stage-aws-nvidia-gpu-addon
         prow_step: install/ci-artifacts
@@ -37,15 +31,28 @@ matrices:
         is_ci_operator: false
         operator_version: "integration"
 
+      92_412|OpenShift 4.12:
+
+      - branch: master
+        test_name: nvidia-gpu-operator-e2e-1-11-x
+        operator_version: "1.11"
+        variant: "4.12"
+
+      - branch: master
+        test_name: nvidia-gpu-operator-e2e-master
+        operator_version: master
+        variant: "4.12"
+
       93_411|OpenShift 4.11:
+
       - branch: master
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
         variant: "4.11"
 
       - branch: master
-        test_name: nvidia-gpu-operator-e2e-1-10-x
-        operator_version: "1.10"
+        test_name: nvidia-gpu-operator-e2e-1-11-x
+        operator_version: "1.11"
         variant: "4.11"
 
       94_410|OpenShift 4.10:
