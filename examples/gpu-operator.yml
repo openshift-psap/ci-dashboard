@@ -2,61 +2,85 @@ version: v1
 description: GPU Operator Test Matrix
 test_history: 15
 matrices:
-  nightlies:
+  0_osde2e:
     description: Red Hat OpenShift Nightlies
     operator_name: GPU Operator
-
     viewer_url: https://prow.ci.openshift.org/view/gs/origin-ci-test/logs
-
     artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs
     artifacts_cache: cache
-
-    repository_url: https://github.com/rh-ecosystem-edge/ci-artifacts
-
-    prow_config: periodic-ci-rh-ecosystem-edge-ci-artifacts
+    repository_url: https://github.com/rh-ecosystem-edge/ci-tools-nvidia-gpu-operator
+    prow_config: periodic-ci-rh-ecosystem-edge-ci-tools-nvidia-gpu-operator
     prow_step: nightly
-
     tests:
-
       91_410|OpenShift Dedicated:
       - branch: master
         prow_name: osde2e-stage-aws-nvidia-gpu-addon
-        prow_step: install/ci-artifacts
+        prow_step: install/
         operator_version: "staging"
         is_ci_operator: false
-
       - branch: master
         prow_name: osde2e-int-aws-nvidia-gpu-addon
-        prow_step: install/ci-artifacts
+        prow_step: install/
         is_ci_operator: false
         operator_version: "integration"
 
+  1_nightlies:
+    description: Red Hat OpenShift Nightlies
+    operator_name: GPU Operator
+    viewer_url: https://prow.ci.openshift.org/view/gs/origin-ci-test/logs
+    artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs
+    artifacts_cache: cache
+    repository_url: https://github.com/rh-ecosystem-edge/ci-tools-nvidia-gpu-operator
+    prow_config: periodic-ci-rh-ecosystem-edge-ci-tools-nvidia-gpu-operator
+    prow_step: nightly-gpu-operator-e2e
+    tests:
       92_412|OpenShift 4.12:
-
-      - branch: master
-        test_name: nvidia-gpu-operator-e2e-1-11-x
-        operator_version: "1.11"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-22-9-x
+        operator_version: "22.9"
         variant: "4.12"
-
-      - branch: master
+      - branch: main
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
         variant: "4.12"
 
       93_411|OpenShift 4.11:
-
-      - branch: master
+      - branch: main
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
         variant: "4.11"
-
-      - branch: master
-        test_name: nvidia-gpu-operator-e2e-1-11-x
-        operator_version: "1.11"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-22-9-x
+        operator_version: "22.9"
         variant: "4.11"
 
       94_410|OpenShift 4.10:
-      - branch: master
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-master
+        operator_version: master
+        variant: "4.10"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-1-11-x
+        operator_version: "1.11"
+        variant: "4.10"
+
+  2_weeklies:
+    description: Red Hat OpenShift Weeklies
+    operator_name: GPU Operator
+    viewer_url: https://prow.ci.openshift.org/view/gs/origin-ci-test/logs
+    artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs
+    artifacts_cache: cache
+    repository_url: https://github.com/rh-ecosystem-edge/ci-tools-nvidia-gpu-operator
+    prow_config: periodic-ci-rh-ecosystem-edge-ci-tools-nvidia-gpu-operator
+    prow_step: weekly-gpu-operator-e2e
+    tests:
+      81_410|OpenShift 4.9 - Weekly:
+      - branch: main
         test_name: nvidia-gpu-operator-e2e-1-10-x
         operator_version: "1.10"
-        variant: "4.10"
+        variant: "4.9"
+      81_411|OpenShift 4.8 - Weekly:
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-1-9-x
+        operator_version: "1.9"
+        variant: "4.8"
