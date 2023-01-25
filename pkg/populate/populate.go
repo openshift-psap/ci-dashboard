@@ -249,7 +249,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	}
 	if strings.Contains(test_result.OpenShiftVersion, "doctype") {
 		// 404 page not recognized
-		test_result.OpenShiftVersion = "[PARSING ERROR]"
+		test_result.OpenShiftVersion = ""
 	} else if test_result.OpenShiftVersion == "MISSING" {
 		test_result.OpenShiftVersion = ""
 	}
@@ -265,7 +265,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	}
 	if strings.Contains(test_result.OperatorVersion, "doctype") {
 		// 404 page not recognized
-		test_result.OperatorVersion = "[PARSING ERROR] " + test_result.TestSpec.OperatorVersion
+		test_result.OperatorVersion = "" + test_result.TestSpec.OperatorVersion
 	} else if test_result.OperatorVersion == "MISSING" {
 		test_result.OperatorVersion = ""
 	}
@@ -281,7 +281,7 @@ func populateTestResult(test *v1.TestSpec, build_id string, finished_file artifa
 	}
 	if strings.Contains(test_result.CiArtifactsVersion, "doctype") {
 		// 404 page not recognized
-		test_result.CiArtifactsVersion = "PARSING ERROR"
+		test_result.CiArtifactsVersion = ""
 	} else if test_result.CiArtifactsVersion == "MISSING" {
 		test_result.CiArtifactsVersion = ""
 	}
