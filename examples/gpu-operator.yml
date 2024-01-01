@@ -38,10 +38,6 @@ matrices:
         operator_version: "23.6"
         variant: "4.13"
       - branch: main
-        test_name: nvidia-gpu-operator-e2e-23-3-x
-        operator_version: "23.3"
-        variant: "4.13"
-      - branch: main
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
         variant: "4.13"
@@ -56,10 +52,6 @@ matrices:
         operator_version: "23.6"
         variant: "4.12"
       - branch: main
-        test_name: nvidia-gpu-operator-e2e-23-3-x
-        operator_version: "23.3"
-        variant: "4.12"
-      - branch: main
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
         variant: "4.12"
@@ -72,10 +64,6 @@ matrices:
       - branch: main
         test_name: nvidia-gpu-operator-e2e-23-6-x
         operator_version: "23.6"
-        variant: "4.11"
-      - branch: main
-        test_name: nvidia-gpu-operator-e2e-23-3-x
-        operator_version: "23.3"
         variant: "4.11"
       - branch: main
         test_name: nvidia-gpu-operator-e2e-master
