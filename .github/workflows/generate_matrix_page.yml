@@ -6,7 +6,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '30 4 * * *'
+    - cron: '30 8 * * *'
 jobs:
   generate-matrix:
     runs-on: ubuntu-latest
