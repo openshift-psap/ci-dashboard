@@ -28,6 +28,20 @@ matrices:
         operator_version: master
         variant: "4.14"
 
+      90_415|OpenShift 4.15 - Nightly:
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-23-9-x
+        operator_version: "23.9"
+        variant: "4.15"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-23-6-x
+        operator_version: "23.6"
+        variant: "4.15"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-master
+        operator_version: master
+        variant: "4.15"
+
   2_weeklies:
     description: Red Hat OpenShift Weeklies
     operator_name: GPU Operator
@@ -66,20 +80,6 @@ matrices:
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
         variant: "4.13"
-
-      81_415|OpenShift 4.15 - Weekly:
-      # - branch: main
-      #   test_name: nvidia-gpu-operator-e2e-23-9-x
-      #   operator_version: "23.9"
-      #   variant: "4.15"
-      # - branch: main
-      #   test_name: nvidia-gpu-operator-e2e-23-6-x
-      #   operator_version: "23.6"
-      #   variant: "4.15"
-      - branch: main
-        test_name: nvidia-gpu-operator-e2e-master
-        operator_version: master
-        variant: "4.15"
 
       81_416|OpenShift 4.16 - Weekly:
       - branch: main
