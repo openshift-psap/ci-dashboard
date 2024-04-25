@@ -3,8 +3,8 @@ description: GPU Operator Test Matrix
 test_history: 15
 matrices:
 
-  1_nightlies:
-    description: Red Hat OpenShift Nightlies
+  1_nightly:
+    description: Red Hat OpenShift Nightly
     operator_name: GPU Operator
     viewer_url: https://prow.ci.openshift.org/view/gs/origin-ci-test/logs
     artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs
@@ -15,14 +15,6 @@ matrices:
     tests:
 
       90_414|OpenShift 4.14 - Nightly:
-      - branch: main
-        test_name: nvidia-gpu-operator-e2e-23-9-x
-        operator_version: "23.9"
-        variant: "4.14"
-      - branch: main
-        test_name: nvidia-gpu-operator-e2e-23-6-x
-        operator_version: "23.6"
-        variant: "4.14"
       - branch: main
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
@@ -42,8 +34,8 @@ matrices:
         operator_version: master
         variant: "4.15"
 
-  2_weeklies:
-    description: Red Hat OpenShift Weeklies
+  2_weekly:
+    description: Red Hat OpenShift Weekly
     operator_name: GPU Operator
     viewer_url: https://prow.ci.openshift.org/view/gs/origin-ci-test/logs
     artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs
@@ -86,3 +78,24 @@ matrices:
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
         variant: "4.16"
+
+  3_nvidia_ci_nightly:
+    description: Red Hat OpenShift Nightly from nvidia-ci
+    operator_name: GPU Operator
+    viewer_url: https://prow.ci.openshift.org/view/gs/origin-ci-test/logs
+    artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/origin-ci-test/logs
+    artifacts_cache: cache
+    repository_url: https://github.com/rh-ecosystem-edge/nvidia-ci
+    prow_config: periodic-ci-rh-ecosystem-edge-nvidia-ci
+    prow_step: gpu-operator-e2e
+    tests:
+
+      50_414|OpenShift 4.14 - Nightly:
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-23-9-x
+        operator_version: "23.9"
+        variant: "4.14"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-23-6-x
+        operator_version: "23.6"
+        variant: "4.14"
