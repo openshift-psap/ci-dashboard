@@ -14,33 +14,11 @@ matrices:
     prow_step: gpu-operator-e2e
     tests:
 
-      90_414|OpenShift 4.14 - Nightly:
-      - branch: main
-        test_name: nvidia-gpu-operator-e2e-23-9-x
-        operator_version: "23.9"
-        variant: "4.14"
-      - branch: main
-        test_name: nvidia-gpu-operator-e2e-24-3-x
-        operator_version: "24.3"
-        variant: "4.14"
+      90_416|OpenShift 4.16 - Nightly:
       - branch: main
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
-        variant: "4.14"
-
-      90_415|OpenShift 4.15 - Nightly:
-      - branch: main
-        test_name: nvidia-gpu-operator-e2e-23-9-x
-        operator_version: "23.9"
-        variant: "4.15"
-      - branch: main
-        test_name: nvidia-gpu-operator-e2e-24-3-x
-        operator_version: "24.3"
-        variant: "4.15"
-      - branch: main
-        test_name: nvidia-gpu-operator-e2e-master
-        operator_version: master
-        variant: "4.15"
+        variant: "4.16"
 
   2_weekly:
     description: Red Hat OpenShift Weekly
@@ -81,11 +59,33 @@ matrices:
         operator_version: master
         variant: "4.13"
 
-      81_416|OpenShift 4.16 - Weekly:
+      81_414|OpenShift 4.14 - Weekly:
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-23-9-x
+        operator_version: "23.9"
+        variant: "4.14"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-3-x
+        operator_version: "24.3"
+        variant: "4.14"
       - branch: main
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
-        variant: "4.16"
+        variant: "4.14"
+
+      81_415|OpenShift 4.15 - Weekly:
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-23-9-x
+        operator_version: "23.9"
+        variant: "4.15"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-3-x
+        operator_version: "24.3"
+        variant: "4.15"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-master
+        operator_version: master
+        variant: "4.15"
 
       81_417|OpenShift 4.17 - Weekly:
       - branch: main
