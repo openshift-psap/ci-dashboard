@@ -19,6 +19,14 @@ matrices:
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
         variant: "4.16"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-23-9-x
+        operator_version: "23.9"
+        variant: "4.16"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-3-x
+        operator_version: "24.3"
+        variant: "4.16"
 
   2_weekly:
     description: Red Hat OpenShift Weekly
