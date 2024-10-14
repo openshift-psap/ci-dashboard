@@ -27,7 +27,7 @@ matrices:
         test_name: nvidia-gpu-operator-e2e-master
         operator_version: master
         variant: "4.16"
-      90_417|OpenShift 4.17 - Weekly:
+      90_417|OpenShift 4.17 - Nightly:
       - branch: main
         test_name: nvidia-gpu-operator-e2e-24-3-x
         operator_version: "24.3"
