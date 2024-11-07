@@ -16,12 +16,12 @@ matrices:
 
       90_416|OpenShift 4.16 - Nightly:
       - branch: main
-        test_name: nvidia-gpu-operator-e2e-24-3-x
-        operator_version: "24.3"
-        variant: "4.16"
-      - branch: main
         test_name: nvidia-gpu-operator-e2e-24-6-x
         operator_version: "24.6"
+        variant: "4.16"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-9-x
+        operator_version: "24.9"
         variant: "4.16"
       - branch: main
         test_name: nvidia-gpu-operator-e2e-master
@@ -29,12 +29,12 @@ matrices:
         variant: "4.16"
       90_417|OpenShift 4.17 - Nightly:
       - branch: main
-        test_name: nvidia-gpu-operator-e2e-24-3-x
-        operator_version: "24.3"
-        variant: "4.17"
-      - branch: main
         test_name: nvidia-gpu-operator-e2e-24-6-x
         operator_version: "24.6"
+        variant: "4.17"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-9-x
+        operator_version: "24.9"
         variant: "4.17"
       - branch: main
         test_name: nvidia-gpu-operator-e2e-master
@@ -54,12 +54,12 @@ matrices:
 
       81_412|OpenShift 4.12 - Weekly:
       - branch: main
-        test_name: nvidia-gpu-operator-e2e-24-3-x
-        operator_version: "24.3"
-        variant: "4.12"
-      - branch: main
         test_name: nvidia-gpu-operator-e2e-24-6-x
         operator_version: "24.6"
+        variant: "4.12"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-9-x
+        operator_version: "24.9"
         variant: "4.12"
       - branch: main
         test_name: nvidia-gpu-operator-e2e-master
@@ -68,12 +68,12 @@ matrices:
 
       81_413|OpenShift 4.13 - Weekly:
       - branch: main
-        test_name: nvidia-gpu-operator-e2e-24-3-x
-        operator_version: "24.3"
-        variant: "4.13"
-      - branch: main
         test_name: nvidia-gpu-operator-e2e-24-6-x
         operator_version: "24.6"
+        variant: "4.13"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-9-x
+        operator_version: "24.9"
         variant: "4.13"
       - branch: main
         test_name: nvidia-gpu-operator-e2e-master
@@ -82,12 +82,12 @@ matrices:
 
       81_414|OpenShift 4.14 - Weekly:
       - branch: main
-        test_name: nvidia-gpu-operator-e2e-24-3-x
-        operator_version: "24.3"
-        variant: "4.14"
-      - branch: main
         test_name: nvidia-gpu-operator-e2e-24-6-x
         operator_version: "24.6"
+        variant: "4.14"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-9-x
+        operator_version: "24.9"
         variant: "4.14"
       - branch: main
         test_name: nvidia-gpu-operator-e2e-master
@@ -96,12 +96,12 @@ matrices:
 
       81_415|OpenShift 4.15 - Weekly:
       - branch: main
-        test_name: nvidia-gpu-operator-e2e-24-3-x
-        operator_version: "24.3"
-        variant: "4.15"
-      - branch: main
         test_name: nvidia-gpu-operator-e2e-24-6-x
         operator_version: "24.6"
+        variant: "4.15"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-9-x
+        operator_version: "24.9"
         variant: "4.15"
       - branch: main
         test_name: nvidia-gpu-operator-e2e-master
