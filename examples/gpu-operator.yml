@@ -94,3 +94,16 @@ matrices:
         operator_version: master
         variant: "4.15"
 
+      81_418|OpenShift 4.18 - Weekly:
+        - branch: main
+          test_name: nvidia-gpu-operator-e2e-24-6-x
+          operator_version: "24.6"
+          variant: "4.18"
+        - branch: main
+          test_name: nvidia-gpu-operator-e2e-24-9-x
+          operator_version: "24.9"
+          variant: "4.18"
+        - branch: main
+          test_name: nvidia-gpu-operator-e2e-master
+          operator_version: master
+          variant: "4.18"
