@@ -119,7 +119,7 @@ matrices:
     prow_step: gpu-operator-e2e
     tests:
 
-      70_412|OpenShift 4.12:
+      70_412|OpenShift 4.12 pre-submit:
       - branch: main
         test_name: nvidia-gpu-operator-e2e-24-6-x
         operator_version: "24.6"
@@ -133,7 +133,7 @@ matrices:
         operator_version: master
         variant: "4.12"
 
-      70_414|OpenShift 4.14:
+      70_414|OpenShift 4.14 pre-submit:
       - branch: main
         test_name: nvidia-gpu-operator-e2e-24-6-x
         operator_version: "24.6"
@@ -147,7 +147,7 @@ matrices:
         operator_version: master
         variant: "4.14"
 
-      70_415|OpenShift 4.15:
+      70_415|OpenShift 4.15 pre-submit:
       - branch: main
         test_name: nvidia-gpu-operator-e2e-24-6-x
         operator_version: "24.6"
@@ -161,7 +161,35 @@ matrices:
         operator_version: master
         variant: "4.15"
 
-      70_418|OpenShift 4.18:
+      70_416|OpenShift 4.16 pre-submit:
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-6-x
+        operator_version: "24.6"
+        variant: "4.16"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-9-x
+        operator_version: "24.9"
+        variant: "4.16"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-master
+        operator_version: master
+        variant: "4.16"
+
+      70_417|OpenShift 4.17 pre-submit:
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-6-x
+        operator_version: "24.6"
+        variant: "4.17"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-9-x
+        operator_version: "24.9"
+        variant: "4.17"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-master
+        operator_version: master
+        variant: "4.17"
+
+      70_418|OpenShift 4.18 pre-submit:
         - branch: main
           test_name: nvidia-gpu-operator-e2e-24-6-x
           operator_version: "24.6"
