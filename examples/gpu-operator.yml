@@ -109,6 +109,20 @@ matrices:
         operator_version: master
         variant: "4.15"
 
+      81_419|OpenShift 4.19 - Weekly:
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-6-x
+        operator_version: "24.6"
+        variant: "4.19"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-24-9-x
+        operator_version: "24.9"
+        variant: "4.19"
+      - branch: main
+        test_name: nvidia-gpu-operator-e2e-master
+        operator_version: master
+        variant: "4.19"
+
   3_presubmit:
     description: Red Hat OpenShift Pre-submit
     operator_name: GPU Operator
@@ -203,3 +217,17 @@ matrices:
           test_name: nvidia-gpu-operator-e2e-master
           operator_version: master
           variant: "4.18"
+
+      70_419|OpenShift 4.19 pre-submit:
+        - branch: main
+          test_name: nvidia-gpu-operator-e2e-24-6-x
+          operator_version: "24.6"
+          variant: "4.19"
+        - branch: main
+          test_name: nvidia-gpu-operator-e2e-24-9-x
+          operator_version: "24.9"
+          variant: "4.19"
+        - branch: main
+          test_name: nvidia-gpu-operator-e2e-master
+          operator_version: master
+          variant: "4.19"
