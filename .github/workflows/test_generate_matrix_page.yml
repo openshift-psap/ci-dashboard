@@ -18,3 +18,9 @@ jobs:
           export CI_DASHBOARD_DAILYMATRIX_TEST_HISTORY=3
           make generate_daily_matrix
           make static
+
+      - name: 'Attach output to the presubmit job'
+        uses: actions/upload-artifact@v4
+        with:
+          name: gpu-operator-daily-matrix
+          path: output/gpu-operator_daily-matrix.html
