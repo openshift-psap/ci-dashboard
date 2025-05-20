@@ -40,7 +40,23 @@ matrices:
           operator_version: master
           variant: "4.18"
 
-  2_weekly:
+
+  2_nightly_microshift:
+    description: Red Hat MicroShift Nightly
+    operator_name: NVIDIA Device Plugin
+    viewer_url: https://prow.ci.openshift.org/view/gs/origin-ci-test/logs
+    artifacts_url: https://gcsweb-ci.apps.ci.l2s4.p1.openshiftapps.com/gcs/test-platform-results/logs
+    artifacts_cache: cache
+    repository_url: https://github.com/openshift/microshift
+    prow_config: periodic-ci-openshift-microshift
+    prow_step: openshift-microshift-e2e-bare-metal-tests
+    tests:
+      90_420|MicroShift 4.20 - Nightly:
+        - prow_name: periodic-ci-openshift-microshift-release-4.20-periodics-e2e-aws-ai-model-serving-nightly
+          prow_step: openshift-microshift-e2e-bare-metal-tests
+          test_name: e2e-aws-ai-model-serving-nightly
+
+  3_weekly:
     description: Red Hat OpenShift Weekly
     operator_name: GPU Operator
     viewer_url: https://prow.ci.openshift.org/view/gs/origin-ci-test/logs
